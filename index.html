@@ -1,90 +1,331 @@
 <!DOCTYPE html>
-<html lang="en-US">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
   </head>
-	<title>Hello</title>
-  <link href="style.css" rel="stylesheet">
-<body>
-  <div class="acontainer">
-    <h1><a href="index.html"><img src="xbanner.jpg" class="prev" width="2050px"></a></h1>
-<br>
-<center>
-</div></div> 
-<center><div class="Blurbox">
-<table>
-  <tbody>
-    <tr>
-      <td><h5 class="fade" id="center"><a href="index.html" class="">Home</a></h5></td>
-      <td><h5 class="fade" id="center"><a href="https://t.me/movieshub_tele">Telegram</a></h5></td>
-    </tr>
-  </tbody>
-</table></div>
-</center>
-     <h2 class="container">DOWNLOAD BELOW </h2> -->
-<div class="Blurtile">
-    <table>
-      <tbody>
-          <td><a href="The Continental From the_World_of_John_Wick.html"><img src="devices/Hanoip/1.png" class="prev" alt="The Continental: From the World of John Wick"/></a></td>
-          <td><a href="https://www.gsmarena.com/motorola_edge_30-11500.php"><img src="devices/Dubai/1.png" class="prev" alt="Dubai" /></a></td>
-      </tbody>
-      <thead>
-        <tr>
-            <th style="background-color: white;"><h1>The Continental: From the World of John Wick</h1></th>
-            <th style="background-color: white;"><h1>Jawaan</h1></th>
-          </tr>
-      </thead>
-    </table>
-</div>
-<div class="acontainer">
- <table><thead>
-  <tr>
-    <th><h1>Hawao</h1></th>
-    <th><h1>Devon</h1></th>
-    </tr>
-</thead>
-      <tbody>
-        <tr><td><a href="https://www.gsmarena.com/motorola_moto_g42-11608.php"><img src="devices/hawao/1.png" class="prev" alt="Hawao" /></a></td>
-          <td><a href="https://www.gsmarena.com/motorola_moto_g32-11733.php"><img src="devices/Devon/1.png" class="prev" alt="Devon" /></a></td>
-        </tr>
-      </tbody>
-    </table>
-	</div>
-	  <div class="container">
-	 <table><thead>
-    <tr>
-      <th><h1>Xpeng</h1></th>
-      <th><h1>Rhode</h1></th>
-      </tr>
-  </thead>
-      <tbody>
-        <tr>
-          <td><a href="https://www.gsmarena.com/motorola_moto_g200_5g-11222.php"><img src="devices/xpeng/1.png" class="prev" alt="Xpeng" /></a></td>
-          <td><a href="https://www.gsmarena.com/motorola_moto_g52-11457.php"><img src="devices/Rhode/1.png" class="prev" alt="Rhode" /></a></td>
-        </tr>
-      </tbody>
-    </table>
-</div>
-
-<div class="container">
-  <table>
-    <thead>
-      <tr>
-        <th><h1>Tundra</h1></th>
-        <th><h1>Rhodep</h1></th>
-        </tr>
-    </thead>
-     <tbody>
-       <tr>
-         <td><a href="https://www.gsmarena.com/motorola_edge_30_fusion-11851.php"><img src="devices/Tundra/1.png" class="prev" alt="Tundra" /></a></td>
-         <td><a href="https://www.gsmarena.com/motorola_moto_g82-11508.php"><img src="devices/Rhodep/1.png" class="prev" alt="Rhodep" /></a></td>
-       </tr>
-     </tbody>
-   </table>
-</div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
-  <script>anchors.add();</script>
-</body>
+  <body>
+    <nav id="desktop-nav">
+      <div class="logo">Chandan Pathak</div>
+      <div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+    <nav id="hamburger-nav">
+      <div class="logo">Chandan Pathak</div>
+      <div class="hamburger-menu">
+        <div class="hamburger-icon" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="menu-links">
+          <li><a href="#about" onclick="toggleMenu()">About</a></li>
+          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        </div>
+      </div>
+    </nav>
+    <section id="profile">
+      <div class="section__pic-container">
+        <img src="./assets/animation_aboutme.gif" alt="Anand Pathak profile picture" />
+      </div>
+      <div class="section__text">
+        <p class="section__text__p1">Hello, I'm</p>
+        <h1 class="title">Chandan Pathak</h1>
+        <p class="section__text__p2">Computer Application Student</p>
+        <div class="btn-container">
+          <button
+            class="btn btn-color-2"
+            onclick="window.open('./assets/anand_pathak_resume_updated.pdf')"
+          >
+            Download CV
+          </button>
+          <button class="btn btn-color-1" onclick="location.href='./#contact'">
+            Contact Info
+          </button>
+        </div>
+        <div id="socials-container">
+          <img
+            src="./assets/linkedin.png"
+            alt="My LinkedIn profile"
+            class="icon"
+            onclick="location.href='www.linkedin.com/in/chandanpathak291'"
+          />
+          <img
+            src="./assets/github.png"
+            alt="My Github profile"
+            class="icon"
+            onclick="location.href='https://github.com/chandan2909'"
+          />
+        </div>
+      </div>
+    </section>
+    <section id="about">
+      <p class="section__text__p1">Get To Know More</p>
+      <h1 class="title">About Me</h1>
+      <div class="section-container">
+        <!-- <div class="section__pic-container">
+          <img
+            src="./assets/about-img.png"
+            alt="Profile picture"
+            class="about-pic"
+          />
+        </div> -->
+        <div class="about-details-container">
+          <div class="about-containers">
+            <!-- <div class="details-container">
+              <img
+                src="./assets/experience.png"
+                alt="Experience icon"
+                class="icon"
+              />
+              <h3>Skills</h3>
+              <p>2+ years <br />Frontend Development</p>
+            </div> -->
+            <div class="details-container">
+              <img
+                src="./assets/education.png"
+                alt="Education icon"
+                class="icon"
+              /> 
+              <h3>Education</h3>
+              <p>MCA - Masters Degree<br />in Computer Application</p>
+            </div>
+          </div>
+          <div class="text-container">
+            <p>
+              I am a student of MCA in computer science and engineering with strong foundation in computer science fundamentals (C and Java).
+              I am a highly motivated and results oriented person with passion to learn new things. I look forward to applying my skills and knowledge to a challenging and rewarding career in the tech industry.
+              I believe I have the skills and experience to be a valuable asset to your team. I am available for an interview at your earliest convenience.
+            </p>
+          </div>
+        </div>
+      </div>
+      <img
+        src="./assets/arrow.png"
+        alt="Arrow icon"
+        class="icon arrow"
+        onclick="location.href='./#experience'"
+      />
+    </section>
+    <section id="experience">
+      <p class="section__text__p1">Explore My</p>
+      <h1 class="title">Skills</h1>
+      <div class="experience-details-container">
+        <div class="about-containers">
+          <div class="details-container">
+            <h2 class="experience-sub-title">Hard & Soft Skills</h2>
+            <div class="article-container">
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h5>C Programming<p>Intermediate</p></h5>
+                  
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h5>Java</h5>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <!-- <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                /> -->
+                <!-- <div>
+                  <h3>SASS</h3>
+                  <p>Basic</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>JavaScript</h3>
+                  <p>Basic</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>TypeScript</h3>
+                  <p>Basic</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Material UI</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+            </div>
+          </div> -->
+         
+      <img
+        src="./assets/arrow.png"
+        alt="Arrow icon"
+        class="icon arrow"
+        onclick="location.href='./#projects'"
+      />
+    </section>
+    <section id="projects">
+      <p class="section__text__p1">Browse My Recent</p>
+      <h1 class="title">Projects</h1>
+      <div class="experience-details-container">
+        <div class="about-containers">
+          <div class="details-container color-container">
+            <div class="article-container" >
+              <img
+                src="./assets/project-one1.png"
+                width="100%"
+                alt="Project 1"
+                class="project-img"
+                
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Portfolio Website</h2>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/chandan2909/chandan2909.github.io'"
+              >
+                Github
+              </button>
+              <!-- <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/rudraofficial'"
+              >
+                Live Demo
+              </button> -->
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="./assets/project-two.gif"
+                alt="Project 2"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Calculator</h2>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/chandan2909/calculator'"
+              >
+                Github
+              </button>
+              <!-- <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/rudraofficial'"
+              >
+                Live Demo
+              </button> -->
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="./assets/project-three.gif"
+                alt="Project 3"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Simple Clock</h2>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/chandan2909/D_clock'"
+              >
+                Github
+              </button>
+              <!-- <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/chandan2909'"
+              >
+                Live Demo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <img
+        src="./assets/arrow.png"
+        alt="Arrow icon"
+        class="icon arrow"
+        onclick="location.href='./#contact'"
+      />
+    </section>
+    <section id="contact">
+      <p class="section__text__p1">Get in Touch</p>
+      <h1 class="title">Contact Me</h1>
+      <div class="contact-info-upper-container">
+        <div class="contact-info-container">
+          <img
+            src="./assets/email.png"
+            alt="Email icon"
+            class="icon contact-icon email-icon"
+          />
+          <p><a href="mailto:vijaypathakssa3@gmail.com">vijaypathakssa3@gmail.com</a></p>
+        </div>
+        <div class="contact-info-container">
+          <img
+            src="./assets/linkedin.png"
+            alt="LinkedIn icon"
+            class="icon contact-icon"
+          />
+          <p><a href="www.linkedin.com/in/chandanpathak291">LinkedIn</a></p>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <nav>
+        <div class="nav-links-container">
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p>Copyright &#169; 2023 Chandan Pathak. All Rights Reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
 </html>
