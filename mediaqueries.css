@@ -4,8 +4,14 @@
     margin-bottom: 6rem;
   }
   .about-containers {
-    flex-wrap: wrap;
-  }
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  
+  .details-container {
+    flex: 1;
+    text-align: center; 
+  }  
 }
 
 @media screen and (max-width: 1200px) {
@@ -91,9 +97,10 @@
     font-size: 1.25rem;
   }
   .title {
-    font-size: 2rem;
-  }
+    font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+  }  
   .text-container {
     text-align: justify;
   }
+}
 }
