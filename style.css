@@ -373,6 +373,7 @@ article .icon {
   margin: 2rem auto;
   padding: 0.5rem auto;
   gap: 2rem auto;
+  height: auto;
 }
 
 .contact-info-container {
@@ -381,6 +382,7 @@ article .icon {
   justify-content: center;
   gap: 0.5rem;
   margin: 2.5rem;
+  height: auto;
 }
 
 .contact-info-container p {
