@@ -133,7 +133,7 @@ a:hover {
 /* SECTIONS */
 section {
   /* padding-top: 4vh; */
-  height: 96vh;
+  height: 50vh;
   margin: 0 10rem;
   box-sizing: border-box;
   min-height: fit-content;
@@ -249,7 +249,7 @@ section {
 }
 
 .about-details-container {
-  justify-content: center;
+  /* justify-content: center; */
   flex-direction: column;
 }
 
@@ -280,7 +280,6 @@ section {
 
 .section-container {
   gap: 4rem;
-  height: 80%;
 }
 
 .section__pic-container {
@@ -360,7 +359,7 @@ article .icon {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 70vh;
+  height: 50vh;
 }
 
 .contact-info-upper-container {
