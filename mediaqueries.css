@@ -1,3 +1,4 @@
+/* Large screens */
 @media screen and (max-width: 1400px) {
   #profile {
     height: auto;
@@ -10,10 +11,11 @@
   }
   .details-container {
     flex: 1;
-    text-align: center; 
-  }  
+    text-align: center;
+  }
 }
 
+/* Medium-large screens */
 @media screen and (max-width: 1200px) {
   #desktop-nav {
     display: none;
@@ -35,57 +37,74 @@
   section,
   .section-container {
     height: fit-content;
-  }
-  section {
     margin: 0 5%;
   }
   .section__pic-container {
-    width: 275px;
-    height: 275px;
+    width: 300px;
+    height: 300px;
     margin: 0 auto 2rem;
+    transition: all 0.3s ease;
   }
   .about-containers {
     margin-top: 0;
   }
 }
 
+/* Tablets and smaller screens */
 @media screen and (max-width: 900px) {
   #profile {
-    height: auto; /* Allow auto height for smaller screens */
-    margin-bottom: 4rem; /* Adjust margin */
+    height: auto;
+    margin-bottom: 4rem;
+    padding: 2rem 0;
   }
   .section__pic-container {
-    width: 100%; /* Full width for images */
-    height: auto; /* Auto height for responsiveness */
+    width: 280px;
+    height: 280px;
   }
   .about-containers {
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Center align items */
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
   }
   .details-container {
-    margin-bottom: 2rem; /* Add space between details */
+    margin-bottom: 2rem;
+    padding: 1.5rem;
   }
   .nav-links {
-    flex-direction: column; /* Stack navigation links */
-    gap: 1rem; /* Space between links */
+    flex-direction: column;
+    gap: 1.5rem;
   }
   .btn-container {
-    flex-direction: column; /* Stack buttons */
-    align-items: center; /* Center align buttons */
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .btn {
+    width: 80%;
+    max-width: 300px;
+  }
+  .section__text {
+    text-align: center;
+    margin: 1rem 0;
   }
 }
 
+/* Mobile devices */
 @media screen and (max-width: 600px) {
   #contact,
   footer {
-    height: 40vh;
+    height: auto;
+    min-height: 40vh;
+    padding: 2rem 0;
   }
   #profile {
-    height: 83vh;
-    margin-bottom: 0;
+    height: auto;
+    padding: 4rem 0;
+    margin-bottom: 2rem;
   }
   article {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    padding: 0.8rem;
   }
   footer nav {
     height: fit-content;
@@ -95,9 +114,13 @@
   .contact-info-upper-container,
   .btn-container {
     flex-wrap: wrap;
+    gap: 1.5rem;
   }
   .contact-info-container {
-    margin: 0.5rem ;
+    margin: 0.8rem;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 350px;
   }
   .contact-info-container p,
   .nav-links li a {
@@ -105,27 +128,55 @@
   }
   .experience-sub-title {
     font-size: 1.25rem;
+    margin-bottom: 1rem;
   }
   .logo {
     font-size: 1.5rem;
   }
   .nav-links {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
     text-align: center;
+    padding: 1rem 0;
   }
   .section__pic-container {
-    width: auto;
-    height: 46vw;
-    justify-content: center;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 2rem;
   }
   .section__text__p2 {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
+    margin: 1rem 0;
   }
   .title {
-    font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
-  }  
+    font-size: clamp(1.8rem, 3vw + 1rem, 2.5rem);
+    margin-bottom: 1.5rem;
+  }
   .text-container {
-    text-align: justify;
+    text-align: left;
+    padding: 0 1rem;
+  }
+  .icon {
+    height: 2rem;
+  }
+  .hamburger-menu {
+    padding: 0.5rem;
+  }
+}
+
+/* Extra small devices */
+@media screen and (max-width: 400px) {
+  .section__pic-container {
+    width: 200px;
+    height: 200px;
+  }
+  .btn {
+    width: 90%;
+  }
+  .title {
+    font-size: clamp(1.5rem, 2.5vw + 1rem, 2rem);
+  }
+  .contact-info-container {
+    padding: 1rem;
   }
 }

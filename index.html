@@ -7,11 +7,31 @@
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
     <nav id="desktop-nav">
       <div class="logo">Chandan Pathak</div>
-      <div>
+      <div class="nav-content">
+        <div class="theme-wrapper">
+          <span class="theme-label"></span>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <svg class="theme-icon dark-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <svg class="theme-icon light-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+        </div>
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Experience</a></li>
@@ -38,7 +58,7 @@
     </nav>
     <section id="profile">
       <div class="section__pic-container">
-        <img src="./assets/animation_aboutme.gif" srcset="./assets/animation_aboutme.gif 600w, ./assets/animation_aboutme.gif 1200w" alt="Profile picture" />
+        <img src="https://media1.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" class="profile-img" alt="Profile picture" />
       </div>
       <div class="section__text">
         <p class="section__text__p1">Hello, I'm</p>
@@ -122,7 +142,7 @@
               <article>
                 <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
                 <div>
-                  <h3>MySQL</h3>
+                  <h3>Database</h3>
                   <p>Intermediate</p>
                 </div>
               </article>
@@ -150,7 +170,7 @@
             <div class="btn-container">
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/chandan2909/chandan2909.github.io'"
+                onclick="window.open('https://github.com/chandan2909/chandan2909.github.io', '_blank')"
               >
                 Github
               </button>
@@ -164,7 +184,7 @@
             <div class="btn-container">
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/chandan2909/calculator'"
+                onclick="window.open('https://github.com/chandan2909/calculator', '_blank')"
               >
                 Github
               </button>
@@ -178,7 +198,7 @@
             <div class="btn-container">
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/chandan2909/atm_gui'"
+                onclick="window.open('https://github.com/chandan2909/atm_gui', '_blank')"
               >
                 Github
               </button>
@@ -220,6 +240,5 @@
       </nav>
       <p>Copyright &#169; 2024 Chandan Pathak. All Rights Reserved.</p>
     </footer>
-    <script src="script.js"></script>
   </body>
 </html>
