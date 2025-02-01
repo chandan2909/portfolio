@@ -49,6 +49,32 @@
   }
 }
 
+@media screen and (max-width: 900px) {
+  #profile {
+    height: auto; /* Allow auto height for smaller screens */
+    margin-bottom: 4rem; /* Adjust margin */
+  }
+  .section__pic-container {
+    width: 100%; /* Full width for images */
+    height: auto; /* Auto height for responsiveness */
+  }
+  .about-containers {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align items */
+  }
+  .details-container {
+    margin-bottom: 2rem; /* Add space between details */
+  }
+  .nav-links {
+    flex-direction: column; /* Stack navigation links */
+    gap: 1rem; /* Space between links */
+  }
+  .btn-container {
+    flex-direction: column; /* Stack buttons */
+    align-items: center; /* Center align buttons */
+  }
+}
+
 @media screen and (max-width: 600px) {
   #contact,
   footer {

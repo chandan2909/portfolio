@@ -338,10 +338,10 @@ article .icon {
 
 .project-img {
   border-radius: 2rem;
-  width: 100%; /* Updated: Image takes full width of its container */
-  max-width: 600px; /* Limits the image size */
-  height: auto; /* Maintains aspect ratio */
-  object-fit: cover; /* Ensures image does not stretch */
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
 }
 
 .project-title {
