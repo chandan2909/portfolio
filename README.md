@@ -30,6 +30,6 @@ Contributions are welcome! If you have any suggestions or improvements, please f
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
 
 
