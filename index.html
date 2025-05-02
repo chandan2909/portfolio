@@ -1,93 +1,77 @@
+<!-- HTML document starts here -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> <!-- Set the language of the document to English -->
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="mediaqueries.css" />
-    <script src="script.js" defer></script>
+    <meta charset="UTF-8" /> <!-- Specify the character encoding -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Ensure compatibility with Internet Explorer -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Set the viewport for responsive design -->
+    <title>My Portfolio</title> <!-- Title of the webpage -->
+    <link rel="stylesheet" href="style.css" /> <!-- Link to the main stylesheet -->
+    <link rel="stylesheet" href="mediaqueries.css" /> <!-- Link to the media queries stylesheet -->
+    <script src="script.js" defer></script> <!-- Link to the JavaScript file, loaded after HTML -->
   </head>
   <body>
-    <nav id="desktop-nav">
-      <div class="logo">Chandan Pathak</div>
-      <div class="nav-content">
-        <div class="theme-wrapper">
-          <span class="theme-label"></span>
-          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-            <svg class="theme-icon dark-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-            <svg class="theme-icon light-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="5"></circle>
-              <line x1="12" y1="1" x2="12" y2="3"></line>
-              <line x1="12" y1="21" x2="12" y2="23"></line>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-              <line x1="1" y1="12" x2="3" y2="12"></line>
-              <line x1="21" y1="12" x2="23" y2="12"></line>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-          </button>
-        </div>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
+    <nav id="desktop-nav"> <!-- Desktop navigation bar -->
+      <div class="logo">Chandan Pathak</div> <!-- Logo text -->
+      <div class="nav-content"> <!-- Container for navigation links -->
+        <ul class="nav-links"> <!-- Unordered list for navigation links -->
+          <li><a href="#about">About</a></li> <!-- Link to About section -->
+          <li><a href="#experience">Experience</a></li> <!-- Link to Experience section -->
+          <li><a href="#projects">Projects</a></li> <!-- Link to Projects section -->
+          <li><a href="#contact">Contact</a></li> <!-- Link to Contact section -->
         </ul>
       </div>
     </nav>
-    <nav id="hamburger-nav">
-      <div class="logo">Chandan Pathak</div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
+    <nav id="hamburger-nav"> <!-- Hamburger navigation for smaller screens -->
+      <div class="logo">Chandan Pathak</div> <!-- Logo text -->
+      <div class="hamburger-menu"> <!-- Container for hamburger menu -->
+        <div class="hamburger-icon" onclick="toggleMenu()"> <!-- Hamburger icon with click event -->
+          <span></span> <!-- Line 1 of the hamburger icon -->
+          <span></span> <!-- Line 2 of the hamburger icon -->
+          <span></span> <!-- Line 3 of the hamburger icon -->
         </div>
-        <div class="menu-links">
-          <li><a href="#about" onclick="toggleMenu()">About</a></li>
-          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        <div class="menu-links"> <!-- Container for menu links -->
+          <ul>
+          <li><a href="#about" onclick="toggleMenu()">About</a></li> <!-- Link to About section -->
+          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li> <!-- Link to Experience section -->
+          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li> <!-- Link to Projects section -->
+          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li> <!-- Link to Contact section -->
+        </ul>
         </div>
       </div>
     </nav>
-    <section id="profile">
-      <div class="section__pic-container">
-        <img src="https://media1.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" class="profile-img" alt="Profile picture" />
+    <section id="profile"> <!-- Profile section -->
+      <div class="section__pic-container"> <!-- Container for profile picture -->
+        <img src="https://media1.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" class="profile-img" alt="Profile picture" /> <!-- Profile picture -->
       </div>
-      <div class="section__text">
-        <p class="section__text__p1">Hello, I'm</p>
-        <h1 class="title">Chandan Pathak</h1>
-        <p class="section__text__p2">Computer Application Student</p>
-        <div class="btn-container">
+      <div class="section__text"> <!-- Container for profile text -->
+        <p class="section__text__p1">Hello, I'm</p> <!-- Introduction text -->
+        <h1 class="title">Chandan Pathak</h1> <!-- Name as title -->
+        <p class="section__text__p2">Computer Application Student</p> <!-- Description text -->
+        <div class="btn-container"> <!-- Container for buttons -->
           <button
             class="btn btn-color-2"
             onclick="window.open('./assets/Chandan_Pathak_Resume.pdf')"
           >
-            Download CV
+            Download CV <!-- Button to download CV -->
           </button>
           <button class="btn btn-color-1" onclick="location.href='./#contact'">
-            Contact Info
+            Contact Info <!-- Button to navigate to Contact section -->
           </button>
         </div>
-        <div id="socials-container">
+        <div id="socials-container"> <!-- Container for social media icons -->
           <img
             src="./assets/linkedin.png"
             alt="My LinkedIn profile"
             class="icon"
             onclick="location.href='https://www.linkedin.com/in/chandanpathak291/'"
-          />
+          /> <!-- LinkedIn icon -->
           <img
             src="./assets/github.png"
             alt="My Github profile"
             class="icon"
             onclick="location.href='https://github.com/chandan2909'"
-          />
+          /> <!-- GitHub icon -->
         </div>
       </div>
     </section>
@@ -100,12 +84,13 @@
             <div class="details-container">
               <img src="./assets/education.png" alt="Education icon" class="icon" />
               <h3>Education</h3>
-              <p>MCA - Masters Degree<br />in Computer Application</p>
+              <p>MCA - Masters Degree<br />in Computer Application</p> 
             </div>
+          
           </div>
           <div class="text-container">
             <p>
-              I am a student of MCA in computer science and engineering with strong foundation in computer science fundamentals (C and Java). I am a highly motivated and results oriented person with passion to learn new things. I look forward to applying my skills and knowledge to a challenging and rewarding career in the tech industry. I believe I have the skills and experience to be a valuable asset to your team. I am available for an interview at your earliest convenience.
+              I am a student of MCA in computer applications with strong foundation in computer science fundamentals (C and Java). I am a highly motivated and results oriented person with passion to learn new things. I look forward to applying my skills and knowledge to a challenging and rewarding career in the tech industry. I believe I have the skills and experience to be a valuable asset to your team. I am available for an interview at your earliest convenience.
             </p>
           </div>
         </div>
@@ -136,6 +121,27 @@
                 <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
                 <div>
                   <h3>Java</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
+                <div>
+                  <h3>HTML</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
+                <div>
+                  <h3>CSS</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
+                <div>
+                  <h3>JavaScript</h3>
                   <p>Intermediate</p>
                 </div>
               </article>
@@ -223,7 +229,7 @@
         </div>
         <div class="contact-info-container">
           <img src="./assets/linkedin.png" alt="LinkedIn icon" class="icon contact-icon" />
-          <p><a href='https://www.linkedin.com/in/chandanpathak291' target="_blank">LinkedIn</a></p>
+          <p><a href='https://www.linkedin.com/in/chandanpathak291' target="_blank" rel="noopener">LinkedIn</a></p>
         </div>
       </div>
     </section>
@@ -238,7 +244,7 @@
           </ul>
         </div>
       </nav>
-      <p>Copyright &#169; 2024 Chandan Pathak. All Rights Reserved.</p>
+      <p>Copyright &#169; <span id="currentYear"></span> Chandan Pathak. All Rights Reserved.</p>
     </footer>
   </body>
 </html>
