@@ -140,6 +140,15 @@ body {
   object-fit: contain;
 }
 
+/* Projects section image fixes */
+.projects-section img,
+.aspect-video img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
 /* SEO and Accessibility improvements */
 .sr-only {
   position: absolute;
