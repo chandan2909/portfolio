@@ -228,19 +228,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Netlify** for free hosting and deployment
 - **Font Awesome** for beautiful icons
 - **Unsplash** for high-quality images (if used)
-
-## 📈 Future Enhancements
-
-- [ ] Add blog section
-- [ ] Implement theme switcher (light/dark)
-- [ ] Add more interactive animations
-- [ ] Include testimonials section
-- [ ] Add contact form backend
-- [ ] Implement PWA features
-- [ ] Add multi-language support
-
 ---
 
 ⭐ **Star this repository** if you found it helpful!
-
-Built with ❤️ by [Chandan Pathak](https://chandanpathak.netlify.app)
