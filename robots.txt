@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://chandanpathak.netlify.app/sitemap.xml
+
+# Disallow crawling of any potential admin or private folders
+Disallow: /admin/
+Disallow: /private/
+
+# Allow crawling of assets
+Allow: /assets/
+Allow: /style/

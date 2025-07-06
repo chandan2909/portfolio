@@ -1,250 +1,1661 @@
-<!-- HTML document starts here -->
 <!DOCTYPE html>
-<html lang="en"> <!-- Set the language of the document to English -->
+<html lang="en" data-bs-theme="">
   <head>
-    <meta charset="UTF-8" /> <!-- Specify the character encoding -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Ensure compatibility with Internet Explorer -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Set the viewport for responsive design -->
-    <title>My Portfolio</title> <!-- Title of the webpage -->
-    <link rel="stylesheet" href="style.css" /> <!-- Link to the main stylesheet -->
-    <link rel="stylesheet" href="mediaqueries.css" /> <!-- Link to the media queries stylesheet -->
-    <script src="script.js" defer></script> <!-- Link to the JavaScript file, loaded after HTML -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>Chandan Pathak - Web Developer Portfolio | MCA Graduate</title>
+    <meta
+      name="description"
+      content="Chandan Pathak is a passionate web developer and MCA graduate with expertise in HTML, CSS, JavaScript, and modern web technologies. View my portfolio and projects."
+    />
+    <meta
+      name="keywords"
+      content="Chandan Pathak, web developer, portfolio, MCA, HTML, CSS, JavaScript, frontend developer, Jaunpur, India"
+    />
+    <meta name="author" content="Chandan Pathak" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta
+      property="og:title"
+      content="Chandan Pathak - Web Developer Portfolio"
+    />
+    <meta
+      property="og:description"
+      content="Passionate web developer and MCA graduate specializing in modern web technologies. Explore my projects and skills."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://chandanpathak.netlify.app" />
+    <meta
+      property="og:image"
+      content="https://chandanpathak.netlify.app/assets/profile-preview.jpg"
+    />
+    <meta property="og:site_name" content="Chandan Pathak Portfolio" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Chandan Pathak - Web Developer Portfolio"
+    />
+    <meta
+      name="twitter:description"
+      content="Passionate web developer and MCA graduate specializing in modern web technologies."
+    />
+    <meta
+      name="twitter:image"
+      content="https://chandanpathak.netlify.app/assets/profile-preview.jpg"
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://chandanpathak.netlify.app" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/apple-touch-icon.png"
+    />
+
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://media1.giphy.com" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["system-ui", "-apple-system", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="./style/style.css" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Chandan Pathak",
+        "jobTitle": "Web Developer",
+        "description": "Passionate web developer and MCA graduate with expertise in HTML, CSS, JavaScript, and modern web technologies",
+        "url": "https://chandanpathak.netlify.app",
+        "sameAs": [
+          "https://github.com/chandan2909",
+          "https://www.linkedin.com/in/chandanpathak291"
+        ],
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Veer Bahadur Singh Purvanchal University"
+        },
+        "knowsAbout": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "Git",
+          "GitHub",
+          "SQL",
+          "Web Development"
+        ],
+        "email": "vijaypathakssa3@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Jaunpur",
+          "addressCountry": "India"
+        }
+      }
+    </script>
   </head>
-  <body>
-    <nav id="desktop-nav"> <!-- Desktop navigation bar -->
-      <div class="logo">Chandan Pathak</div> <!-- Logo text -->
-      <div class="nav-content"> <!-- Container for navigation links -->
-        <ul class="nav-links"> <!-- Unordered list for navigation links -->
-          <li><a href="#about">About</a></li> <!-- Link to About section -->
-          <li><a href="#experience">Experience</a></li> <!-- Link to Experience section -->
-          <li><a href="#projects">Projects</a></li> <!-- Link to Projects section -->
-          <li><a href="#contact">Contact</a></li> <!-- Link to Contact section -->
-        </ul>
-      </div>
-    </nav>
-    <nav id="hamburger-nav"> <!-- Hamburger navigation for smaller screens -->
-      <div class="logo">Chandan Pathak</div> <!-- Logo text -->
-      <div class="hamburger-menu"> <!-- Container for hamburger menu -->
-        <div class="hamburger-icon" onclick="toggleMenu()"> <!-- Hamburger icon with click event -->
-          <span></span> <!-- Line 1 of the hamburger icon -->
-          <span></span> <!-- Line 2 of the hamburger icon -->
-          <span></span> <!-- Line 3 of the hamburger icon -->
-        </div>
-        <div class="menu-links"> <!-- Container for menu links -->
-          <ul>
-          <li><a href="#about" onclick="toggleMenu()">About</a></li> <!-- Link to About section -->
-          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li> <!-- Link to Experience section -->
-          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li> <!-- Link to Projects section -->
-          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li> <!-- Link to Contact section -->
-        </ul>
-        </div>
-      </div>
-    </nav>
-    <section id="profile"> <!-- Profile section -->
-      <div class="section__pic-container"> <!-- Container for profile picture -->
-        <img src="https://media1.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" class="profile-img" alt="Profile picture" /> <!-- Profile picture -->
-      </div>
-      <div class="section__text"> <!-- Container for profile text -->
-        <p class="section__text__p1">Hello, I'm</p> <!-- Introduction text -->
-        <h1 class="title">Chandan Pathak</h1> <!-- Name as title -->
-        <p class="section__text__p2">Computer Application Student</p> <!-- Description text -->
-        <div class="btn-container"> <!-- Container for buttons -->
-          <button
-            class="btn btn-color-2"
-            onclick="window.open('./assets/Chandan_Pathak_Resume.pdf')"
+  <body class="bg-black">
+    <div class="bg-black min-h-screen text-white">
+      <!-- Navigation -->
+      <nav
+        class="bg-gray-900 border-b border-gray-800 py-4 px-4 shadow-lg transition-all duration-300 ease-in-out fixed top-0 left-0 right-0 z-50"
+        aria-label="Main navigation"
+      >
+        <div
+          class="container mx-auto flex flex-wrap items-center justify-between"
+        >
+          <a
+            class="text-xl font-bold flex items-center text-white hover:text-blue-400 transition-colors duration-300"
+            href="#home"
+            aria-label="Chandan Pathak Portfolio Home"
           >
-            Download CV <!-- Button to download CV -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="inline-block mr-2 transition-transform duration-300 hover:rotate-12"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+            >
+              <path
+                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16M1 8a7 7 0 0 0 7 7 3.5 3.5 0 1 0 0-7 3.5 3.5 0 1 1 0-7 7 7 0 0 0-7 7"
+              />
+            </svg>
+            Portfolio
+          </a>
+          <button
+            class="md:hidden bg-transparent border-0 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-lg transition-all duration-300 hover:bg-gray-800 transform hover:scale-110"
+            type="button"
+            data-toggle="mobile-menu"
+            aria-expanded="false"
+            aria-label="Toggle navigation menu"
+          >
+            <svg
+              class="w-6 h-6 transition-transform duration-300"
+              id="hamburger-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
           </button>
-          <button class="btn btn-color-1" onclick="location.href='./#contact'">
-            Contact Info <!-- Button to navigate to Contact section -->
-          </button>
-        </div>
-        <div id="socials-container"> <!-- Container for social media icons -->
-          <img
-            src="./assets/linkedin.png"
-            alt="My LinkedIn profile"
-            class="icon"
-            onclick="location.href='https://www.linkedin.com/in/chandanpathak291/'"
-          /> <!-- LinkedIn icon -->
-          <img
-            src="./assets/github.png"
-            alt="My Github profile"
-            class="icon"
-            onclick="location.href='https://github.com/chandan2909'"
-          /> <!-- GitHub icon -->
-        </div>
-      </div>
-    </section>
-    <section id="about">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
-      <div class="section-container">
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img src="./assets/education.png" alt="Education icon" class="icon" />
-              <h3>Education</h3>
-              <p>MCA - Masters Degree<br />in Computer Application</p> 
-            </div>
-          
+          <div
+            class="w-full md:w-auto md:flex hidden transition-all duration-500 ease-in-out transform z-40"
+            data-mobile-menu
+          >
+            <ul
+              class="flex flex-col md:flex-row md:space-x-8 mt-0 bg-gray-900 md:bg-transparent p-4 md:p-0 rounded-lg md:rounded-none border border-gray-800 md:border-none relative z-40"
+            >
+              <li class="transform transition-all duration-300 hover:scale-105">
+                <a
+                  class="block text-gray-300 hover:text-blue-400 transition-all duration-300 py-2 md:py-0 relative hover:font-semibold before:absolute before:bottom-0 before:left-0 before:w-0 before:h-0.5 before:bg-blue-400 before:transition-all before:duration-300 hover:before:w-full"
+                  href="#about"
+                  >About</a
+                >
+              </li>
+              <li class="transform transition-all duration-300 hover:scale-105">
+                <a
+                  class="block text-gray-300 hover:text-blue-400 transition-all duration-300 py-2 md:py-0 relative hover:font-semibold before:absolute before:bottom-0 before:left-0 before:w-0 before:h-0.5 before:bg-blue-400 before:transition-all before:duration-300 hover:before:w-full"
+                  href="#experience"
+                  >Experience</a
+                >
+              </li>
+              <li class="transform transition-all duration-300 hover:scale-105">
+                <a
+                  class="block text-gray-300 hover:text-blue-400 transition-all duration-300 py-2 md:py-0 relative hover:font-semibold before:absolute before:bottom-0 before:left-0 before:w-0 before:h-0.5 before:bg-blue-400 before:transition-all before:duration-300 hover:before:w-full"
+                  href="#projects"
+                  >Projects</a
+                >
+              </li>
+              <li class="transform transition-all duration-300 hover:scale-105">
+                <a
+                  class="block text-gray-300 hover:text-blue-400 transition-all duration-300 py-2 md:py-0 relative hover:font-semibold before:absolute before:bottom-0 before:left-0 before:w-0 before:h-0.5 before:bg-blue-400 before:transition-all before:duration-300 hover:before:w-full"
+                  href="#contact"
+                  >Contact</a
+                >
+              </li>
+            </ul>
           </div>
-          <div class="text-container">
-            <p>
-              I am a student of MCA in computer applications with strong foundation in computer science fundamentals (C and Java). I am a highly motivated and results oriented person with passion to learn new things. I look forward to applying my skills and knowledge to a challenging and rewarding career in the tech industry. I believe I have the skills and experience to be a valuable asset to your team. I am available for an interview at your earliest convenience.
-            </p>
-          </div>
-        </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#experience'"
-      />
-    </section>
-    <section id="experience">
-      <p class="section__text__p1">Explore My</p>
-      <h1 class="title">Skills</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container">
-            <h2 class="experience-sub-title">Hard & Soft Skills</h2>
-            <div class="article-container">
-              <article>
-                <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-                <div>
-                  <h3>C</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-                <div>
-                  <h3>Java</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-                <div>
-                  <h3>HTML</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-                <div>
-                  <h3>CSS</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-                <div>
-                  <h3>JavaScript</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img src="./assets/checkmark.png" alt="Experience icon" class="icon" />
-                <div>
-                  <h3>Database</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#projects'"
-      />
-    </section>
-    <section id="projects">
-      <p class="section__text__p1">Browse My Recent</p>
-      <h1 class="title">Projects</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img src="./assets/project-one1.png" alt="Project 1" class="project-img" />
-            </div>
-            <h2 class="experience-sub-title project-title">Portfolio Website</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('https://github.com/chandan2909/chandan2909.github.io', '_blank')"
-              >
-                Github
-              </button>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img src="./assets/project-two.gif" alt="Project 2" class="project-img" />
-            </div>
-            <h2 class="experience-sub-title project-title">Calculator</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('https://github.com/chandan2909/calculator', '_blank')"
-              >
-                Github
-              </button>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img src="./assets/project-three.gif" alt="Project 3" class="project-img" />
-            </div>
-            <h2 class="experience-sub-title project-title">Atm interface</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('https://github.com/chandan2909/Atm-manage', '_blank')"
-              >
-                Github
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#contact'"
-      />
-    </section>
-    <section id="contact">
-      <p class="section__text__p1">Get in Touch</p>
-      <h1 class="title">Contact Me</h1>
-      <div class="contact-info-upper-container">
-        <div class="contact-info-container">
-          <img src="./assets/email.png" alt="Email icon" class="icon contact-icon email-icon" />
-          <p><a href="mailto:vijaypathakssa3@gmail.com">Email</a></p>
-        </div>
-        <div class="contact-info-container">
-          <img src="./assets/linkedin.png" alt="LinkedIn icon" class="icon contact-icon" />
-          <p><a href='https://www.linkedin.com/in/chandanpathak291' target="_blank" rel="noopener">LinkedIn</a></p>
-        </div>
-      </div>
-    </section>
-    <footer>
-      <nav>
-        <div class="nav-links-container">
-          <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
         </div>
       </nav>
-      <p>Copyright &#169; <span id="currentYear"></span> Chandan Pathak. All Rights Reserved.</p>
+
+      <!-- Hero/Profile Section -->
+      <header
+        id="home"
+        class="pt-24 pb-8 bg-black"
+      >
+        <div
+          class="container mx-auto max-w-6xl bg-gray-900 rounded-3xl py-8 px-8 shadow-2xl border border-gray-700"
+        >
+          <div class="flex flex-col-reverse lg:flex-row items-center gap-12">
+            <div class="lg:w-1/2 text-left space-y-6">
+              <div
+                class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-900/50 to-purple-900/50 text-blue-300 text-sm font-semibold px-4 py-2 rounded-full border border-blue-600"
+              >
+                <div
+                  class="w-2 h-2 bg-green-400 rounded-full animate-pulse"
+                ></div>
+                Hello, I'm
+              </div>
+              <h1
+                class="text-6xl lg:text-7xl font-bold bg-gradient-to-r from-white via-blue-400 to-purple-400 bg-clip-text text-transparent leading-tight"
+              >
+                Chandan Pathak
+              </h1>
+              <div class="space-y-3">
+                <p class="text-2xl lg:text-3xl font-semibold text-gray-200">
+                  Passionate Web Developer
+                </p>
+                <p class="text-lg text-gray-400 leading-relaxed max-w-lg">
+                  MCA Graduate crafting modern, responsive web experiences with
+                  clean code and creative solutions.
+                </p>
+              </div>
+              <div class="flex flex-wrap gap-4">
+                <button
+                  onclick="window.open('./assets/Chandan_Pathak_Resume.pdf')"
+                  class="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                  aria-label="Download Chandan Pathak Resume PDF"
+                >
+                  <svg
+                    class="w-5 h-5 group-hover:animate-bounce"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    ></path>
+                  </svg>
+                  Download Resume
+                </button>
+                <a
+                  href="#contact"
+                  class="bg-white border-2 border-gray-300 hover:border-blue-500 text-gray-700 hover:text-blue-600 px-8 py-3 rounded-full font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                  aria-label="Go to contact section"
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                    ></path>
+                  </svg>
+                  Contact Me
+                </a>
+              </div>
+              <div class="flex flex-wrap gap-4">
+                <a
+                  href="https://www.github.com/chandan2909/ "
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group bg-gray-800 hover:bg-gray-900 text-white px-6 py-2 rounded-full font-medium shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                  aria-label="Visit Chandan Pathak GitHub profile (opens in new tab)"
+                >
+                  <svg
+                    class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                    />
+                  </svg>
+                  GitHub
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/chandanpathak291"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-medium shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                  aria-label="Visit Chandan Pathak LinkedIn profile (opens in new tab)"
+                >
+                  <svg
+                    class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                    />
+                  </svg>
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+            <div class="lg:w-1/2 flex justify-center">
+              <div class="relative group">
+                <div
+                  class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"
+                ></div>
+                <div class="relative">
+                  <img
+                    src="https://media1.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif"
+                    class="w-80 h-80 rounded-full shadow-2xl object-cover border-4 border-white transform group-hover:scale-105 transition-transform duration-300"
+                    alt="Chandan Pathak - Web Developer Profile Picture"
+                    loading="eager"
+                    width="320"
+                    height="320"
+                  />
+                  <div
+                    class="absolute inset-0 rounded-full bg-gradient-to-t from-black/20 via-transparent to-transparent"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- About Section -->
+      <section id="about" class="py-6">
+        <div class="container mx-auto max-w-6xl bg-gray-900 rounded-3xl pb-8 mb-6 px-4 border border-gray-700">
+          <div class="text-center mb-8 py-6">
+            <p
+              class="text-blue-400 font-semibold text-lg mb-3 tracking-wide uppercase"
+            >
+              Get To Know More
+            </p>
+            <h2
+              class="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4"
+            >
+              About Me
+            </h2>
+            <div
+              class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full"
+            ></div>
+          </div>
+
+          <!-- About Content Container -->
+          <div
+            class="bg-gray-800 border-2 border-gray-600 rounded-3xl pt-8 pb-8 shadow-lg about-section animate-on-scroll"
+          >
+            <div class="flex items-center mb-6 px-8">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                class="text-blue-600 mr-3"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"
+                />
+              </svg>
+              <h3 class="text-white font-bold text-2xl">Who I Am</h3>
+            </div>
+
+            <!-- Main About Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8 mb-8">
+              <!-- Story Card -->
+              <div
+                class="bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
+              >
+                <div class="flex items-start mb-4">
+                  <div
+                    class="bg-blue-600 rounded-full p-3 mr-4 group-hover:bg-blue-700 transition-colors duration-300 group-hover:scale-110"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="white"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M2 3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v.5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3z"
+                      />
+                      <path
+                        d="M2 6h12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6zm11 3.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1zm-3 0a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1zm-5 3a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1zm3 0a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4
+                      class="font-bold text-xl text-white mb-2 group-hover:text-blue-400 transition-colors duration-300"
+                    >
+                      My Journey
+                    </h4>
+                  </div>
+                </div>
+                <p class="text-gray-300 leading-relaxed">
+                  I am a dedicated MCA student with a strong foundation in
+                  computer science fundamentals. My expertise spans across
+                  <strong>HTML, CSS, JavaScript, and Java</strong>, allowing me
+                  to create dynamic and responsive web applications.
+                </p>
+              </div>
+
+              <!-- Passion Card -->
+              <div
+                class="bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
+              >
+                <div class="flex items-start mb-4">
+                  <div
+                    class="bg-green-600 rounded-full p-3 mr-4 group-hover:bg-green-700 transition-colors duration-300 group-hover:scale-110"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="white"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                      />
+                      <path
+                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4
+                      class="font-bold text-xl text-white mb-2 group-hover:text-green-400 transition-colors duration-300"
+                    >
+                      My Drive
+                    </h4>
+                  </div>
+                </div>
+                <p class="text-gray-300 leading-relaxed">
+                  I am highly motivated and results-oriented with a genuine
+                  passion for learning new technologies. I thrive on challenges
+                  and continuously seek opportunities to expand my knowledge in
+                  the ever-evolving tech landscape.
+                </p>
+              </div>
+            </div>
+
+            <!-- Goals and Availability -->
+            <div class="px-8">
+              <div
+                class="bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 border border-gray-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group"
+              >
+                <div class="flex items-start mb-4">
+                  <div
+                    class="bg-purple-600 rounded-full p-3 mr-4 group-hover:bg-purple-700 transition-colors duration-300 group-hover:scale-110"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="white"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h4
+                      class="font-bold text-xl text-white mb-2 group-hover:text-purple-400 transition-colors duration-300"
+                    >
+                      Career Goals
+                    </h4>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                      I look forward to applying my skills and knowledge to a
+                      challenging and rewarding career in the tech industry. I
+                      believe I have the dedication and expertise to be a
+                      valuable asset to any development team.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Skills and Education Section -->
+      <section id="experience" aria-labelledby="skills-heading" class="py-6">
+        <div
+          class="container mx-auto max-w-6xl bg-gray-900 rounded-3xl pb-8 mb-6 px-4 border border-gray-700"
+        >
+          <div class="text-center mb-12 py-8">
+            <p
+              class="text-blue-400 font-semibold text-lg mb-3 tracking-wide uppercase"
+            >
+              Explore My
+            </p>
+            <h2
+              id="skills-heading"
+              class="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4"
+            >
+              Skills
+            </h2>
+            <div
+              class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full"
+            ></div>
+          </div>
+
+          <!-- Technical Skills -->
+          <div
+            class="bg-gray-800 border-2 border-gray-600 rounded-3xl pt-8 pb-8 shadow-lg skills-section animate-on-scroll"
+          >
+            <div class="flex items-center mb-6 px-8">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                class="text-blue-400 mr-3"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"
+                />
+              </svg>
+              <h3 class="text-white font-bold text-2xl">Technical Skills</h3>
+            </div>
+
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-8"
+              role="list"
+            >
+              <!-- HTML Skill Card -->
+              <div
+                class="bg-gradient-to-br from-gray-700 to-gray-600 rounded-2xl p-6 border border-gray-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group cursor-pointer"
+                role="listitem"
+              >
+                <div class="flex items-start">
+                  <div
+                    class="bg-orange-600 rounded-full p-3 mr-4 group-hover:bg-orange-700 transition-colors duration-300 group-hover:scale-105"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="white"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z"
+                      />
+                      <path
+                        d="M4.5 7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7zM4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM4.5 9a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h4
+                      class="font-bold text-xl text-gray-900 mb-2 group-hover:text-orange-700 transition-colors duration-300"
+                    >
+                      HTML
+                    </h4>
+                    <p class="text-sm text-gray-600 mb-3">Markup Language</p>
+                    <div class="flex items-center">
+                      <span
+                        class="bg-orange-100 text-orange-800 text-xs font-semibold px-3 py-1 rounded-full"
+                      >
+                        Intermediate
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CSS Skill Card -->
+              <div
+                class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-6 border border-blue-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group cursor-pointer"
+                role="listitem"
+              >
+                <div class="flex items-start">
+                  <div
+                    class="bg-blue-600 rounded-full p-3 mr-4 group-hover:bg-blue-700 transition-colors duration-300 group-hover:scale-105"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="white"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 1h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H4z"
+                      />
+                      <path
+                        d="M8.5 4a.5.5 0 0 0-1 0v3H6a.5.5 0 0 0 0 1h1.5v3a.5.5 0 0 0 1 0V8H10a.5.5 0 0 0 0-1H8.5V4z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h4
+                      class="font-bold text-xl text-gray-900 mb-2 group-hover:text-blue-700 transition-colors duration-300"
+                    >
+                      CSS
+                    </h4>
+                    <p class="text-sm text-gray-600 mb-3">Styling & Design</p>
+                    <div class="flex items-center">
+                      <span
+                        class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full"
+                      >
+                        Intermediate
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- JavaScript Skill Card -->
+              <div
+                class="bg-gradient-to-br from-yellow-50 to-amber-100 rounded-2xl p-6 border border-yellow-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group cursor-pointer"
+                role="listitem"
+              >
+                <div class="flex items-start">
+                  <div
+                    class="bg-yellow-600 rounded-full p-3 mr-4 group-hover:bg-yellow-700 transition-colors duration-300 group-hover:scale-105"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="white"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z"
+                      />
+                      <path
+                        d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h4
+                      class="font-bold text-xl text-gray-900 mb-2 group-hover:text-yellow-700 transition-colors duration-300"
+                    >
+                      JavaScript
+                    </h4>
+                    <p class="text-sm text-gray-600 mb-3">
+                      Programming & Logic
+                    </p>
+                    <div class="flex items-center">
+                      <span
+                        class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full"
+                      >
+                        Intermediate
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Git/GitHub Skill Card -->
+              <div
+                class="bg-gradient-to-br from-gray-50 to-slate-100 rounded-2xl p-6 border border-gray-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group cursor-pointer"
+                role="listitem"
+              >
+                <div class="flex items-start">
+                  <div
+                    class="bg-gray-800 rounded-full p-3 mr-4 group-hover:bg-gray-900 transition-colors duration-300 group-hover:scale-105"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="white"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h4
+                      class="font-bold text-xl text-gray-900 mb-2 group-hover:text-gray-700 transition-colors duration-300"
+                    >
+                      Git/GitHub
+                    </h4>
+                    <p class="text-sm text-gray-600 mb-3">Version Control</p>
+                    <div class="flex items-center">
+                      <span
+                        class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full"
+                      >
+                        Basic
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SQL Skill Card -->
+              <div
+                class="bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl p-6 border border-green-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group cursor-pointer"
+                role="listitem"
+              >
+                <div class="flex items-start">
+                  <div
+                    class="bg-green-600 rounded-full p-3 mr-4 group-hover:bg-green-700 transition-colors duration-300 group-hover:scale-105"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="white"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Z"
+                      />
+                      <path
+                        d="M.5 1a.5.5 0 0 0 0 1H2a.5.5 0 0 0 .485-.379l.626-2.5A.5.5 0 0 1 3.596 0H14.5a.5.5 0 0 1 .485.621l-1.5 6a.5.5 0 0 1-.485.379H6.5a.5.5 0 0 0-.485.621l.818 3.274a.5.5 0 0 0 .485.379h.5a.5.5 0 0 1 0 1h-.5a.5.5 0 0 1-.485-.379L5.416 8H2.5a.5.5 0 0 1 0-1h2.5l-.5-2H.5a.5.5 0 0 1 0-1Z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h4
+                      class="font-bold text-xl text-gray-900 mb-2 group-hover:text-green-700 transition-colors duration-300"
+                    >
+                      SQL
+                    </h4>
+                    <p class="text-sm text-gray-600 mb-3">
+                      Database Management
+                    </p>
+                    <div class="flex items-center">
+                      <span
+                        class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full"
+                      >
+                        Intermediate
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Java Skill Card -->
+              <div
+                class="bg-gradient-to-br from-purple-50 to-violet-100 rounded-2xl p-6 border border-purple-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group cursor-pointer"
+                role="listitem"
+              >
+                <div class="flex items-start">
+                  <div
+                    class="bg-purple-600 rounded-full p-3 mr-4 group-hover:bg-purple-700 transition-colors duration-300 group-hover:scale-105"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="white"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8.5 5a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V9a.5.5 0 0 0 1 0V7.5H10a.5.5 0 0 0 0-1H8.5V5z"
+                      />
+                      <path
+                        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H4z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h4
+                      class="font-bold text-xl text-gray-900 mb-2 group-hover:text-purple-700 transition-colors duration-300"
+                    >
+                      Java
+                    </h4>
+                    <p class="text-sm text-gray-600 mb-3">
+                      Object-Oriented Programming
+                    </p>
+                    <div class="flex items-center">
+                      <span
+                        class="bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full"
+                      >
+                        Intermediate
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education Section -->
+      <section id="education" aria-labelledby="education-heading" class="py-6">
+        <div class="container mx-auto max-w-6xl bg-gray-900 rounded-3xl pb-8 mb-6 px-4 border border-gray-700">
+          <div class="text-center mb-12 py-8">
+            <p
+              class="text-blue-400 font-semibold text-lg mb-3 tracking-wide uppercase"
+            >
+              My Academic
+            </p>
+            <h2
+              id="education-heading"
+              class="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4"
+            >
+              Education
+            </h2>
+            <div
+              class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full"
+            ></div>
+          </div>
+
+          <!-- Education Container -->
+          <div
+            class="bg-gray-800 border-2 border-gray-600 rounded-3xl pt-8 pb-8 shadow-lg education-section animate-on-scroll"
+          >
+            <div class="flex items-center mb-6 px-8">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                class="text-blue-400 mr-3"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5Z"
+                />
+                <path
+                  d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Z"
+                />
+              </svg>
+              <h3 class="text-white font-bold text-2xl">Academic Background</h3>
+            </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-8"
+          >
+            <div
+              class="bg-gradient-to-br from-gray-700 to-gray-600 rounded-2xl p-6 border border-gray-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
+            >
+              <div class="flex items-start">
+                <div
+                  class="bg-blue-600 rounded-full p-2 mr-4 group-hover:bg-blue-700 transition-colors duration-300"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="white"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"
+                    />
+                  </svg>
+                </div>
+                <div class="flex-1">
+                  <h4
+                    class="font-bold text-xl text-white mb-2 group-hover:text-blue-400 transition-colors duration-300"
+                  >
+                    MCA
+                  </h4>
+                  <p class="text-sm mb-3 text-gray-300 leading-relaxed">
+                    Master of Computer Applications<br />
+                    Veer Bahadur Singh Purvanchal University, Jaunpur
+                  </p>
+                  <div class="flex items-center">
+                    <span
+                      class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full"
+                    >
+                      CGPA: 8.0
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl p-6 border border-green-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
+            >
+              <div class="flex items-start">
+                <div
+                  class="bg-green-600 rounded-full p-2 mr-4 group-hover:bg-green-700 transition-colors duration-300"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="white"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                    />
+                    <path
+                      d="M5.354 5.646a.5.5 0 1 0-.708.708L7.293 9l-2.647 2.646a.5.5 0 0 0 .708.708L8 9.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 9l2.647-2.646a.5.5 0 0 0-.708-.708L8 8.293 5.354 5.646z"
+                    />
+                  </svg>
+                </div>
+                <div class="flex-1">
+                  <h4
+                    class="font-bold text-xl text-gray-900 mb-2 group-hover:text-green-700 transition-colors duration-300"
+                  >
+                    BSc
+                  </h4>
+                  <p class="text-sm mb-3 text-gray-700 leading-relaxed">
+                    Bachelor of Science<br />
+                    Veer Bahadur Singh Purvanchal University, Jaunpur
+                  </p>
+                  <div class="flex items-center">
+                    <span
+                      class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full"
+                    >
+                      63.0%
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-purple-50 to-violet-100 rounded-2xl p-6 border border-purple-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
+            >
+              <div class="flex items-start">
+                <div
+                  class="bg-purple-600 rounded-full p-2 mr-4 group-hover:bg-purple-700 transition-colors duration-300"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="white"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.58 26.58 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.933.933 0 0 1-.765.935c-.845.147-2.34.346-4.235.346-1.895 0-3.39-.2-4.235-.346A.933.933 0 0 1 3 9.219V8.062ZM4.5 3a2.5 2.5 0 0 1 5 0v.5a.5.5 0 0 1-1 0V3a1.5 1.5 0 1 0-3 0v.5a.5.5 0 0 1-1 0V3Z"
+                    />
+                  </svg>
+                </div>
+                <div class="flex-1">
+                  <h4
+                    class="font-bold text-xl text-gray-900 mb-2 group-hover:text-purple-700 transition-colors duration-300"
+                  >
+                    Intermediate
+                  </h4>
+                  <p class="text-sm mb-3 text-gray-700 leading-relaxed">
+                    Higher Secondary Education<br />
+                    Parvati Public School, Jaunpur
+                  </p>
+                  <div class="flex items-center">
+                    <span
+                      class="bg-orange-100 text-orange-800 text-xs font-semibold px-3 py-1 rounded-full"
+                    >
+                      62%
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" aria-labelledby="projects-heading" class="py-6">
+        <div class="container mx-auto max-w-6xl bg-gray-900 rounded-3xl pb-8 mb-6 px-4 border border-gray-700">
+          <div class="text-center mb-12 py-8">
+            <p
+              class="text-blue-400 font-semibold text-lg mb-3 tracking-wide uppercase"
+            >
+              Explore My
+            </p>
+            <h2
+              id="projects-heading"
+              class="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4"
+            >
+              Projects
+            </h2>
+            <div
+              class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full"
+            ></div>
+          </div>
+
+          <!-- Projects Container -->
+          <div
+            class="bg-gray-800 border-2 border-gray-600 rounded-3xl pt-8 pb-8 shadow-lg projects-section animate-on-scroll"
+          >
+            <div class="flex items-center mb-6 px-8">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                class="text-blue-400 mr-3"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1.5 0A1.5 1.5 0 0 0 0 1.5v7A1.5 1.5 0 0 0 1.5 10H6v1H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5v-1h4.5A1.5 1.5 0 0 0 16 8.5v-7A1.5 1.5 0 0 0 14.5 0h-13Zm0 1h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5Z"
+                />
+                <path
+                  d="M12 12.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm2 0a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM1.5 12h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1ZM1 14.25a.25.25 0 0 1 .25-.25h5.5a.25.25 0 1 1 0 .5h-5.5a.25.25 0 0 1-.25-.25Z"
+                />
+              </svg>
+              <h3 class="text-white font-bold text-2xl">
+                Featured Projects
+              </h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-8">
+              <!-- Portfolio Website Project -->
+              <article
+                class="bg-gradient-to-br from-gray-700 to-gray-600 rounded-2xl border border-gray-500 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:rotate-1 group overflow-hidden relative"
+              >
+                <!-- Animated background overlay -->
+                <div
+                  class="absolute inset-0 bg-gradient-to-r from-blue-400/5 to-indigo-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                ></div>
+
+                <!-- Floating particles effect -->
+                <div
+                  class="absolute inset-0 overflow-hidden pointer-events-none"
+                >
+                  <div
+                    class="absolute top-4 left-4 w-2 h-2 bg-blue-400 rounded-full opacity-0 group-hover:opacity-60 group-hover:animate-ping"
+                  ></div>
+                  <div
+                    class="absolute top-8 right-8 w-1.5 h-1.5 bg-indigo-500 rounded-full opacity-0 group-hover:opacity-40 group-hover:animate-pulse particle-1"
+                  ></div>
+                  <div
+                    class="absolute bottom-6 left-6 w-1 h-1 bg-blue-600 rounded-full opacity-0 group-hover:opacity-50 group-hover:animate-bounce particle-2"
+                  ></div>
+                </div>
+
+                <div class="relative z-10">
+                  <div
+                    class="aspect-video overflow-hidden rounded-t-2xl bg-white m-4 mb-0 shadow-sm relative"
+                  >
+                    <!-- Image overlay with gradient -->
+                    <!-- <div
+                      class="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                    ></div> -->
+                    <img
+                      src="./assets/project-one1.png"
+                      alt="Portfolio Website Project Screenshot"
+                      loading="lazy"
+                      class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-110"
+                    />
+                    <!-- Live indicator -->
+                    <div
+                      class="absolute top-3 right-3 bg-green-500 text-white text-xs px-2 py-1 rounded-full flex items-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-20"
+                    >
+                      <div
+                        class="w-2 h-2 bg-green-300 rounded-full animate-pulse mr-1"
+                      ></div>
+                      Live
+                    </div>
+                  </div>
+                  <div class="p-6">
+                    <div class="flex items-center mb-3">
+                      <div
+                        class="bg-blue-600 rounded-full p-2 mr-3 group-hover:bg-blue-700 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="white"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472c.218-.284.418-.598.597-.933zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"
+                          />
+                        </svg>
+                      </div>
+                      <h3
+                        class="text-xl font-bold text-gray-900 group-hover:text-blue-700 transition-all duration-300"
+                      >
+                        Portfolio Website
+                      </h3>
+                      <!-- Skill level indicator -->
+                      <div
+                        class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      >
+                        <span
+                          class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full"
+                          >Featured</span
+                        >
+                      </div>
+                    </div>
+                    <p
+                      class="text-gray-700 mb-4 leading-relaxed group-hover:text-gray-800 transition-colors duration-300"
+                    >
+                      Personal portfolio showcasing modern web development
+                      skills using HTML, CSS, JavaScript, and responsive design
+                      principles.
+                    </p>
+
+                    <!-- Tech Stack with enhanced animations -->
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      <span
+                        class="bg-orange-100 text-orange-800 text-xs font-medium px-2 py-1 rounded-full transition-all duration-300 hover:scale-110 hover:bg-orange-200 cursor-default"
+                        >HTML</span
+                      >
+                      <span
+                        class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full transition-all duration-300 hover:scale-110 hover:bg-blue-200 cursor-default tech-tag-1"
+                        >CSS</span
+                      >
+                      <span
+                        class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded-full transition-all duration-300 hover:scale-110 hover:bg-yellow-200 cursor-default tech-tag-2"
+                        >JavaScript</span
+                      >
+                    </div>
+
+                    <div class="flex gap-3 flex-wrap">
+                      <button
+                        onclick="window.open('https://github.com/chandan2909/portfolio', '_blank')"
+                        type="button"
+                        class="bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2 px-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 flex items-center relative overflow-hidden group/btn"
+                        aria-label="View Portfolio Website source code on GitHub (opens in new tab)"
+                      >
+                        <div
+                          class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"
+                        ></div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="mr-2 relative z-10"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                          />
+                        </svg>
+                        <span class="relative z-10">GitHub</span>
+                      </button>
+                      <button
+                        onclick="window.open('https://chandanpathak.netlify.app', '_blank')"
+                        type="button"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center relative overflow-hidden group/btn"
+                        aria-label="View live Portfolio Website (opens in new tab)"
+                      >
+                        <div
+                          class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"
+                        ></div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="mr-2 relative z-10"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+                          />
+                          <path
+                            d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+                          />
+                        </svg>
+                        <span class="relative z-10">Live Demo</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- ATM Interface Project -->
+              <article
+                class="bg-gradient-to-br from-gray-700 to-gray-600 rounded-2xl border border-gray-500 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:rotate-1 group overflow-hidden relative"
+              >
+                <!-- Animated background overlay -->
+                <div
+                  class="absolute inset-0 bg-gradient-to-r from-blue-400/5 to-indigo-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                ></div>
+
+                <!-- Floating particles effect -->
+                <div
+                  class="absolute inset-0 overflow-hidden pointer-events-none"
+                >
+                  <div
+                    class="absolute top-6 right-4 w-2 h-2 bg-blue-400 rounded-full opacity-0 group-hover:opacity-60 group-hover:animate-ping"
+                  ></div>
+                  <div
+                    class="absolute top-4 left-8 w-1.5 h-1.5 bg-indigo-500 rounded-full opacity-0 group-hover:opacity-40 group-hover:animate-pulse particle-1"
+                  ></div>
+                  <div
+                    class="absolute bottom-4 right-6 w-1 h-1 bg-blue-600 rounded-full opacity-0 group-hover:opacity-50 group-hover:animate-bounce particle-2"
+                  ></div>
+                </div>
+
+                <div class="relative z-10">
+                  <div
+                    class="aspect-video overflow-hidden rounded-t-2xl bg-white m-4 mb-0 shadow-sm relative"
+                  >
+                    <!-- Image overlay with gradient -->
+                    <!-- <div
+                      class="absolute inset-0 bg-gradient-to-t from-green-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                    ></div> -->
+                    <img
+                      src="./assets/project-three.gif"
+                      class="w-full h-full object-cover rounded-lg transition-all duration-500 group-hover:scale-110 group-hover:brightness-110"
+                      alt="ATM Interface Project Animation"
+                      loading="lazy"
+                    />
+                    <!-- Desktop app indicator -->
+                    <!-- <div
+                      class="absolute top-3 right-3 bg-purple-500 text-white text-xs px-2 py-1 rounded-full flex items-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-20"
+                    >
+                      <div
+                        class="w-2 h-2 bg-purple-300 rounded-full animate-pulse mr-1"
+                      ></div>
+                      Desktop
+                    </div> -->
+                  </div>
+                  <div class="p-6">
+                    <div class="flex items-center mb-3">
+                      <div
+                        class="bg-blue-600 rounded-full p-2 mr-3 group-hover:bg-blue-700 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="white"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M0 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm5 2v6h1V5H5zm4 0v6h1V5H9z"
+                          />
+                        </svg>
+                      </div>
+                      <h3
+                        class="text-xl font-bold text-gray-900 group-hover:text-blue-700 transition-all duration-300"
+                      >
+                        ATM Interface
+                      </h3>
+                      <!-- Skill level indicator -->
+                      <div
+                        class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      >
+                        <span
+                          class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full"
+                          >Java</span
+                        >
+                      </div>
+                    </div>
+                    <p
+                      class="text-gray-700 mb-4 leading-relaxed group-hover:text-gray-800 transition-colors duration-300"
+                    >
+                      Interactive ATM management system built with modern
+                      programming concepts, featuring secure transactions and
+                      intuitive user interface design.
+                    </p>
+
+                    <!-- Tech Stack with enhanced animations -->
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      <span
+                        class="bg-orange-100 text-orange-800 text-xs font-medium px-2 py-1 rounded-full transition-all duration-300 hover:scale-110 hover:bg-orange-200 cursor-default"
+                        >Java</span
+                      >
+                      <span
+                        class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full transition-all duration-300 hover:scale-110 hover:bg-blue-200 cursor-default tech-tag-1"
+                        >OOP</span
+                      >
+                    </div>
+
+                    <div class="flex gap-3 flex-wrap">
+                      <button
+                        onclick="window.open('https://github.com/chandan2909/Atm-manage', '_blank')"
+                        type="button"
+                        class="bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2 px-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 flex items-center relative overflow-hidden group/btn"
+                        aria-label="View ATM Interface source code on GitHub (opens in new tab)"
+                      >
+                        <div
+                          class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"
+                        ></div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="mr-2 relative z-10"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                          />
+                        </svg>
+                        <span class="relative z-10">GitHub</span>
+                      </button>
+                      <span
+                        class="bg-gray-100 text-gray-600 font-semibold py-2 px-4 rounded-full text-sm flex items-center transition-all duration-300 hover:bg-gray-200 hover:scale-105"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="mr-2"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                          />
+                          <path
+                            d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+                          />
+                        </svg>
+                        Desktop App
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" aria-labelledby="contact-heading" class="py-6">
+        <div class="container mx-auto max-w-6xl bg-gray-900 rounded-3xl pb-8 mb-6 px-4 border border-gray-700">
+          <div class="text-center mb-12 py-8">
+            <p
+              class="text-blue-400 font-semibold text-lg mb-3 tracking-wide uppercase"
+            >
+              Get in Touch
+            </p>
+            <h2
+              id="contact-heading"
+              class="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4"
+            >
+              Contact Me
+            </h2>
+            <div
+              class="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full"
+            ></div>
+          </div>
+
+          <!-- Contact Cards Container -->
+          <div
+            class="bg-gray-800 border-2 border-gray-600 rounded-3xl pt-8 pb-8 shadow-lg contact-section animate-on-scroll"
+          >
+            <div class="flex items-center mb-6 px-8">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                class="text-blue-600 mr-3"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
+                />
+              </svg>
+              <h3 class="text-gray-900 font-bold text-2xl">Let's Connect</h3>
+            </div>
+
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-8"
+            >
+              <!-- Email Card -->
+              <div
+                class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-6 border border-blue-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
+              >
+                <div class="flex flex-col items-center text-center">
+                  <div
+                    class="bg-blue-600 rounded-full p-4 mb-4 group-hover:bg-blue-700 transition-colors duration-300 group-hover:scale-110"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="white"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"
+                      />
+                    </svg>
+                  </div>
+                  <h4
+                    class="font-bold text-xl text-gray-900 mb-3 group-hover:text-blue-700 transition-colors duration-300"
+                  >
+                    Email
+                  </h4>
+                  <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+                    Send me a direct message
+                  </p>
+                  <a
+                    href="mailto:vijaypathakssa3@gmail.com"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    aria-label="Send email to Chandan Pathak"
+                  >
+                    Send Email
+                  </a>
+                  <p class="text-xs text-gray-500 mt-2 break-all">
+                    vijaypathakssa3@gmail.com
+                  </p>
+                </div>
+              </div>
+
+              <!-- LinkedIn Card -->
+              <div
+                class="bg-gradient-to-br from-indigo-50 to-blue-100 rounded-2xl p-6 border border-indigo-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
+              >
+                <div class="flex flex-col items-center text-center">
+                  <div
+                    class="bg-indigo-600 rounded-full p-4 mb-4 group-hover:bg-indigo-700 transition-colors duration-300 group-hover:scale-110"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="white"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"
+                      />
+                    </svg>
+                  </div>
+                  <h4
+                    class="font-bold text-xl text-gray-900 mb-3 group-hover:text-indigo-700 transition-colors duration-300"
+                  >
+                    LinkedIn
+                  </h4>
+                  <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+                    Connect professionally
+                  </p>
+                  <a
+                    href="https://www.linkedin.com/in/chandanpathak291"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    aria-label="Visit Chandan Pathak LinkedIn profile (opens in new tab)"
+                  >
+                    View Profile
+                  </a>
+                  <p class="text-xs text-gray-500 mt-2">@chandanpathak291</p>
+                </div>
+              </div>
+
+              <!-- GitHub Card -->
+              <div
+                class="bg-gradient-to-br from-gray-50 to-slate-100 rounded-2xl p-6 border border-gray-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group md:col-span-2 lg:col-span-1"
+              >
+                <div class="flex flex-col items-center text-center">
+                  <div
+                    class="bg-gray-800 rounded-full p-4 mb-4 group-hover:bg-gray-900 transition-colors duration-300 group-hover:scale-110"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="white"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                      />
+                    </svg>
+                  </div>
+                  <h4
+                    class="font-bold text-xl text-gray-900 mb-3 group-hover:text-gray-700 transition-colors duration-300"
+                  >
+                    GitHub
+                  </h4>
+                  <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+                    Explore my code repositories
+                  </p>
+                  <a
+                    href="https://www.github.com/chandan2909/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2 px-4 rounded-full transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                    aria-label="Visit Chandan Pathak GitHub profile (opens in new tab)"
+                  >
+                    View Projects
+                  </a>
+                  <p class="text-xs text-gray-500 mt-2">@chandan2909</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional Contact Info -->
+            <div class="mt-8 px-8">
+              <div
+                class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100"
+              >
+                <div class="text-center">
+                  <h4 class="text-lg font-semibold text-gray-900 mb-2">
+                    Ready to collaborate?
+                  </h4>
+                  <p class="text-gray-600 mb-4">
+                    I'm always open to discussing new opportunities and exciting
+                    projects.
+                  </p>
+                  <div class="flex flex-wrap justify-center gap-2">
+                    <span
+                      class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full"
+                      >Web Development</span
+                    >
+                    <span
+                      class="bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded-full"
+                      >Frontend</span
+                    >
+                    <span
+                      class="bg-purple-100 text-purple-800 text-xs font-medium px-3 py-1 rounded-full"
+                      >JavaScript</span
+                    >
+                    <span
+                      class="bg-orange-100 text-orange-800 text-xs font-medium px-3 py-1 rounded-full"
+                      >Freelance</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-700 py-6 px-5 text-center">
+      <p class="text-gray-400">
+        &copy; 2025 Chandan Pathak. All Rights Reserved
+      </p>
     </footer>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.querySelector(
+          '[data-toggle="mobile-menu"]'
+        );
+        const mobileMenu = document.querySelector("[data-mobile-menu]");
+        const hamburgerIcon = document.getElementById("hamburger-icon");
+
+        if (mobileMenuButton && mobileMenu) {
+          mobileMenuButton.addEventListener("click", function () {
+            const isHidden = mobileMenu.classList.contains("hidden");
+
+            if (isHidden) {
+              // Show menu with animation
+              mobileMenu.classList.remove("hidden");
+              // Force reflow to ensure the element is visible before adding animation class
+              mobileMenu.offsetHeight;
+              mobileMenu.classList.add("block");
+              mobileMenuButton.setAttribute("aria-expanded", "true");
+
+              // Animate hamburger icon
+              if (hamburgerIcon) {
+                hamburgerIcon.classList.add("hamburger-active");
+                hamburgerIcon.innerHTML =
+                  '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+              }
+            } else {
+              // Hide menu with animation
+              mobileMenu.classList.remove("block");
+              mobileMenuButton.setAttribute("aria-expanded", "false");
+
+              // Reset hamburger icon
+              if (hamburgerIcon) {
+                hamburgerIcon.classList.remove("hamburger-active");
+                hamburgerIcon.innerHTML =
+                  '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+              }
+
+              // Hide after animation completes
+              setTimeout(() => {
+                mobileMenu.classList.add("hidden");
+              }, 400);
+            }
+          });
+
+          // Close mobile menu when clicking on links
+          const menuLinks = mobileMenu.querySelectorAll("a");
+          menuLinks.forEach((link) => {
+            link.addEventListener("click", function () {
+              if (window.innerWidth < 768) {
+                mobileMenu.classList.remove("block");
+                mobileMenuButton.setAttribute("aria-expanded", "false");
+
+                // Reset hamburger icon
+                if (hamburgerIcon) {
+                  hamburgerIcon.classList.remove("hamburger-active");
+                  hamburgerIcon.innerHTML =
+                    '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+                }
+
+                setTimeout(() => {
+                  mobileMenu.classList.add("hidden");
+                }, 400);
+              }
+            });
+          });
+
+          // Close mobile menu when resizing to desktop
+          window.addEventListener("resize", function () {
+            if (window.innerWidth >= 768) {
+              mobileMenu.classList.remove("hidden", "block");
+              mobileMenuButton.setAttribute("aria-expanded", "false");
+
+              // Reset hamburger icon
+              if (hamburgerIcon) {
+                hamburgerIcon.classList.remove("hamburger-active");
+                hamburgerIcon.innerHTML =
+                  '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+              }
+            }
+          });
+        }
+
+        // Add scroll effect to navbar
+        window.addEventListener("scroll", function () {
+          const nav = document.querySelector("nav");
+          if (window.scrollY > 50) {
+            nav.classList.add("shadow-lg", "nav-scrolled");
+            nav.classList.remove("bg-gray-900");
+          } else {
+            nav.classList.remove("shadow-lg", "nav-scrolled");
+            nav.classList.add("bg-gray-900");
+          }
+        });
+      });
+    </script>
+
+    <!-- Portfolio JavaScript -->
+    <script src="script.js"></script>
   </body>
 </html>
