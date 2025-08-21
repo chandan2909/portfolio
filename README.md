@@ -227,7 +227,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Tailwind CSS** for the utility-first CSS framework
 - **Netlify** for free hosting and deployment
 - **Font Awesome** for beautiful icons
-- **Unsplash** for high-quality images (if used)
 ---
 
 ⭐ **Star this repository** if you found it helpful!
