@@ -217,7 +217,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👤 Author
 
 **Chandan Pathak**
-- 🌐 Website: [chandanpathak.netlify.app](https://chandanpathak.netlify.app)
+- 🌐 Website: [www.chandanpathak.dev](https://www.chandanpathak.dev)
 - 📧 Email: vijaypathakssa3@gmail.com
 - 💼 LinkedIn: [Connect with me](https://linkedin.com/in/chandanpathak)
 - 🐱 GitHub: [@chandan2909](https://github.com/chandan2909)
