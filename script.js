@@ -1,6 +1,159 @@
 // Portfolio Website JavaScript
 // Modern ES6+ implementation with performance optimizations
 
+// --- Cloudflare Turnstile Gate ---
+(() => {
+  const GATE_ID = 'turnstile-gate';
+  const STORAGE_KEY = 'turnstile_ok';
+  const FAILSAFE_MS = 12000; // show help if widget doesn't load
+
+  function hideGate() {
+    const el = document.getElementById(GATE_ID);
+    if (!el) return;
+    el.style.opacity = '0';
+    el.style.transition = 'opacity 200ms ease-out';
+    setTimeout(() => el.remove(), 220);
+    document.body.style.overflow = '';
+  }
+
+  function showGate() {
+    const el = document.getElementById(GATE_ID);
+    if (!el) return;
+    el.style.opacity = '1';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function showToast(message) {
+    try {
+      if (window.portfolioJS && typeof window.portfolioJS.showNotification === 'function') {
+        window.portfolioJS.showNotification(message, 'success', 2500);
+      } else {
+        const div = document.createElement('div');
+        div.className = 'fixed top-4 right-4 z-[100000] bg-green-600 text-white px-4 py-2 rounded shadow';
+        div.textContent = message;
+        document.body.appendChild(div);
+        setTimeout(() => div.remove(), 2500);
+      }
+    } catch {}
+  }
+
+  function resetTurnstile() {
+    try {
+      const msg = document.getElementById('turnstile-message');
+      const retry = document.getElementById('turnstile-retry');
+      if (msg) { msg.classList.add('hidden'); msg.textContent = ''; msg.classList.remove('text-red-300','text-green-300'); }
+      if (retry) { retry.classList.add('hidden'); }
+      const widgetEl = document.getElementById('turnstile-widget');
+      if (window.turnstile && widgetEl) {
+        try {
+          window.turnstile.reset(widgetEl);
+        } catch (e) {
+          // Fallback: re-render the widget if reset fails
+          const sitekey = widgetEl.getAttribute('data-sitekey');
+          window.turnstile.render(widgetEl, {
+            sitekey,
+            callback: 'onTurnstileSuccess',
+            'expired-callback': 'onTurnstileExpired',
+            'error-callback': 'onTurnstileError',
+            appearance: 'always',
+            theme: 'dark',
+            size: 'normal',
+          });
+        }
+      }
+    } catch (e) {
+      console.error('Failed to reset Turnstile:', e);
+    }
+  }
+
+  // Attach retry handler once DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    const retry = document.getElementById('turnstile-retry');
+    if (retry) retry.addEventListener('click', resetTurnstile);
+
+    // (Spinner removed) Keep mutation observer if needed in future
+  });
+
+  // If already solved in this session, remove gate early
+  if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+    const existing = document.getElementById(GATE_ID);
+    if (existing) existing.remove();
+  } else {
+    // Ensure gate blocks scrolling until solved
+    showGate();
+  }
+
+  // Expose callbacks for Turnstile widget
+  window.onTurnstileSuccess = function(token) {
+    try {
+      // Inline success message (accessible)
+      const msg = document.getElementById('turnstile-message');
+      if (msg) {
+        msg.textContent = 'Verification complete. Welcome!';
+        msg.classList.remove('hidden','text-red-300');
+        msg.classList.add('text-green-300');
+      }
+      showToast('Human verified. Unlocking…');
+
+      // Store and close shortly after so user can read the message
+      window.__turnstileToken = token;
+      sessionStorage.setItem(STORAGE_KEY, '1');
+      setTimeout(() => hideGate(), 600);
+    } catch (e) {
+      console.error('Turnstile success handling error:', e);
+    }
+  };
+
+  window.onTurnstileExpired = function() {
+    try {
+      window.__turnstileToken = undefined;
+      const msg = document.getElementById('turnstile-message');
+      const retry = document.getElementById('turnstile-retry');
+      if (msg) {
+        msg.textContent = 'Verification expired. Please try again.';
+        msg.classList.remove('hidden','text-green-300');
+        msg.classList.add('text-red-300');
+      }
+      if (retry) retry.classList.remove('hidden');
+      // If gate is hidden for some reason, show it again
+      const gate = document.getElementById(GATE_ID);
+      if (gate && !document.body.classList.contains('js-loaded')) {
+        showGate();
+      }
+    } catch (e) {
+      console.error('Turnstile expired handling error:', e);
+    }
+  };
+
+  window.onTurnstileError = function() {
+    try {
+      const msg = document.getElementById('turnstile-message');
+      const retry = document.getElementById('turnstile-retry');
+      if (msg) {
+        msg.textContent = 'There was an error verifying. Please refresh and try again.';
+        msg.classList.remove('hidden','text-green-300');
+        msg.classList.add('text-red-300');
+      }
+      if (retry) retry.classList.remove('hidden');
+    } catch (e) {
+      console.error('Turnstile error handling error:', e);
+    }
+  };
+
+  // Failsafe: if the widget hasn't rendered/called back in time, guide the user
+  setTimeout(() => {
+    const solved = sessionStorage.getItem(STORAGE_KEY) === '1';
+    if (solved) return;
+    const msg = document.getElementById('turnstile-message');
+    if (msg) {
+      msg.innerHTML = 'If the verification doesn\'t appear, please disable ad blockers for this site and refresh.';
+      msg.classList.remove('hidden');
+      msg.classList.add('text-red-300');
+    }
+  }, FAILSAFE_MS);
+})();
+
+
 document.addEventListener('DOMContentLoaded', function() {
     'use strict';
 

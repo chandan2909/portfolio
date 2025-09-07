@@ -115,6 +115,36 @@
     </script>
   </head>
   <body class="bg-black">
+    <!-- Turnstile Access Gate Overlay -->
+    <div id="turnstile-gate" class="fixed inset-0 z-[99999] flex items-center justify-center bg-black/80 backdrop-blur-sm">
+      <div class="w-[92%] max-w-md rounded-2xl border border-gray-700 bg-gray-900 p-6 shadow-2xl text-white">
+        <div class="mb-4 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="text-blue-400" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16M1 8a7 7 0 0 0 7 7 3.5 3.5 0 1 0 0-7 3.5 3.5 0 1 1 0-7 7 7 0 0 0-7 7"/>
+          </svg>
+          <h2 class="text-lg font-semibold">Are you human?</h2>
+        </div>
+        <p class="text-sm text-gray-300 mb-4">Please complete the security check to continue to the portfolio.</p>
+  <div id="turnstile-box" class="relative flex flex-col items-center justify-center min-h-[100px]">
+          <div id="turnstile-widget"
+               class="cf-turnstile"
+               data-sitekey="0x4AAAAAABz2V0bCF0OgvPrt"
+               data-theme="dark"
+               data-size="normal"
+               data-callback="onTurnstileSuccess"
+               data-expired-callback="onTurnstileExpired"
+               data-error-callback="onTurnstileError"
+               data-appearance="always"></div>
+        </div>
+
+  <div id="turnstile-message" class="mt-3 hidden text-xs" aria-live="polite"></div>
+  <button id="turnstile-retry" type="button" class="mt-3 hidden rounded-md border border-gray-600 px-3 py-2 text-sm text-white hover:bg-gray-800">Try again</button>
+        <p class="mt-4 text-[11px] text-gray-400">This site is protected by Cloudflare Turnstile. Completing this check helps keep the site free from abuse.</p>
+        <noscript>
+          <p class="mt-3 text-sm text-amber-300">JavaScript is required to view this site. Please enable JavaScript and reload the page.</p>
+        </noscript>
+      </div>
+    </div>
     <div class="bg-black min-h-screen text-white">
       <!-- Navigation -->
       <nav
@@ -1657,5 +1687,10 @@
 
     <!-- Portfolio JavaScript -->
     <script src="script.js"></script>
+    <script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
   </body>
 </html>
