@@ -217,7 +217,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👤 Author
 
 **Chandan Pathak**
-- 🌐 Website: [chandanpathak.netlify.app](https://chandanpathak.netlify.app)
+- 🌐 Website: [www.chandanpathak.dev](https://www.chandanpathak.dev)
 - 📧 Email: vijaypathakssa3@gmail.com
 - 💼 LinkedIn: [Connect with me](https://linkedin.com/in/chandanpathak)
 - 🐱 GitHub: [@chandan2909](https://github.com/chandan2909)
@@ -227,7 +227,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Tailwind CSS** for the utility-first CSS framework
 - **Netlify** for free hosting and deployment
 - **Font Awesome** for beautiful icons
-- **Unsplash** for high-quality images (if used)
 ---
 
 ⭐ **Star this repository** if you found it helpful!
