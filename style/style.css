@@ -61,49 +61,20 @@ img {
   color: white;
 }
 
-/* Dark/Blackish Theme Styles */
 
-/* Button styles for dark theme */
-.btn-primary {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  color: white;
-  border: none;
-  transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: #e5e7eb;
-  border: 2px solid #4b5563;
-  transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background: linear-gradient(135deg, #374151, #4b5563);
-  border-color: #6b7280;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(75, 85, 99, 0.3);
-}
 
 /* Dark theme text colors */
 body {
-  background: #000000;
-  color: #ffffff;
+  background: #eff6ff;
+  color: #111827;
 }
 
-/* Section content text colors for dark theme */
+/* Section content text colors for light theme */
 .about-section p,
 .skills-section p,
 .projects-section p,
 .contact-section p {
-  color: #d1d5db !important;
+  color: #475569 !important;
 }
 
 .about-section h3,
@@ -114,7 +85,7 @@ body {
 .projects-section h4,
 .contact-section h3,
 .contact-section h4 {
-  color: #f9fafb !important;
+  color: #1e293b !important;
 }
 
 /* Profile image styles */
@@ -165,7 +136,7 @@ body {
 /* Focus indicators for better accessibility */
 a:focus,
 button:focus {
-  outline: 2px solid #374151;
+  outline: 2px solid #3b82f6;
   outline-offset: 2px;
   outline-style: solid;
   border-radius: 4px;
@@ -200,11 +171,11 @@ button:focus {
     top: 100%;
     left: 0;
     right: 0;
-    background-color: #111827;
+    background-color: #f8fafc;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     z-index: 50;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
     margin-top: 1rem;
     padding-top: 1rem;
     opacity: 0;
@@ -265,9 +236,9 @@ button:focus {
   }
   
   [data-mobile-menu] a:hover {
-    background-color: rgba(42, 58, 90, 0.8);
+    background-color: rgba(226, 232, 240, 0.8);
     transform: translateX(5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   }
   
   /* Ensure nav container has relative positioning for absolute mobile menu */
@@ -315,7 +286,7 @@ button:focus {
     left: 50%;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
     transition: all 0.3s ease;
     transform: translateX(-50%);
   }
@@ -355,9 +326,9 @@ nav ul {
   }
   
   nav ul {
-    background-color: #1f2937 !important;
-    border: 1px solid #374151 !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+    background-color: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
     margin-top: 0 !important;
     border-top: none !important;
     border-radius: 0 0 0.5rem 0.5rem !important;
@@ -843,49 +814,12 @@ html {
   opacity: 1;
 }
 
-/* Dark/Blackish Theme Styles */
-
-/* Button styles for dark theme */
-.btn-primary {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  color: white;
-  border: none;
-  transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: #e5e7eb;
-  border: 2px solid #4b5563;
-  transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background: linear-gradient(135deg, #374151, #4b5563);
-  border-color: #6b7280;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(75, 85, 99, 0.3);
-}
-
-/* Dark theme text colors */
-body {
-  background: #000000;
-  color: #ffffff;
-}
-
-/* Section content text colors for dark theme */
+/* Section content text colors - Light Theme */
 .about-section p,
 .skills-section p,
 .projects-section p,
 .contact-section p {
-  color: #d1d5db !important;
+  color: #475569 !important;
 }
 
 .about-section h3,
@@ -896,29 +830,29 @@ body {
 .projects-section h4,
 .contact-section h3,
 .contact-section h4 {
-  color: #f9fafb !important;
+  color: #1e293b !important;
 }
 
 /* Card styles for dark theme */
 .enhanced-card {
-  background: rgba(17, 24, 39, 0.8);
-  border: 1px solid rgba(75, 85, 99, 0.5);
+  background: rgba(248, 250, 252, 0.9);
+  border: 1px solid rgba(203, 213, 225, 0.5);
   transition: all 0.3s ease;
 }
 
 .enhanced-card:hover {
-  background: rgba(31, 41, 55, 0.9);
-  border-color: rgba(96, 165, 250, 0.5);
+  background: rgba(241, 245, 249, 0.9);
+  border-color: rgba(59, 130, 246, 0.5);
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
 }
 
 /* Skill badges and tags for dark theme */
 .skill-badge,
 .project-tag {
-  background: linear-gradient(135deg, #1f2937, #374151);
-  color: #e5e7eb;
-  border: 1px solid #4b5563;
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+  color: #1e293b;
+  border: 1px solid #cbd5e1;
 }
 
 /* Icons for dark theme */
@@ -945,10 +879,10 @@ svg {
 
 /* Scroll effects for dark navbar */
 .nav-scrolled {
-  background: rgba(17, 24, 39, 0.95) !important;
+  background: rgba(248, 250, 252, 0.95) !important;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.3);
 }
 
 /* Dark theme animations */
@@ -967,23 +901,23 @@ svg {
 
 /* Contact and link colors for dark theme */
 a {
-  color: #60a5fa;
+  color: #3b82f6;
   transition: color 0.3s ease;
 }
 
 a:hover {
-  color: #93c5fd;
+  color: #2563eb;
 }
 
 /* Form inputs for dark theme */
 input, textarea, select {
-  background: rgba(31, 41, 55, 0.8);
-  border: 1px solid #4b5563;
-  color: #e5e7eb;
+  background: rgba(248, 250, 252, 0.9);
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: #60a5fa;
+  border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
@@ -996,276 +930,14 @@ input:focus, textarea:focus, select:focus {
 /* Mobile menu adjustments for dark theme */
 @media (max-width: 768px) {
   .mobile-menu {
-    background: rgba(17, 24, 39, 0.95);
-    border: 1px solid rgba(75, 85, 99, 0.3);
+    background: rgba(248, 250, 252, 0.95);
+    border: 1px solid rgba(203, 213, 225, 0.3);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
   }
 }
 
-/* Global Dark Theme Override for all sections */
-
-/* Override all white/light backgrounds in sections */
-.about-section,
-.skills-section,
-.projects-section,
-.contact-section {
-  background: #1f2937 !important;
-  border-color: #374151 !important;
-}
-
-/* Override all light colored cards and elements */
-.about-section div[class*="from-blue-50"],
-.about-section div[class*="from-green-50"],
-.about-section div[class*="from-purple-50"],
-.skills-section div[class*="from-orange-50"],
-.skills-section div[class*="from-blue-50"],
-.skills-section div[class*="from-green-50"],
-.skills-section div[class*="from-yellow-50"],
-.skills-section div[class*="from-purple-50"],
-.skills-section div[class*="from-red-50"],
-.projects-section div[class*="from-blue-50"],
-.projects-section div[class*="from-green-50"],
-.projects-section div[class*="from-purple-50"],
-.contact-section div[class*="from-blue-50"],
-.contact-section div[class*="from-green-50"] {
-  background: linear-gradient(135deg, #374151, #4b5563) !important;
-  border-color: #6b7280 !important;
-}
-
-/* Override all text colors in sections */
-.about-section h3,
-.about-section h4,
-.about-section h5,
-.skills-section h3,
-.skills-section h4,
-.skills-section h5,
-.projects-section h3,
-.projects-section h4,
-.projects-section h5,
-.contact-section h3,
-.contact-section h4,
-.contact-section h5 {
-  color: #ffffff !important;
-}
-
-.about-section p,
-.skills-section p,
-.projects-section p,
-.contact-section p {
-  color: #d1d5db !important;
-}
-
-/* Override skill level text and labels */
-.about-section span,
-.skills-section span,
-.projects-section span,
-.contact-section span {
-  color: #e5e7eb !important;
-}
-
-/* Override skill badges and tags */
-.about-section span[class*="bg-"],
-.skills-section span[class*="bg-"],
-.projects-section span[class*="bg-"],
-.contact-section span[class*="bg-"] {
-  background: linear-gradient(135deg, #1f2937, #374151) !important;
-  color: #e5e7eb !important;
-  border: 1px solid #4b5563 !important;
-}
-
-/* Override education cards */
-.about-section div[class*="bg-gradient"],
-.skills-section div[class*="bg-gradient"],
-.projects-section div[class*="bg-gradient"],
-.contact-section div[class*="bg-gradient"] {
-  background: linear-gradient(135deg, #374151, #4b5563) !important;
-  border-color: #6b7280 !important;
-}
-
-/* Override progress bars and skill indicators */
-.about-section div[class*="bg-orange"],
-.about-section div[class*="bg-blue"],
-.about-section div[class*="bg-green"],
-.about-section div[class*="bg-purple"],
-.skills-section div[class*="bg-orange"],
-.skills-section div[class*="bg-blue"],
-.skills-section div[class*="bg-green"],
-.skills-section div[class*="bg-purple"],
-.skills-section div[class*="bg-yellow"],
-.skills-section div[class*="bg-red"],
-.projects-section div[class*="bg-orange"],
-.projects-section div[class*="bg-blue"],
-.projects-section div[class*="bg-green"],
-.projects-section div[class*="bg-purple"],
-.contact-section div[class*="bg-orange"],
-.contact-section div[class*="bg-blue"],
-.contact-section div[class*="bg-green"],
-.contact-section div[class*="bg-purple"] {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
-}
-
-/* Override any remaining white/light backgrounds */
-.about-section *[class*="bg-white"],
-.skills-section *[class*="bg-white"],
-.projects-section *[class*="bg-white"],
-.contact-section *[class*="bg-white"],
-.about-section *[class*="bg-gray-50"],
-.skills-section *[class*="bg-gray-50"],
-.projects-section *[class*="bg-gray-50"],
-.contact-section *[class*="bg-gray-50"],
-.about-section *[class*="bg-gray-100"],
-.skills-section *[class*="bg-gray-100"],
-.projects-section *[class*="bg-gray-100"],
-.contact-section *[class*="bg-gray-100"] {
-  background: #374151 !important;
-  border-color: #6b7280 !important;
-}
-
-/* Ensure all dark text becomes light */
-.about-section *[class*="text-gray-900"],
-.about-section *[class*="text-gray-800"],
-.about-section *[class*="text-gray-700"],
-.skills-section *[class*="text-gray-900"],
-.skills-section *[class*="text-gray-800"],
-.skills-section *[class*="text-gray-700"],
-.projects-section *[class*="text-gray-900"],
-.projects-section *[class*="text-gray-800"],
-.projects-section *[class*="text-gray-700"],
-.contact-section *[class*="text-gray-900"],
-.contact-section *[class*="text-gray-800"],
-.contact-section *[class*="text-gray-700"] {
-  color: #ffffff !important;
-}
-
-.about-section *[class*="text-gray-600"],
-.about-section *[class*="text-gray-500"],
-.skills-section *[class*="text-gray-600"],
-.skills-section *[class*="text-gray-500"],
-.projects-section *[class*="text-gray-600"],
-.projects-section *[class*="text-gray-500"],
-.contact-section *[class*="text-gray-600"],
-.contact-section *[class*="text-gray-500"] {
-  color: #d1d5db !important;
-}
-
-/* Hover effects for dark theme */
-.about-section *:hover,
-.skills-section *:hover,
-.projects-section *:hover,
-.contact-section *:hover {
-  color: inherit;
-}
-
-/* Education and Projects Section Specific Overrides */
-
-/* Education section - force dark theme */
-.education-section {
-  background: #1f2937 !important;
-  border-color: #4b5563 !important;
-}
-
-.education-section * {
-  color: #ffffff !important;
-}
-
-.education-section p,
-.education-section span:not([class*="bg-"]) {
-  color: #d1d5db !important;
-}
-
-.education-section div[class*="bg-gradient-to-br"] {
-  background: linear-gradient(135deg, #374151, #4b5563) !important;
-  border-color: #6b7280 !important;
-}
-
-.education-section div[class*="from-blue"],
-.education-section div[class*="from-green"],
-.education-section div[class*="from-purple"],
-.education-section div[class*="from-orange"],
-.education-section div[class*="from-yellow"] {
-  background: linear-gradient(135deg, #374151, #4b5563) !important;
-  border-color: #6b7280 !important;
-}
-
-.education-section span[class*="bg-"] {
-  background: linear-gradient(135deg, #1f2937, #374151) !important;
-  color: #e5e7eb !important;
-  border: 1px solid #4b5563 !important;
-}
-
-/* Projects section - force dark theme */
-.projects-section * {
-  color: #ffffff !important;
-}
-
-.projects-section p,
-.projects-section span:not([class*="bg-"]) {
-  color: #d1d5db !important;
-}
-
-.projects-section div[class*="bg-gradient-to-br"] {
-  background: linear-gradient(135deg, #374151, #4b5563) !important;
-  border-color: #6b7280 !important;
-}
-
-.projects-section div[class*="from-blue"],
-.projects-section div[class*="from-green"],
-.projects-section div[class*="from-purple"],
-.projects-section div[class*="from-orange"],
-.projects-section div[class*="from-yellow"] {
-  background: linear-gradient(135deg, #374151, #4b5563) !important;
-  border-color: #6b7280 !important;
-}
-
-.projects-section span[class*="bg-"] {
-  background: linear-gradient(135deg, #1f2937, #374151) !important;
-  color: #e5e7eb !important;
-  border: 1px solid #4b5563 !important;
-}
-
-.projects-section img {
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
-}
-
-.projects-section img:hover {
-  opacity: 1;
-}
-
-/* Override any specific color classes that might be persistent */
-.education-section *[class*="text-gray-900"],
-.education-section *[class*="text-gray-800"],
-.education-section *[class*="text-gray-700"],
-.projects-section *[class*="text-gray-900"],
-.projects-section *[class*="text-gray-800"],
-.projects-section *[class*="text-gray-700"] {
-  color: #ffffff !important;
-}
-
-.education-section *[class*="text-gray-600"],
-.education-section *[class*="text-gray-500"],
-.projects-section *[class*="text-gray-600"],
-.projects-section *[class*="text-gray-500"] {
-  color: #d1d5db !important;
-}
-
-/* Button styling in projects section */
-.projects-section button,
-.projects-section a[class*="bg-"] {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
-  color: white !important;
-  border-color: #4b5563 !important;
-}
-
-.projects-section button:hover,
-.projects-section a[class*="bg-"]:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
-}
-
-/* Remove any unwanted spacing in mobile menu */
+/* Mobile Menu Adjustments */
 @media (max-width: 768px) {
   nav [data-mobile-menu].hidden {
     display: none !important;
@@ -1315,3 +987,4 @@ section {
 header {
   padding-bottom: 2rem !important;
 }
+
