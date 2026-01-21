@@ -162,7 +162,6 @@
                 msg.classList.remove('hidden', 'text-red-300');
                 msg.classList.add('text-green-300');
             }
-            showToast('Human verified. Unlocking…');
 
             // Store and close shortly after so user can read the message
             window.__turnstileToken = token;
