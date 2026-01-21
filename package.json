@@ -1,0 +1,20 @@
+{
+  "name": "chandan2909-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio website for Chandan Pathak",
+  "main": "index.html",
+  "scripts": {
+    "build:css": "tailwindcss -i ./style/input.css -o ./style/output.css --minify",
+    "watch:css": "tailwindcss -i ./style/input.css -o ./style/output.css --watch",
+    "dev": "npm run watch:css"
+  },
+  "keywords": [
+    "portfolio",
+    "tailwindcss"
+  ],
+  "author": "Chandan Pathak",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

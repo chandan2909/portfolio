@@ -3,180 +3,249 @@
 
 // --- Cloudflare Turnstile Gate ---
 (() => {
-  const GATE_ID = 'turnstile-gate';
-  const STORAGE_KEY = 'turnstile_ok';
-  const FAILSAFE_MS = 12000; // show help if widget doesn't load
+    const GATE_ID = 'turnstile-gate';
+    const STORAGE_KEY = 'turnstile_ok';
+    const FAILSAFE_MS = 12000; // show help if widget doesn't load
 
-  function hideGate() {
-    const el = document.getElementById(GATE_ID);
-    if (!el) return;
-    el.style.opacity = '0';
-    el.style.transition = 'opacity 200ms ease-out';
-    setTimeout(() => el.remove(), 220);
-    document.body.style.overflow = '';
-  }
+    function hideGate() {
+        const el = document.getElementById(GATE_ID);
+        if (!el) return;
 
-  function showGate() {
-    const el = document.getElementById(GATE_ID);
-    if (!el) return;
-    el.style.opacity = '1';
-    document.body.style.overflow = 'hidden';
-  }
+        // INSTANT hiding - no delays, no transitions
+        el.style.cssText = 'display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; z-index: -99999 !important; position: fixed !important; top: -9999px !important; left: -9999px !important;';
 
-  function showToast(message) {
-    try {
-      if (window.portfolioJS && typeof window.portfolioJS.showNotification === 'function') {
-        window.portfolioJS.showNotification(message, 'success', 2500);
-      } else {
-        const div = document.createElement('div');
-        div.className = 'fixed top-4 right-4 z-[100000] bg-green-600 text-white px-4 py-2 rounded shadow';
-        div.textContent = message;
-        document.body.appendChild(div);
-        setTimeout(() => div.remove(), 2500);
-      }
-    } catch {}
-  }
+        // Immediate comprehensive cleanup
+        const cleanupCloudflare = () => {
+            // Remove all Cloudflare-related elements
+            const selectors = [
+                'iframe[src*="cloudflare"]',
+                'iframe[src*="turnstile"]',
+                'iframe[id*="cf-"]',
+                'iframe[title*="cloudflare"]',
+                'iframe[title*="turnstile"]',
+                '.cf-turnstile',
+                'div[id*="cf-"]',
+                '[class*="cf-challenge"]',
+                '[id*="turnstile"]'
+            ];
 
-  function resetTurnstile() {
-    try {
-      const msg = document.getElementById('turnstile-message');
-      const retry = document.getElementById('turnstile-retry');
-      if (msg) { msg.classList.add('hidden'); msg.textContent = ''; msg.classList.remove('text-red-300','text-green-300'); }
-      if (retry) { retry.classList.add('hidden'); }
-      const widgetEl = document.getElementById('turnstile-widget');
-      if (window.turnstile && widgetEl) {
+            selectors.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(elem => {
+                    if (elem && elem.id !== GATE_ID) {
+                        elem.style.cssText = 'display: none !important; visibility: hidden !important; opacity: 0 !important; z-index: -99999 !important;';
+                        elem.remove();
+                    }
+                });
+            });
+        };
+
+        // Clean immediately
+        cleanupCloudflare();
+
+        // Remove gate from DOM immediately
+        el.remove();
+
+        // Clean again after a brief moment to catch any dynamically created elements
+        setTimeout(cleanupCloudflare, 10);
+        setTimeout(cleanupCloudflare, 50);
+        setTimeout(cleanupCloudflare, 150);
+
+        document.body.style.overflow = '';
+    }
+
+    function showGate() {
+        const el = document.getElementById(GATE_ID);
+        if (!el) return;
+        el.style.opacity = '1';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function showToast(message) {
         try {
-          window.turnstile.reset(widgetEl);
+            if (window.portfolioJS && typeof window.portfolioJS.showNotification === 'function') {
+                window.portfolioJS.showNotification(message, 'success', 2500);
+            } else {
+                const div = document.createElement('div');
+                div.className = 'fixed top-4 right-4 z-[100000] bg-green-600 text-white px-4 py-2 rounded shadow';
+                div.textContent = message;
+                document.body.appendChild(div);
+                setTimeout(() => div.remove(), 2500);
+            }
+        } catch { }
+    }
+
+    function resetTurnstile() {
+        try {
+            const msg = document.getElementById('turnstile-message');
+            const retry = document.getElementById('turnstile-retry');
+            if (msg) { msg.classList.add('hidden'); msg.textContent = ''; msg.classList.remove('text-red-300', 'text-green-300'); }
+            if (retry) { retry.classList.add('hidden'); }
+            const widgetEl = document.getElementById('turnstile-widget');
+            if (window.turnstile && widgetEl) {
+                try {
+                    window.turnstile.reset(widgetEl);
+                } catch (e) {
+                    // Fallback: re-render the widget if reset fails
+                    const sitekey = widgetEl.getAttribute('data-sitekey');
+                    window.turnstile.render(widgetEl, {
+                        sitekey,
+                        callback: 'onTurnstileSuccess',
+                        'expired-callback': 'onTurnstileExpired',
+                        'error-callback': 'onTurnstileError',
+                        appearance: 'always',
+                        theme: 'dark',
+                        size: 'normal',
+                    });
+                }
+            }
         } catch (e) {
-          // Fallback: re-render the widget if reset fails
-          const sitekey = widgetEl.getAttribute('data-sitekey');
-          window.turnstile.render(widgetEl, {
-            sitekey,
-            callback: 'onTurnstileSuccess',
-            'expired-callback': 'onTurnstileExpired',
-            'error-callback': 'onTurnstileError',
-            appearance: 'always',
-            theme: 'dark',
-            size: 'normal',
-          });
+            console.error('Failed to reset Turnstile:', e);
         }
-      }
-    } catch (e) {
-      console.error('Failed to reset Turnstile:', e);
     }
-  }
 
-  // Attach retry handler once DOM is ready
-  document.addEventListener('DOMContentLoaded', () => {
-    const retry = document.getElementById('turnstile-retry');
-    if (retry) retry.addEventListener('click', resetTurnstile);
+    // Attach retry handler once DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+        const retry = document.getElementById('turnstile-retry');
+        if (retry) retry.addEventListener('click', resetTurnstile);
 
-    // (Spinner removed) Keep mutation observer if needed in future
-  });
+        // Add MutationObserver to catch any Cloudflare elements that appear later
+        const observer = new MutationObserver((mutations) => {
+            // Only clean if gate is already closed (user verified)
+            if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+                mutations.forEach((mutation) => {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === 1) { // Element node
+                            // Check if it's a Cloudflare element
+                            const isCfElement =
+                                (node.tagName === 'IFRAME' && (
+                                    (node.src && node.src.includes('cloudflare')) ||
+                                    (node.src && node.src.includes('turnstile')) ||
+                                    (node.id && node.id.includes('cf-')) ||
+                                    (node.title && (node.title.includes('cloudflare') || node.title.includes('turnstile')))
+                                )) ||
+                                (node.className && typeof node.className === 'string' && node.className.includes('cf-')) ||
+                                (node.id && typeof node.id === 'string' && (node.id.includes('cf-') || node.id.includes('turnstile')));
 
-  // If already solved in this session, remove gate early
-  if (sessionStorage.getItem(STORAGE_KEY) === '1') {
-    const existing = document.getElementById(GATE_ID);
-    if (existing) existing.remove();
-  } else {
-    // Ensure gate blocks scrolling until solved
-    showGate();
-  }
+                            if (isCfElement) {
+                                node.style.cssText = 'display: none !important; visibility: hidden !important; z-index: -99999 !important;';
+                                node.remove();
+                            }
+                        }
+                    });
+                });
+            }
+        });
 
-  // Expose callbacks for Turnstile widget
-  window.onTurnstileSuccess = function(token) {
-    try {
-      // Inline success message (accessible)
-      const msg = document.getElementById('turnstile-message');
-      if (msg) {
-        msg.textContent = 'Verification complete. Welcome!';
-        msg.classList.remove('hidden','text-red-300');
-        msg.classList.add('text-green-300');
-      }
-      showToast('Human verified. Unlocking…');
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    });
 
-      // Store and close shortly after so user can read the message
-      window.__turnstileToken = token;
-      sessionStorage.setItem(STORAGE_KEY, '1');
-      setTimeout(() => hideGate(), 600);
-    } catch (e) {
-      console.error('Turnstile success handling error:', e);
-    }
-  };
-
-  window.onTurnstileExpired = function() {
-    try {
-      window.__turnstileToken = undefined;
-      const msg = document.getElementById('turnstile-message');
-      const retry = document.getElementById('turnstile-retry');
-      if (msg) {
-        msg.textContent = 'Verification expired. Please try again.';
-        msg.classList.remove('hidden','text-green-300');
-        msg.classList.add('text-red-300');
-      }
-      if (retry) retry.classList.remove('hidden');
-      // If gate is hidden for some reason, show it again
-      const gate = document.getElementById(GATE_ID);
-      if (gate && !document.body.classList.contains('js-loaded')) {
+    // If already solved in this session, remove gate early
+    if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+        const existing = document.getElementById(GATE_ID);
+        if (existing) existing.remove();
+    } else {
+        // Ensure gate blocks scrolling until solved
         showGate();
-      }
-    } catch (e) {
-      console.error('Turnstile expired handling error:', e);
     }
-  };
 
-  window.onTurnstileError = function() {
-    try {
-      const msg = document.getElementById('turnstile-message');
-      const retry = document.getElementById('turnstile-retry');
-      if (msg) {
-        msg.textContent = 'There was an error verifying. Please refresh and try again.';
-        msg.classList.remove('hidden','text-green-300');
-        msg.classList.add('text-red-300');
-      }
-      if (retry) retry.classList.remove('hidden');
-    } catch (e) {
-      console.error('Turnstile error handling error:', e);
-    }
-  };
+    // Expose callbacks for Turnstile widget
+    window.onTurnstileSuccess = function (token) {
+        try {
+            // Inline success message (accessible)
+            const msg = document.getElementById('turnstile-message');
+            if (msg) {
+                msg.textContent = 'Verification complete. Welcome!';
+                msg.classList.remove('hidden', 'text-red-300');
+                msg.classList.add('text-green-300');
+            }
+            showToast('Human verified. Unlocking…');
 
-  // Failsafe: if the widget hasn't rendered/called back in time, guide the user
-  setTimeout(() => {
-    const solved = sessionStorage.getItem(STORAGE_KEY) === '1';
-    if (solved) return;
-    const msg = document.getElementById('turnstile-message');
-    if (msg) {
-      msg.innerHTML = 'If the verification doesn\'t appear, please disable ad blockers for this site and refresh.';
-      msg.classList.remove('hidden');
-      msg.classList.add('text-red-300');
-    }
-  }, FAILSAFE_MS);
+            // Store and close shortly after so user can read the message
+            window.__turnstileToken = token;
+            sessionStorage.setItem(STORAGE_KEY, '1');
+            setTimeout(() => hideGate(), 600);
+        } catch (e) {
+            console.error('Turnstile success handling error:', e);
+        }
+    };
+
+    window.onTurnstileExpired = function () {
+        try {
+            window.__turnstileToken = undefined;
+            const msg = document.getElementById('turnstile-message');
+            const retry = document.getElementById('turnstile-retry');
+            if (msg) {
+                msg.textContent = 'Verification expired. Please try again.';
+                msg.classList.remove('hidden', 'text-green-300');
+                msg.classList.add('text-red-300');
+            }
+            if (retry) retry.classList.remove('hidden');
+            // If gate is hidden for some reason, show it again
+            const gate = document.getElementById(GATE_ID);
+            if (gate && !document.body.classList.contains('js-loaded')) {
+                showGate();
+            }
+        } catch (e) {
+            console.error('Turnstile expired handling error:', e);
+        }
+    };
+
+    window.onTurnstileError = function () {
+        try {
+            const msg = document.getElementById('turnstile-message');
+            const retry = document.getElementById('turnstile-retry');
+            if (msg) {
+                msg.textContent = 'There was an error verifying. Please refresh and try again.';
+                msg.classList.remove('hidden', 'text-green-300');
+                msg.classList.add('text-red-300');
+            }
+            if (retry) retry.classList.remove('hidden');
+        } catch (e) {
+            console.error('Turnstile error handling error:', e);
+        }
+    };
+
+    // Failsafe: if the widget hasn't rendered/called back in time, guide the user
+    setTimeout(() => {
+        const solved = sessionStorage.getItem(STORAGE_KEY) === '1';
+        if (solved) return;
+        const msg = document.getElementById('turnstile-message');
+        if (msg) {
+            msg.innerHTML = 'If the verification doesn\'t appear, please disable ad blockers for this site and refresh.';
+            msg.classList.remove('hidden');
+            msg.classList.add('text-red-300');
+        }
+    }, FAILSAFE_MS);
 })();
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     'use strict';
 
     // ==============================================
     // 1. SMOOTH SCROLLING FOR NAVIGATION
     // ==============================================
-    
+
     function initSmoothScrolling() {
         const navLinks = document.querySelectorAll('a[href^="#"]');
-        
+
         navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 e.preventDefault();
-                
+
                 const targetId = this.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
-                
+
                 if (targetSection) {
                     targetSection.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    
+
                     // Close mobile menu if open
                     closeMobileMenu();
                 }
@@ -187,14 +256,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==============================================
     // 2. NAVBAR SCROLL EFFECTS
     // ==============================================
-    
+
     function initNavbarScrollEffects() {
         const navbar = document.querySelector('nav');
         let lastScrollY = window.scrollY;
-        
+
         function updateNavbar() {
             const currentScrollY = window.scrollY;
-            
+
             if (navbar) {
                 // Add scrolled class for styling
                 if (currentScrollY > 50) {
@@ -202,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     navbar.classList.remove('nav-scrolled');
                 }
-                
+
                 // Hide/show navbar on scroll (optional)
                 if (currentScrollY > lastScrollY && currentScrollY > 100) {
                     navbar.style.transform = 'translateY(-100%)';
@@ -210,10 +279,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     navbar.style.transform = 'translateY(0)';
                 }
             }
-            
+
             lastScrollY = currentScrollY;
         }
-        
+
         // Throttle scroll events for performance
         let ticking = false;
         window.addEventListener('scroll', () => {
@@ -228,20 +297,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==============================================
     // 3. MOBILE MENU FUNCTIONALITY
     // ==============================================
-    
+
     function initMobileMenu() {
         const menuToggle = document.querySelector('.mobile-menu-toggle');
         const mobileMenu = document.querySelector('.mobile-menu');
         const menuOverlay = document.querySelector('.menu-overlay');
-        
+
         if (menuToggle && mobileMenu) {
             menuToggle.addEventListener('click', toggleMobileMenu);
-            
+
             // Close menu when clicking overlay
             if (menuOverlay) {
                 menuOverlay.addEventListener('click', closeMobileMenu);
             }
-            
+
             // Close menu when clicking menu links
             const mobileLinks = mobileMenu.querySelectorAll('a');
             mobileLinks.forEach(link => {
@@ -249,15 +318,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-    
+
     function toggleMobileMenu() {
         const mobileMenu = document.querySelector('.mobile-menu');
         const menuOverlay = document.querySelector('.menu-overlay');
         const body = document.body;
-        
+
         if (mobileMenu) {
             const isOpen = mobileMenu.classList.contains('active');
-            
+
             if (isOpen) {
                 closeMobileMenu();
             } else {
@@ -267,12 +336,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-    
+
     function closeMobileMenu() {
         const mobileMenu = document.querySelector('.mobile-menu');
         const menuOverlay = document.querySelector('.menu-overlay');
         const body = document.body;
-        
+
         if (mobileMenu) {
             mobileMenu.classList.remove('active');
             if (menuOverlay) menuOverlay.classList.remove('active');
@@ -283,23 +352,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==============================================
     // 4. ACTIVE SECTION HIGHLIGHTING
     // ==============================================
-    
+
     function initActiveSection() {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('nav a[href^="#"]');
-        
+
         function updateActiveSection() {
             let current = '';
-            
+
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                
+
                 if (window.scrollY >= (sectionTop - 200)) {
                     current = section.getAttribute('id');
                 }
             });
-            
+
             navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${current}`) {
@@ -307,7 +376,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
-        
+
         // Throttle scroll events
         let ticking = false;
         window.addEventListener('scroll', () => {
@@ -317,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => { ticking = false; }, 10);
             }
         });
-        
+
         // Initial call
         updateActiveSection();
     }
@@ -325,16 +394,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==============================================
     // 5. SCROLL ANIMATIONS (INTERSECTION OBSERVER)
     // ==============================================
-    
+
     function initScrollAnimations() {
         const animatedElements = document.querySelectorAll('.animate-on-scroll, .enhanced-card, article');
-        
+
         if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('animate-in');
-                        
+
                         // Add staggered animation for cards
                         if (entry.target.matches('article')) {
                             const delay = Array.from(entry.target.parentNode.children)
@@ -347,7 +416,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             });
-            
+
             animatedElements.forEach(el => observer.observe(el));
         }
     }
@@ -355,17 +424,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==============================================
     // 6. TYPING ANIMATION
     // ==============================================
-    
+
     function initTypingAnimation() {
         const typewriterElements = document.querySelectorAll('.typewriter-text');
-        
+
         typewriterElements.forEach(element => {
             const text = element.textContent;
             const speed = parseInt(element.dataset.speed) || 100;
-            
+
             element.textContent = '';
             element.style.visibility = 'visible';
-            
+
             let i = 0;
             function typeWriter() {
                 if (i < text.length) {
@@ -374,7 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(typeWriter, speed);
                 }
             }
-            
+
             // Start typing animation when element is visible
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -384,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
             });
-            
+
             observer.observe(element);
         });
     }
@@ -392,68 +461,68 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==============================================
     // 7. SKILL PROGRESS BARS ANIMATION
     // ==============================================
-    
+
     function initSkillBars() {
         const progressBars = document.querySelectorAll('.progress-bar');
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const bar = entry.target;
                     const progress = bar.dataset.progress || '0';
-                    
+
                     // Animate progress bar
                     setTimeout(() => {
                         bar.style.width = `${progress}%`;
-                        
+
                         // Add percentage text if needed
                         const percentText = bar.querySelector('.progress-text');
                         if (percentText) {
                             animateNumber(percentText, 0, parseInt(progress), 1000);
                         }
                     }, 200);
-                    
+
                     observer.unobserve(entry.target);
                 }
             });
         }, {
             threshold: 0.5
         });
-        
+
         progressBars.forEach(bar => observer.observe(bar));
     }
 
     // ==============================================
     // 8. NUMBER COUNTER ANIMATION
     // ==============================================
-    
+
     function animateNumber(element, start, end, duration) {
         const startTime = performance.now();
-        
+
         function updateNumber(currentTime) {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            
+
             const current = Math.floor(start + (end - start) * progress);
             element.textContent = current + (element.dataset.suffix || '');
-            
+
             if (progress < 1) {
                 requestAnimationFrame(updateNumber);
             }
         }
-        
+
         requestAnimationFrame(updateNumber);
     }
-    
+
     function initNumberCounters() {
         const counters = document.querySelectorAll('.counter-number');
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const counter = entry.target;
                     const target = parseInt(counter.dataset.target) || 0;
-                    
+
                     animateNumber(counter, 0, target, 2000);
                     observer.unobserve(entry.target);
                 }
@@ -461,20 +530,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }, {
             threshold: 0.5
         });
-        
+
         counters.forEach(counter => observer.observe(counter));
     }
 
     // ==============================================
     // 9. FORM HANDLING (Contact Form)
     // ==============================================
-    
+
     function initFormHandling() {
         const contactForm = document.querySelector('#contact-form');
-        
+
         if (contactForm) {
             contactForm.addEventListener('submit', handleFormSubmit);
-            
+
             // Add real-time validation
             const inputs = contactForm.querySelectorAll('input, textarea');
             inputs.forEach(input => {
@@ -483,61 +552,61 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-    
+
     function handleFormSubmit(e) {
         e.preventDefault();
-        
+
         const form = e.target;
         const formData = new FormData(form);
         const submitBtn = form.querySelector('button[type="submit"]');
-        
+
         // Validate form
         if (!validateForm(form)) {
             return;
         }
-        
+
         // Show loading state
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;
-        
+
         // Simulate form submission (replace with actual endpoint)
         setTimeout(() => {
             showNotification('Message sent successfully! Thank you for reaching out.', 'success');
             form.reset();
-            
+
             // Reset button
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
         }, 2000);
     }
-    
+
     function validateForm(form) {
         const inputs = form.querySelectorAll('input[required], textarea[required]');
         let isValid = true;
-        
+
         inputs.forEach(input => {
             if (!validateField({ target: input })) {
                 isValid = false;
             }
         });
-        
+
         return isValid;
     }
-    
+
     function validateField(e) {
         const field = e.target;
         const value = field.value.trim();
         const type = field.type;
         let isValid = true;
         let message = '';
-        
+
         // Required field validation
         if (field.hasAttribute('required') && !value) {
             isValid = false;
             message = 'This field is required';
         }
-        
+
         // Email validation
         if (type === 'email' && value) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -546,7 +615,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 message = 'Please enter a valid email address';
             }
         }
-        
+
         // Phone validation
         if (type === 'tel' && value) {
             const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
@@ -555,18 +624,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 message = 'Please enter a valid phone number';
             }
         }
-        
+
         showFieldError(field, isValid ? '' : message);
         return isValid;
     }
-    
+
     function clearFieldError(e) {
         showFieldError(e.target, '');
     }
-    
+
     function showFieldError(field, message) {
         const errorElement = field.parentNode.querySelector('.field-error');
-        
+
         if (message) {
             field.classList.add('error');
             if (errorElement) {
@@ -588,11 +657,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==============================================
     // 10. NOTIFICATION SYSTEM
     // ==============================================
-    
+
     function showNotification(message, type = 'info', duration = 5000) {
         const notification = document.createElement('div');
         notification.className = `notification notification-${type} fixed top-4 right-4 bg-gray-800 border border-gray-600 text-white px-6 py-4 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300`;
-        
+
         notification.innerHTML = `
             <div class="flex items-center">
                 <span class="flex-1">${message}</span>
@@ -603,14 +672,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 </button>
             </div>
         `;
-        
+
         document.body.appendChild(notification);
-        
+
         // Show notification
         setTimeout(() => {
             notification.style.transform = 'translateX(0)';
         }, 100);
-        
+
         // Auto remove
         setTimeout(() => {
             notification.style.transform = 'translateX(full)';
@@ -625,21 +694,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==============================================
     // 11. DARK MODE TOGGLE (Optional)
     // ==============================================
-    
+
     function initDarkModeToggle() {
         const toggleButton = document.querySelector('#dark-mode-toggle');
-        
+
         if (toggleButton) {
             // Check for saved preference
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
                 document.documentElement.setAttribute('data-theme', savedTheme);
             }
-            
+
             toggleButton.addEventListener('click', () => {
                 const currentTheme = document.documentElement.getAttribute('data-theme');
                 const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                
+
                 document.documentElement.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
             });
@@ -649,7 +718,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==============================================
     // 12. PERFORMANCE OPTIMIZATIONS
     // ==============================================
-    
+
     function initPerformanceOptimizations() {
         // Lazy load images
         if ('loading' in HTMLImageElement.prototype) {
@@ -670,17 +739,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
             });
-            
+
             document.querySelectorAll('img[data-src]').forEach(img => {
                 imageObserver.observe(img);
             });
         }
-        
+
         // Preload critical resources
         const criticalResources = [
             // Add critical CSS/JS files here
         ];
-        
+
         criticalResources.forEach(resource => {
             const link = document.createElement('link');
             link.rel = 'preload';
@@ -693,7 +762,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==============================================
     // 13. INITIALIZE ALL FUNCTIONALITY
     // ==============================================
-    
+
     function init() {
         try {
             initSmoothScrolling();
@@ -707,27 +776,27 @@ document.addEventListener('DOMContentLoaded', function() {
             initFormHandling();
             initDarkModeToggle();
             initPerformanceOptimizations();
-            
+
             // Add loaded class to body for CSS animations
             document.body.classList.add('js-loaded');
-            
+
             console.log('Portfolio JavaScript initialized successfully');
         } catch (error) {
             console.error('Error initializing portfolio JavaScript:', error);
         }
     }
-    
+
     // Initialize everything
     init();
-    
+
     // ==============================================
     // 14. UTILITY FUNCTIONS
     // ==============================================
-    
+
     // Throttle function for performance
-    window.throttle = function(func, limit) {
+    window.throttle = function (func, limit) {
         let inThrottle;
-        return function() {
+        return function () {
             const args = arguments;
             const context = this;
             if (!inThrottle) {
@@ -737,13 +806,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
     };
-    
+
     // Debounce function for performance
-    window.debounce = function(func, wait, immediate) {
+    window.debounce = function (func, wait, immediate) {
         let timeout;
-        return function() {
+        return function () {
             const context = this, args = arguments;
-            const later = function() {
+            const later = function () {
                 timeout = null;
                 if (!immediate) func.apply(context, args);
             };
@@ -753,7 +822,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (callNow) func.apply(context, args);
         };
     };
-    
+
     // Expose useful functions globally
     window.portfolioJS = {
         showNotification,
