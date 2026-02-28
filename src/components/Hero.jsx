@@ -34,7 +34,7 @@ const Hero = () => {
     }, [typedText, isDeleting, roleIndex]);
 
     return (
-        <header id="home" className="pt-16 pb-8 lg:pt-36 lg:pb-12 animate-on-scroll">
+        <header id="home" className="pt-32 pb-8 lg:pt-36 lg:pb-12 animate-on-scroll">
             <div className="container mx-auto max-w-6xl px-8">
                 <div className="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-10">
                     <div className="lg:w-1/2 text-left space-y-8">

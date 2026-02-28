@@ -52,7 +52,7 @@ const Navbar = () => {
                 </a>
 
                 <button
-                    className="md:hidden bg-transparent border-0 text-gray-400 hover:text-black focus:outline-none focus:ring-1 focus:ring-black p-2 rounded-full transition-all duration-300 hover:bg-gray-100"
+                    className="lg:hidden bg-transparent border-0 text-gray-400 hover:text-black focus:outline-none focus:ring-1 focus:ring-black p-2 rounded-full transition-all duration-300 hover:bg-gray-100"
                     type="button"
                     onClick={toggleMobileMenu}
                     aria-expanded={isMobileMenuOpen}
@@ -74,10 +74,10 @@ const Navbar = () => {
                 </button>
 
                 <div
-                    className={`w-full md:w-auto md:flex transition-all duration-300 ease-in-out z-40 absolute md:relative left-0 right-0 top-full md:top-auto overflow-hidden md:overflow-visible ${isMobileMenuOpen ? 'max-h-[500px] opacity-100 visible translate-y-0' : 'max-h-0 opacity-0 invisible -translate-y-4 md:max-h-none md:opacity-100 md:visible md:translate-y-0'}`}
+                    className={`w-full lg:w-auto lg:flex transition-all duration-300 ease-in-out z-40 absolute lg:relative left-0 right-0 top-full lg:top-auto overflow-hidden lg:overflow-visible ${isMobileMenuOpen ? 'max-h-[500px] opacity-100 visible translate-y-0' : 'max-h-0 opacity-0 invisible -translate-y-4 lg:max-h-none lg:opacity-100 lg:visible lg:translate-y-0'}`}
                 >
-                    <div className="flex flex-col md:flex-row md:items-center bg-white md:bg-transparent p-4 md:p-0 border-b border-gray-100 md:border-none relative z-40 w-full shadow-sm md:shadow-none">
-                        <ul className="flex flex-col md:flex-row md:space-x-1 w-full md:w-auto">
+                    <div className="flex flex-col lg:flex-row lg:items-center bg-white lg:bg-transparent p-4 lg:p-0 border-b border-gray-100 lg:border-none relative z-40 w-full shadow-sm lg:shadow-none">
+                        <ul className="flex flex-col lg:flex-row lg:space-x-1 w-full lg:w-auto">
                             {navLinks.map((link) => (
                                 <li key={link.name}>
                                     <a
@@ -93,7 +93,7 @@ const Navbar = () => {
                                 </li>
                             ))}
                         </ul>
-                        <div className="flex items-center gap-3 mt-4 md:mt-0 md:ml-2 pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-gray-200 md:pl-3">
+                        <div className="flex items-center gap-3 mt-4 lg:mt-0 lg:ml-2 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-gray-200 lg:pl-3">
                             <a
                                 href="https://www.github.com/chandan2909/"
                                 target="_blank"
