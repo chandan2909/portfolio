@@ -44,8 +44,14 @@ const Navbar = () => {
         >
             <div className="container mx-auto flex flex-wrap items-center justify-between">
                 <a
-                    className="text-xl font-black flex items-center text-gray-800 transition-colors duration-300 uppercase tracking-tighter"
-                    href="#home"
+                    className="cursor-pointer text-xl font-black flex items-center text-gray-800 transition-colors duration-300 uppercase tracking-tighter"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        const element = document.getElementById('home');
+                        if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }}
                     aria-label="Chandan Pathak Portfolio Home"
                 >
                     Chandan Pathak
@@ -81,12 +87,18 @@ const Navbar = () => {
                             {navLinks.map((link) => (
                                 <li key={link.name}>
                                     <a
-                                        className={`block px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeSection === link.href.substring(1)
+                                        className={`cursor-pointer block px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeSection === link.href.substring(1)
                                             ? 'bg-gray-200 text-black'
                                             : 'text-gray-500 hover:bg-gray-100 hover:text-black'
                                             }`}
-                                        href={link.href}
-                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setIsMobileMenuOpen(false);
+                                            const element = document.getElementById(link.href.substring(1));
+                                            if (element) {
+                                                element.scrollIntoView({ behavior: 'smooth' });
+                                            }
+                                        }}
                                     >
                                         {link.name}
                                     </a>

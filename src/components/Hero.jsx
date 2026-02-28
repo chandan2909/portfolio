@@ -63,8 +63,14 @@ const Hero = () => {
                                 Download Resume
                             </button>
                             <a
-                                href="#contact"
-                                className="bg-white border border-gray-200 hover:bg-gray-50 text-black px-10 py-4 rounded-full font-bold text-sm uppercase tracking-widest transition-all duration-300 shadow-sm"
+                                className="cursor-pointer bg-white border border-gray-200 hover:bg-gray-50 text-black px-10 py-4 rounded-full font-bold text-sm uppercase tracking-widest transition-all duration-300 shadow-sm"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    const element = document.getElementById('contact');
+                                    if (element) {
+                                        element.scrollIntoView({ behavior: 'smooth' });
+                                    }
+                                }}
                                 aria-label="Go to contact section"
                             >
                                 Contact Me
