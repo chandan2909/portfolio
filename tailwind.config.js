@@ -1,15 +1,16 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
     content: [
-        "./**/*.html",
-        "./**/*.js",
-        "!./node_modules/**"
+        "./index.html",
+        "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
         extend: {
-            fontFamily: {
-                sans: ["system-ui", "-apple-system", "sans-serif"],
-            },
+            colors: {
+                'dark-100': '#1e293b',
+                'dark-200': '#334155',
+                'dark-300': '#475569',
+            }
         },
     },
     plugins: [],
