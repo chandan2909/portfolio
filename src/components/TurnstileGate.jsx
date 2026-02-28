@@ -6,12 +6,20 @@ const TurnstileGate = ({ onVerify }) => {
     const [messageColor, setMessageColor] = useState('text-gray-400');
 
     useEffect(() => {
-        // Add Turnstile script
-        const script = document.createElement('script');
-        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-        script.async = true;
-        script.defer = true;
-        document.head.appendChild(script);
+        // Add Turnstile script only if it doesn't exist
+        const scriptId = 'cloudflare-turnstile-script';
+        let script = document.getElementById(scriptId);
+        let createdScript = false;
+
+        if (!script) {
+            script = document.createElement('script');
+            script.id = scriptId;
+            script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+            script.async = true;
+            script.defer = true;
+            document.head.appendChild(script);
+            createdScript = true;
+        }
 
         // Global callbacks for Turnstile
         window.onTurnstileSuccess = (token) => {
@@ -40,7 +48,8 @@ const TurnstileGate = ({ onVerify }) => {
         }, 12000);
 
         return () => {
-            if (document.head.contains(script)) {
+            if (createdScript && script && document.head.contains(script)) {
+                // only remove if we created it in this mount? Actually it's better to leave it loaded to avoid re-fetching, but if we want to clean it up:
                 document.head.removeChild(script);
             }
             clearTimeout(failsafe);
