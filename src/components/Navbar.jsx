@@ -81,7 +81,7 @@ const Navbar = () => {
                             {navLinks.map((link) => (
                                 <li key={link.name}>
                                     <a
-                                        className={`block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeSection === link.href.substring(1)
+                                        className={`block px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeSection === link.href.substring(1)
                                             ? 'bg-gray-200 text-black'
                                             : 'text-gray-500 hover:bg-gray-100 hover:text-black'
                                             }`}
