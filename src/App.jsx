@@ -10,7 +10,7 @@ import TurnstileGate from './components/TurnstileGate';
 import useScrollReveal from './hooks/useScrollReveal';
 
 function App() {
-    const [isVerified, setIsVerified] = useState(true); // Temporarily bypassed due to Cloudflare domain error
+    const [isVerified, setIsVerified] = useState(false);
     useScrollReveal();
 
     useEffect(() => {
