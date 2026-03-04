@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website showcasing web development skills, projects, and professional experience. Built with clean HTML5, Tailwind CSS, and vanilla JavaScript.
 
-![Portfolio Preview](assets/project-one1.png)
+![Portfolio Preview](public/assets/portfolio-screenshot.png)
 
 ## 🌟 Features
 
