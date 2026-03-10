@@ -13,16 +13,29 @@ export const fetchSkills = async () => {
 };
 
 export const submitContact = async (data) => {
-    const response = await fetch(`${API_BASE_URL}/contact`, {
+    // You can replace 'YOUR_ACCESS_KEY_HERE' with your actual Web3Forms access key
+    // or set VITE_WEB3FORMS_ACCESS_KEY in your .env file
+    const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || 'YOUR_ACCESS_KEY_HERE';
+
+    if (WEB3FORMS_ACCESS_KEY === 'YOUR_ACCESS_KEY_HERE') {
+        console.warn('Please provide a valid Web3Forms access key in your .env file (VITE_WEB3FORMS_ACCESS_KEY) or explicitly in the code.');
+    }
+
+    const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json'
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+            access_key: WEB3FORMS_ACCESS_KEY,
+            ...data
+        }),
     });
-    if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || 'Failed to submit contact');
+
+    const result = await response.json();
+    if (!result.success) {
+        throw new Error(result.message || 'Failed to submit contact');
     }
-    return response.json();
+    return result;
 };

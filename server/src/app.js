@@ -6,7 +6,7 @@ import rateLimit from 'express-rate-limit';
 import healthRoutes from './routes/healthRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
 import skillRoutes from './routes/skillRoutes.js';
-import contactRoutes from './routes/contactRoutes.js';
+
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 
 const app = express();
@@ -30,7 +30,7 @@ app.use('/api', limiter);
 app.use('/api/health', healthRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/skills', skillRoutes);
-app.use('/api/contact', contactRoutes);
+
 
 // Error Handling
 app.use(notFound);
