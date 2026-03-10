@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { submitContact } from '../services/api';
+import React from 'react';
 
 const Contact = () => {
     const contactLinks = [
@@ -25,29 +24,6 @@ const Contact = () => {
             color: 'slate'
         }
     ];
-
-    const [formState, setFormState] = useState('idle');
-    const [formStatus, setFormStatus] = useState({ message: '', type: '' });
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-
-    const handleFormChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleContactSubmit = async (e) => {
-        e.preventDefault();
-        setFormState('loading');
-        try {
-            await submitContact(formData);
-            setFormState('success');
-            setFormStatus({ message: 'Message sent successfully!', type: 'success' });
-            setFormData({ name: '', email: '', message: '' });
-        } catch (error) {
-            console.error('Failed to submit message:', error);
-            setFormState('error');
-            setFormStatus({ message: error.message || 'Failed to send message', type: 'error' });
-        }
-    };
 
     return (
         <section id="contact" aria-labelledby="contact-heading" className="py-20 animate-on-scroll">
@@ -85,32 +61,6 @@ const Contact = () => {
                             </a>
                         </div>
                     ))}
-                </div>
-
-                <div className="mt-16 bg-white rounded-[2rem] p-12 border border-gray-100 text-center shadow-sm">
-                    <h4 className="text-3xl font-black text-black mb-8 uppercase tracking-tighter">Send a Message</h4>
-                    <form onSubmit={handleContactSubmit} className="max-w-2xl mx-auto space-y-6 text-left">
-                        {formStatus.message && (
-                            <div className={`p-4 rounded-xl ${formStatus.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                                {formStatus.message}
-                            </div>
-                        )}
-                        <div>
-                            <label className="block text-sm font-bold text-gray-700 uppercase tracking-widest mb-2" htmlFor="name">Name</label>
-                            <input type="text" id="name" name="name" required className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-black focus:ring-1 focus:ring-black outline-none transition-all" value={formData.name} onChange={handleFormChange} disabled={formState === 'loading'} />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-bold text-gray-700 uppercase tracking-widest mb-2" htmlFor="email">Email</label>
-                            <input type="email" id="email" name="email" required className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-black focus:ring-1 focus:ring-black outline-none transition-all" value={formData.email} onChange={handleFormChange} disabled={formState === 'loading'} />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-bold text-gray-700 uppercase tracking-widest mb-2" htmlFor="message">Message</label>
-                            <textarea id="message" name="message" rows="4" required className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-black focus:ring-1 focus:ring-black outline-none transition-all resize-none" value={formData.message} onChange={handleFormChange} disabled={formState === 'loading'}></textarea>
-                        </div>
-                        <button type="submit" disabled={formState === 'loading'} className="w-full bg-black hover:bg-gray-800 text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm">
-                            {formState === 'loading' ? 'Sending...' : 'Send Message'}
-                        </button>
-                    </form>
                 </div>
 
                 <div className="mt-16 bg-white rounded-[2rem] p-12 border border-gray-100 text-center shadow-sm">
