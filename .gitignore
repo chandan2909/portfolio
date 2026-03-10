@@ -12,3 +12,4 @@ package-lock.json
 # Local planning docs
 IMPLEMENTATION_PLAN.md
 firebase-debug.log
+.env

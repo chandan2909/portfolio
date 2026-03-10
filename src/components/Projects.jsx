@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { fetchProjects } from '../services/api';
 
 const Projects = () => {
-    const projects = [
-        {
-            title: 'Portfolio Website',
-            description: 'Personal portfolio showcasing modern web development skills using HTML, CSS, JavaScript, and responsive design principles.',
-            image: './assets/portfolio-screenshot.png',
-            github: 'https://github.com/chandan2909/portfolio',
-            live: 'https://chandanpathak.dev',
-            tags: ['HTML', 'CSS', 'JavaScript'],
-        },
-        {
-            title: 'ATM Interface',
-            description: 'Interactive ATM management system built with modern programming concepts, featuring secure transactions and intuitive user interface design.',
-            image: './assets/project-three.gif',
-            github: 'https://github.com/chandan2909/Atm-manage',
-            tags: ['Java', 'OOP'],
-            desktopApp: true
-        }
-    ];
+    const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadProjects = async () => {
+            try {
+                const res = await fetchProjects();
+                setProjects(res.data || []);
+            } catch (error) {
+                console.error('Failed to load projects:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        loadProjects();
+    }, []);
+
+    if (loading) {
+        return <div className="text-center py-20 text-gray-500 font-bold uppercase tracking-widest">Loading latest work...</div>;
+    }
 
     return (
         <section id="projects" aria-labelledby="projects-heading" className="py-20 animate-on-scroll">
@@ -37,12 +40,12 @@ const Projects = () => {
                         <article key={index} className="bg-white rounded-[2rem] border border-gray-200 shadow-md hover:shadow-2xl transition-all duration-700 group overflow-hidden flex flex-col">
                             <div className="aspect-video overflow-hidden bg-gray-50 relative">
                                 <img
-                                    src={project.image}
+                                    src={project.image || 'https://via.placeholder.com/600x400?text=Project'}
                                     alt={`${project.title} Screenshot`}
                                     loading="lazy"
                                     className={`w-full h-full transition-all duration-700 group-hover:scale-105 group-hover:brightness-95 ${index === 0 ? 'object-contain' : 'object-cover'}`}
                                 />
-                                
+
                             </div>
 
                             <div className="p-10 flex-1 flex flex-col">
@@ -51,7 +54,7 @@ const Projects = () => {
                                         {project.title}
                                     </h3>
                                     <div className="flex gap-2">
-                                        {project.tags.map((tag) => (
+                                        {(project.techStack || project.tags || []).map((tag) => (
                                             <span key={tag} className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{tag}</span>
                                         ))}
                                     </div>
@@ -62,16 +65,16 @@ const Projects = () => {
                                 </p>
 
                                 <div className="flex gap-4 pt-4">
-                                    {project.live && (
+                                    {(project.liveUrl || project.live) && (
                                         <button
-                                            onClick={() => window.open(project.live, '_blank')}
+                                            onClick={() => window.open(project.liveUrl || project.live, '_blank')}
                                             className="flex-1 bg-black hover:bg-gray-800 text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
                                         >
                                             Live Experience
                                         </button>
                                     )}
                                     <button
-                                        onClick={() => window.open(project.github, '_blank')}
+                                        onClick={() => window.open(project.repoUrl || project.github, '_blank')}
                                         className="flex-1 bg-white border border-gray-200 hover:bg-gray-50 text-black font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
                                     >
                                         Source Code
