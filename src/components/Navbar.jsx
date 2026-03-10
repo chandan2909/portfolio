@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -38,13 +39,13 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`bg-white border-b border-slate-200 py-4 px-4 shadow-lg transition-all duration-300 ease-in-out fixed top-0 left-0 right-0 z-[100000] ${isScrolled ? 'nav-scrolled' : ''
+            className={`bg-white dark:bg-dark-100 border-b border-slate-200 dark:border-slate-800 py-4 px-4 shadow-lg transition-all duration-300 ease-in-out fixed top-0 left-0 right-0 z-[100000] ${isScrolled ? 'nav-scrolled' : ''
                 }`}
             aria-label="Main navigation"
         >
             <div className="container mx-auto flex flex-wrap items-center justify-between">
                 <a
-                    className="cursor-pointer text-xl font-black flex items-center text-gray-800 transition-colors duration-300 uppercase tracking-tighter"
+                    className="cursor-pointer text-xl font-black flex items-center text-gray-800 dark:text-gray-100 transition-colors duration-300 uppercase tracking-tighter"
                     onClick={(e) => {
                         e.preventDefault();
                         const element = document.getElementById('home');
@@ -57,39 +58,44 @@ const Navbar = () => {
                     Chandan Pathak
                 </a>
 
-                <button
-                    className="lg:hidden bg-transparent border-0 text-gray-400 hover:text-black focus:outline-none focus:ring-1 focus:ring-black p-2 rounded-full transition-all duration-300 hover:bg-gray-100"
-                    type="button"
-                    onClick={toggleMobileMenu}
-                    aria-expanded={isMobileMenuOpen}
-                    aria-label="Toggle navigation menu"
-                >
-                    <svg
-                        className={`w-6 h-6 transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-90' : ''}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                <div className="flex items-center gap-2">
+                    <div className="lg:hidden">
+                        <ThemeToggle />
+                    </div>
+                    <button
+                        className="lg:hidden bg-transparent border-0 text-gray-400 hover:text-black dark:hover:text-white focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white p-2 rounded-full transition-all duration-300 hover:bg-gray-100 dark:hover:bg-dark-200"
+                        type="button"
+                        onClick={toggleMobileMenu}
+                        aria-expanded={isMobileMenuOpen}
+                        aria-label="Toggle navigation menu"
                     >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1.5"
-                            d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-                        ></path>
-                    </svg>
-                </button>
+                        <svg
+                            className={`w-6 h-6 transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-90' : ''}`}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="1.5"
+                                d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                            ></path>
+                        </svg>
+                    </button>
+                </div>
 
                 <div
                     className={`w-full lg:w-auto lg:flex transition-all duration-300 ease-in-out z-40 absolute lg:relative left-0 right-0 top-full lg:top-auto overflow-hidden lg:overflow-visible ${isMobileMenuOpen ? 'max-h-[500px] opacity-100 visible translate-y-0' : 'max-h-0 opacity-0 invisible -translate-y-4 lg:max-h-none lg:opacity-100 lg:visible lg:translate-y-0'}`}
                 >
-                    <div className="flex flex-col lg:flex-row lg:items-center bg-white lg:bg-transparent p-4 lg:p-0 border-b border-gray-100 lg:border-none relative z-40 w-full shadow-sm lg:shadow-none">
+                    <div className="flex flex-col lg:flex-row lg:items-center bg-white dark:bg-dark-100 lg:bg-transparent dark:lg:bg-transparent p-4 lg:p-0 border-b border-gray-100 dark:border-slate-800 lg:border-none relative z-40 w-full shadow-sm lg:shadow-none">
                         <ul className="flex flex-col lg:flex-row lg:space-x-1 w-full lg:w-auto">
                             {navLinks.map((link) => (
                                 <li key={link.name}>
                                     <a
                                         className={`cursor-pointer block px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeSection === link.href.substring(1)
-                                            ? 'bg-gray-200 text-black'
-                                            : 'text-gray-500 hover:bg-gray-100 hover:text-black'
+                                            ? 'bg-gray-200 text-black dark:bg-dark-200 dark:text-white'
+                                            : 'text-gray-500 hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-dark-200 dark:hover:text-white'
                                             }`}
                                         onClick={(e) => {
                                             e.preventDefault();
@@ -105,12 +111,15 @@ const Navbar = () => {
                                 </li>
                             ))}
                         </ul>
-                        <div className="flex items-center gap-3 mt-4 lg:mt-0 lg:ml-2 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-gray-200 lg:pl-3">
+                        <div className="flex items-center gap-3 mt-4 lg:mt-0 lg:ml-2 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-gray-200 dark:border-slate-700 lg:pl-3">
+                            <div className="hidden lg:block">
+                                <ThemeToggle />
+                            </div>
                             <a
                                 href="https://www.github.com/chandan2909/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="p-2 bg-white border border-gray-100 hover:bg-gray-100 rounded-full transition-all duration-300 shadow-sm group"
+                                className="p-2 bg-white dark:bg-dark-200 border border-gray-100 dark:border-slate-700 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-full transition-all duration-300 shadow-sm group"
                                 aria-label="Visit GitHub profile"
                             >
                                 <svg className="w-4 h-4 text-gray-600 group-hover:text-black group-hover:scale-110 transition-all" fill="currentColor" viewBox="0 0 24 24">
@@ -121,7 +130,7 @@ const Navbar = () => {
                                 href="https://www.linkedin.com/in/chandanpathak291"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="p-2 bg-white border border-gray-100 hover:bg-gray-100 rounded-full transition-all duration-300 shadow-sm group"
+                                className="p-2 bg-white dark:bg-dark-200 border border-gray-100 dark:border-slate-700 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-full transition-all duration-300 shadow-sm group"
                                 aria-label="Visit LinkedIn profile"
                             >
                                 <svg className="w-4 h-4 text-gray-600 group-hover:text-black group-hover:scale-110 transition-all" fill="currentColor" viewBox="0 0 24 24">

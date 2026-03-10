@@ -32,30 +32,30 @@ const Contact = () => {
                     <p className="text-gray-400 font-bold text-xs mb-4 tracking-[0.2em] uppercase">
                         Get in Touch
                     </p>
-                    <h2 id="contact-heading" className="text-6xl lg:text-8xl font-black text-black uppercase tracking-tighter leading-none">
+                    <h2 id="contact-heading" className="text-6xl lg:text-8xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
                         Let's Connect
                     </h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     {contactLinks.map((link) => (
-                        <div key={link.name} className="bg-white rounded-[2rem] p-10 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-700 group flex flex-col items-center text-center">
-                            <div className="bg-gray-100 rounded-full p-6 mb-8 group-hover:bg-black transition-all duration-500 group-hover:scale-110">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" className="text-black group-hover:text-white transition-colors duration-500" viewBox="0 0 16 16">
+                        <div key={link.name} className="bg-white dark:bg-dark-200 rounded-[2rem] p-10 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-2xl transition-all duration-700 group flex flex-col items-center text-center">
+                            <div className="bg-gray-100 dark:bg-dark-300 rounded-full p-6 mb-8 group-hover:bg-black transition-all duration-500 group-hover:scale-110">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" className="text-black dark:text-white group-hover:text-white transition-colors duration-500" viewBox="0 0 16 16">
                                     <path d={link.icon} />
                                 </svg>
                             </div>
-                            <h4 className="font-black text-2xl text-black mb-4 uppercase tracking-tighter transition-colors duration-300">
+                            <h4 className="font-black text-2xl text-black dark:text-white mb-4 uppercase tracking-tighter transition-colors duration-300">
                                 {link.name}
                             </h4>
-                            <p className="text-gray-500 mb-8 leading-relaxed font-medium">
+                            <p className="text-gray-500 dark:text-gray-400 mb-8 leading-relaxed font-medium">
                                 {link.name === 'Email' ? 'Send me a direct message' : link.name === 'LinkedIn' ? 'Connect professionally' : 'Explore my code repositories'}
                             </p>
                             <a
                                 href={link.href}
                                 target={link.name !== 'Email' ? "_blank" : undefined}
                                 rel={link.name !== 'Email' ? "noopener noreferrer" : undefined}
-                                className="w-full bg-black hover:bg-gray-800 text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm text-center"
+                                className="w-full bg-black dark:bg-white dark:text-black dark:hover:bg-gray-200 hover:bg-gray-800 text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm text-center"
                             >
                                 {link.name === 'Email' ? 'Send Email' : 'View Profile'}
                             </a>
@@ -63,12 +63,12 @@ const Contact = () => {
                     ))}
                 </div>
 
-                <div className="mt-16 bg-white rounded-[2rem] p-12 border border-gray-100 text-center shadow-sm">
-                    <h4 className="text-3xl font-black text-black mb-4 uppercase tracking-tighter">Ready to collaborate?</h4>
-                    <p className="text-gray-500 mb-10 font-medium text-lg max-w-2xl mx-auto">I'm always open to discussing new opportunities and exciting projects that push the boundaries of web development.</p>
+                <div className="mt-16 bg-white dark:bg-dark-200 rounded-[2rem] p-12 border border-gray-100 dark:border-slate-700 text-center shadow-sm">
+                    <h4 className="text-3xl font-black text-black dark:text-white mb-4 uppercase tracking-tighter">Ready to collaborate?</h4>
+                    <p className="text-gray-500 dark:text-gray-400 mb-10 font-medium text-lg max-w-2xl mx-auto">I'm always open to discussing new opportunities and exciting projects that push the boundaries of web development.</p>
                     <div className="flex flex-wrap justify-center gap-4">
                         {['Web Development', 'Frontend', 'JavaScript', 'Freelance'].map((tag) => (
-                            <span key={tag} className="bg-gray-100 text-black text-xs font-black px-6 py-2 rounded-full uppercase tracking-widest">{tag}</span>
+                            <span key={tag} className="bg-gray-100 dark:bg-dark-300 text-black dark:text-white text-xs font-black px-6 py-2 rounded-full uppercase tracking-widest">{tag}</span>
                         ))}
                     </div>
                 </div>

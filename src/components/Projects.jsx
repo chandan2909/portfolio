@@ -27,15 +27,15 @@ const Projects = () => {
                     <p className="text-gray-400 font-bold text-xs mb-4 tracking-[0.2em] uppercase">
                         Explore My
                     </p>
-                    <h2 id="projects-heading" className="text-6xl lg:text-8xl font-black text-black uppercase tracking-tighter leading-none">
+                    <h2 id="projects-heading" className="text-6xl lg:text-8xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
                         Latest Work
                     </h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     {projects.map((project, index) => (
-                        <article key={index} className="bg-white rounded-[2rem] border border-gray-200 shadow-md hover:shadow-2xl transition-all duration-700 group overflow-hidden flex flex-col">
-                            <div className="aspect-video overflow-hidden bg-gray-50 relative">
+                        <article key={index} className="bg-white dark:bg-dark-200 rounded-[2rem] border border-gray-200 dark:border-slate-700 shadow-md hover:shadow-2xl transition-all duration-700 group overflow-hidden flex flex-col">
+                            <div className="aspect-video overflow-hidden bg-gray-50 dark:bg-dark-300 relative">
                                 <img
                                     src={project.image}
                                     alt={`${project.title} Screenshot`}
@@ -47,7 +47,7 @@ const Projects = () => {
 
                             <div className="p-10 flex-1 flex flex-col">
                                 <div className="flex items-center justify-between mb-4">
-                                    <h3 className="text-3xl font-black text-black uppercase tracking-tighter group-hover:text-gray-700 transition-colors">
+                                    <h3 className="text-3xl font-black text-black dark:text-white uppercase tracking-tighter group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
                                         {project.title}
                                     </h3>
                                     <div className="flex gap-2">
@@ -57,7 +57,7 @@ const Projects = () => {
                                     </div>
                                 </div>
 
-                                <p className="text-gray-500 mb-8 leading-relaxed font-medium text-lg flex-1">
+                                <p className="text-gray-500 dark:text-gray-400 mb-8 leading-relaxed font-medium text-lg flex-1">
                                     {project.description}
                                 </p>
 
@@ -65,14 +65,14 @@ const Projects = () => {
                                     {project.live && (
                                         <button
                                             onClick={() => window.open(project.live, '_blank')}
-                                            className="flex-1 bg-black hover:bg-gray-800 text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
+                                            className="flex-1 bg-black dark:bg-white dark:text-black dark:hover:bg-gray-200 hover:bg-gray-800 text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
                                         >
                                             Live Experience
                                         </button>
                                     )}
                                     <button
                                         onClick={() => window.open(project.github, '_blank')}
-                                        className="flex-1 bg-white border border-gray-200 hover:bg-gray-50 text-black font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
+                                        className="flex-1 bg-white dark:bg-dark-300 border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-dark-200 text-black dark:text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
                                     >
                                         Source Code
                                     </button>

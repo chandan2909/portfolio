@@ -24,10 +24,9 @@ img {
 }
 
 body {
-  background-color: #f8f8f8;
+  @apply bg-[#f8f8f8] text-[#000000] dark:bg-dark-100 dark:text-gray-100;
   background-image: linear-gradient(to right, #e5e7eb 1px, transparent 1px);
   background-size: 30px 100%;
-  color: #000000;
   overflow-x: hidden;
   font-family:
     "Inter",
@@ -36,6 +35,10 @@ body {
     "Segoe UI",
     Roboto,
     sans-serif;
+}
+
+.dark body {
+  background-image: linear-gradient(to right, #334155 1px, transparent 1px);
 }
 
 ::selection {
@@ -53,7 +56,7 @@ html {
 .nav-scrolled {
   padding-top: 0.5rem !important;
   padding-bottom: 0.5rem !important;
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  @apply bg-white/90 dark:bg-dark-100/90;
   backdrop-filter: blur(8px);
 }
 
