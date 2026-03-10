@@ -104,7 +104,6 @@ const Hero = () => {
                     </div>
                     <div className="lg:w-1/2 flex justify-center mb-12 lg:mb-0">
                         <div className="relative">
-                            <div className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full bg-gray-100 dark:bg-dark-200 absolute -top-4 -left-4 -z-10 transition-all duration-500"></div>
                             <img
                                 src="https://media1.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif"
                                 className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full shadow-lg object-cover hover:shadow-2xl hover:scale-105 transition-all duration-500 border border-gray-100 dark:border-slate-700"
