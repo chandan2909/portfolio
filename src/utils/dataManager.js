@@ -88,14 +88,12 @@ export function resetSkills() {
 }
 
 // ─── Admin Auth (API-based with bcrypt hashing) ─────────────────
-
-const API_BASE = import.meta.env.PROD
-    ? '' // In production, use relative URL (same origin or configure)
-    : 'http://localhost:5000';
+// Uses relative URLs — Vercel serves API from same domain,
+// locally Vite proxy forwards /api/* to the Express server
 
 export async function checkPassword(password) {
     try {
-        const res = await fetch(`${API_BASE}/api/auth/login`, {
+        const res = await fetch('/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password }),
@@ -110,7 +108,7 @@ export async function checkPassword(password) {
 
 export async function changePassword(currentPassword, newPassword) {
     try {
-        const res = await fetch(`${API_BASE}/api/auth/change-password`, {
+        const res = await fetch('/api/auth/change-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ currentPassword, newPassword }),
