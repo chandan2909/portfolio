@@ -1,24 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { getProjects } from '../utils/dataManager';
 
 const Projects = () => {
-    const projects = [
-        {
-            title: 'Portfolio Website',
-            description: 'Personal portfolio showcasing modern web development skills using HTML, CSS, JavaScript, and responsive design principles.',
-            image: './assets/portfolio-screenshot.png',
-            github: 'https://github.com/chandan2909/portfolio',
-            live: 'https://chandanpathak.dev',
-            tags: ['HTML', 'CSS', 'JavaScript'],
-        },
-        {
-            title: 'ATM Interface',
-            description: 'Interactive ATM management system built with modern programming concepts, featuring secure transactions and intuitive user interface design.',
-            image: './assets/project-three.gif',
-            github: 'https://github.com/chandan2909/Atm-manage',
-            tags: ['Java', 'OOP'],
-            desktopApp: true
-        }
-    ];
+    const [projects] = useState(() => getProjects());
 
     return (
         <section id="projects" aria-labelledby="projects-heading" className="py-20 animate-on-scroll">

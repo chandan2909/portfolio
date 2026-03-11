@@ -1,4 +1,5 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -6,9 +7,10 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import AdminPanel from './components/AdminPanel';
 import useScrollReveal from './hooks/useScrollReveal';
 
-function App() {
+function Portfolio() {
     useScrollReveal();
 
     return (
@@ -25,6 +27,15 @@ function App() {
                 <Footer />
             </div>
         </div>
+    );
+}
+
+function App() {
+    return (
+        <Routes>
+            <Route path="/" element={<Portfolio />} />
+            <Route path="/admin" element={<AdminPanel />} />
+        </Routes>
     );
 }
 
