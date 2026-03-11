@@ -87,17 +87,40 @@ export function resetSkills() {
     return [...defaultSkills];
 }
 
-// ─── Admin Auth (simple password check) ─────────────────────────
+// ─── Admin Auth (API-based with bcrypt hashing) ─────────────────
 
-const DEFAULT_PASSWORD = 'admin123';
+const API_BASE = import.meta.env.PROD
+    ? '' // In production, use relative URL (same origin or configure)
+    : 'http://localhost:5000';
 
-export function checkPassword(password) {
-    const storedPassword = localStorage.getItem(ADMIN_PASSWORD_KEY);
-    return password === (storedPassword || DEFAULT_PASSWORD);
+export async function checkPassword(password) {
+    try {
+        const res = await fetch(`${API_BASE}/api/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password }),
+        });
+        const data = await res.json();
+        return data.success;
+    } catch (err) {
+        console.error('Auth check failed:', err);
+        return false;
+    }
 }
 
-export function changePassword(newPassword) {
-    localStorage.setItem(ADMIN_PASSWORD_KEY, newPassword);
+export async function changePassword(currentPassword, newPassword) {
+    try {
+        const res = await fetch(`${API_BASE}/api/auth/change-password`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ currentPassword, newPassword }),
+        });
+        const data = await res.json();
+        return data;
+    } catch (err) {
+        console.error('Password change failed:', err);
+        return { success: false, message: 'Network error' };
+    }
 }
 
 // ─── Unique ID generator ────────────────────────────────────────
@@ -105,3 +128,4 @@ export function changePassword(newPassword) {
 export function generateId() {
     return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
 }
+

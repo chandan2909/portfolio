@@ -11,12 +11,14 @@ const AdminPanel = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const [activeTab, setActiveTab] = useState('projects');
     const [projects, setProjectsList] = useState([]);
     const [skills, setSkillsList] = useState([]);
     const [editingProject, setEditingProject] = useState(null);
     const [editingSkill, setEditingSkill] = useState(null);
     const [showPasswordChange, setShowPasswordChange] = useState(false);
+    const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordMsg, setPasswordMsg] = useState('');
@@ -37,33 +39,52 @@ const AdminPanel = () => {
     };
 
     // ─── Auth ─────────────────────────────────────────────────
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        if (checkPassword(password)) {
-            setIsAuthenticated(true);
-            setError('');
-        } else {
-            setError('Incorrect password');
+        setLoading(true);
+        setError('');
+        try {
+            const success = await checkPassword(password);
+            if (success) {
+                setIsAuthenticated(true);
+                setError('');
+            } else {
+                setError('Incorrect password');
+            }
+        } catch (err) {
+            setError('Server error — is the backend running?');
         }
+        setLoading(false);
         setPassword('');
     };
 
-    const handlePasswordChange = (e) => {
+    const handlePasswordChange = async (e) => {
         e.preventDefault();
+        if (!currentPassword) {
+            setPasswordMsg('Current password is required');
+            return;
+        }
         if (newPassword.length < 4) {
-            setPasswordMsg('Password must be at least 4 characters');
+            setPasswordMsg('New password must be at least 4 characters');
             return;
         }
         if (newPassword !== confirmPassword) {
             setPasswordMsg('Passwords do not match');
             return;
         }
-        changePassword(newPassword);
-        setNewPassword('');
-        setConfirmPassword('');
-        setShowPasswordChange(false);
-        setPasswordMsg('');
-        showToast('Password changed successfully');
+        setLoading(true);
+        const result = await changePassword(currentPassword, newPassword);
+        setLoading(false);
+        if (result.success) {
+            setCurrentPassword('');
+            setNewPassword('');
+            setConfirmPassword('');
+            setShowPasswordChange(false);
+            setPasswordMsg('');
+            showToast('Password changed successfully');
+        } else {
+            setPasswordMsg(result.message || 'Failed to change password');
+        }
     };
 
     // ─── Project CRUD ─────────────────────────────────────────
@@ -157,9 +178,10 @@ const AdminPanel = () => {
                             )}
                             <button
                                 type="submit"
-                                className="w-full bg-black dark:bg-white text-white dark:text-black font-black py-4 rounded-2xl uppercase text-xs tracking-widest hover:bg-gray-800 dark:hover:bg-gray-200 transition-all shadow-lg"
+                                disabled={loading}
+                                className="w-full bg-black dark:bg-white text-white dark:text-black font-black py-4 rounded-2xl uppercase text-xs tracking-widest hover:bg-gray-800 dark:hover:bg-gray-200 transition-all shadow-lg disabled:opacity-50"
                             >
-                                Unlock Dashboard
+                                {loading ? 'Verifying...' : 'Unlock Dashboard'}
                             </button>
                         </form>
                         <button
@@ -223,23 +245,30 @@ const AdminPanel = () => {
                 {showPasswordChange && (
                     <div className="mb-8 bg-white dark:bg-dark-200 rounded-3xl border border-gray-200 dark:border-slate-700 shadow-sm p-8">
                         <h3 className="text-lg font-black text-black dark:text-white uppercase tracking-tighter mb-4">Change Password</h3>
-                        <form onSubmit={handlePasswordChange} className="flex flex-col sm:flex-row gap-4">
+                        <form onSubmit={handlePasswordChange} className="flex flex-col sm:flex-row gap-4 flex-wrap">
+                            <input
+                                type="password"
+                                value={currentPassword}
+                                onChange={(e) => setCurrentPassword(e.target.value)}
+                                placeholder="Current password"
+                                className="flex-1 min-w-[180px] px-4 py-3 bg-gray-50 dark:bg-dark-300 border border-gray-200 dark:border-slate-600 rounded-xl text-black dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white placeholder:text-gray-400"
+                            />
                             <input
                                 type="password"
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
                                 placeholder="New password"
-                                className="flex-1 px-4 py-3 bg-gray-50 dark:bg-dark-300 border border-gray-200 dark:border-slate-600 rounded-xl text-black dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white placeholder:text-gray-400"
+                                className="flex-1 min-w-[180px] px-4 py-3 bg-gray-50 dark:bg-dark-300 border border-gray-200 dark:border-slate-600 rounded-xl text-black dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white placeholder:text-gray-400"
                             />
                             <input
                                 type="password"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
-                                placeholder="Confirm password"
-                                className="flex-1 px-4 py-3 bg-gray-50 dark:bg-dark-300 border border-gray-200 dark:border-slate-600 rounded-xl text-black dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white placeholder:text-gray-400"
+                                placeholder="Confirm new password"
+                                className="flex-1 min-w-[180px] px-4 py-3 bg-gray-50 dark:bg-dark-300 border border-gray-200 dark:border-slate-600 rounded-xl text-black dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white placeholder:text-gray-400"
                             />
-                            <button type="submit" className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black font-black rounded-xl uppercase text-xs tracking-widest hover:bg-gray-800 dark:hover:bg-gray-200 transition-all">
-                                Update
+                            <button type="submit" disabled={loading} className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black font-black rounded-xl uppercase text-xs tracking-widest hover:bg-gray-800 dark:hover:bg-gray-200 transition-all disabled:opacity-50">
+                                {loading ? 'Updating...' : 'Update'}
                             </button>
                         </form>
                         {passwordMsg && <p className="text-red-500 text-sm font-bold mt-3">{passwordMsg}</p>}
@@ -251,8 +280,8 @@ const AdminPanel = () => {
                     <button
                         onClick={() => setActiveTab('projects')}
                         className={`flex items-center gap-2 px-6 py-3.5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'projects'
-                                ? 'bg-black dark:bg-white text-white dark:text-black shadow-lg'
-                                : 'bg-white dark:bg-dark-200 text-gray-400 hover:text-black dark:hover:text-white border border-gray-200 dark:border-slate-700'
+                            ? 'bg-black dark:bg-white text-white dark:text-black shadow-lg'
+                            : 'bg-white dark:bg-dark-200 text-gray-400 hover:text-black dark:hover:text-white border border-gray-200 dark:border-slate-700'
                             }`}
                     >
                         <FolderOpen className="w-4 h-4" /> Projects
@@ -260,8 +289,8 @@ const AdminPanel = () => {
                     <button
                         onClick={() => setActiveTab('skills')}
                         className={`flex items-center gap-2 px-6 py-3.5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'skills'
-                                ? 'bg-black dark:bg-white text-white dark:text-black shadow-lg'
-                                : 'bg-white dark:bg-dark-200 text-gray-400 hover:text-black dark:hover:text-white border border-gray-200 dark:border-slate-700'
+                            ? 'bg-black dark:bg-white text-white dark:text-black shadow-lg'
+                            : 'bg-white dark:bg-dark-200 text-gray-400 hover:text-black dark:hover:text-white border border-gray-200 dark:border-slate-700'
                             }`}
                     >
                         <Wrench className="w-4 h-4" /> Skills
