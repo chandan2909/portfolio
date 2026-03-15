@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getSkills } from '../utils/dataManager';
 
 const Skills = () => {
-    const [technicalSkills] = useState(() => getSkills());
+    const [technicalSkills, setSkills] = useState([]);
+
+    useEffect(() => {
+        getSkills().then(data => setSkills(data));
+    }, []);
 
     const education = [
         { type: 'MCA', detail: 'Master of Computer Applications', school: 'Veer Bahadur Singh Purvanchal University, Jaunpur', result: 'CGPA: 8.0', color: 'blue' },

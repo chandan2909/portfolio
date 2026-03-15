@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    getProjects, saveProjects, resetProjects,
-    getSkills, saveSkills, resetSkills,
-    checkPassword, changePassword, generateId
+    getProjects, saveProject, deleteProject,
+    getSkills, saveSkill, deleteSkill,
+    checkPassword, changePassword
 } from '../utils/dataManager';
-import { Lock, LogOut, Plus, Trash2, Edit3, Save, X, RotateCcw, FolderOpen, Wrench, KeyRound, ArrowLeft, Check } from 'lucide-react';
+import { Lock, LogOut, Plus, Trash2, Edit3, Save, X, RotateCcw, FolderOpen, Wrench, KeyRound, ArrowLeft, Check, Upload, ImageIcon } from 'lucide-react';
 
 const AdminPanel = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -25,10 +25,19 @@ const AdminPanel = () => {
     const [toast, setToast] = useState(null);
     const navigate = useNavigate();
 
+    const loadData = async () => {
+        try {
+            const [p, s] = await Promise.all([getProjects(), getSkills()]);
+            setProjectsList(p || []);
+            setSkillsList(s || []);
+        } catch (err) {
+            console.error('Failed to load data:', err);
+        }
+    };
+
     useEffect(() => {
         if (isAuthenticated) {
-            setProjectsList(getProjects());
-            setSkillsList(getSkills());
+            loadData();
         }
     }, [isAuthenticated]);
 
@@ -90,61 +99,49 @@ const AdminPanel = () => {
     // ─── Project CRUD ─────────────────────────────────────────
     const emptyProject = { id: '', title: '', description: '', image: '', github: '', live: '', tags: [] };
 
-    const handleSaveProject = (project) => {
-        let updated;
-        if (project.id) {
-            updated = projects.map(p => p.id === project.id ? project : p);
+    const handleSaveProject = async (project) => {
+        setLoading(true);
+        const result = await saveProject(project);
+        if (result.success) {
+            await loadData();
+            setEditingProject(null);
+            showToast(project.id ? 'Project updated' : 'Project added');
         } else {
-            project.id = generateId();
-            updated = [...projects, project];
+            showToast(result.message || 'Failed to save', 'error');
         }
-        setProjectsList(updated);
-        saveProjects(updated);
-        setEditingProject(null);
-        showToast(project.id ? 'Project updated' : 'Project added');
+        setLoading(false);
     };
 
-    const handleDeleteProject = (id) => {
-        const updated = projects.filter(p => p.id !== id);
-        setProjectsList(updated);
-        saveProjects(updated);
-        showToast('Project deleted', 'info');
-    };
-
-    const handleResetProjects = () => {
-        const defaults = resetProjects();
-        setProjectsList(defaults);
-        showToast('Projects reset to defaults', 'info');
+    const handleDeleteProject = async (id) => {
+        const result = await deleteProject(id);
+        if (result.success) {
+            await loadData();
+            showToast('Project deleted', 'info');
+        }
     };
 
     // ─── Skill CRUD ───────────────────────────────────────────
     const emptySkill = { id: '', name: '', category: '', level: 'Basic' };
 
-    const handleSaveSkill = (skill) => {
-        let updated;
-        if (skill.id) {
-            updated = skills.map(s => s.id === skill.id ? skill : s);
+    const handleSaveSkill = async (skill) => {
+        setLoading(true);
+        const result = await saveSkill(skill);
+        if (result.success) {
+            await loadData();
+            setEditingSkill(null);
+            showToast(skill.id ? 'Skill updated' : 'Skill added');
         } else {
-            skill.id = generateId();
-            updated = [...skills, skill];
+            showToast(result.message || 'Failed to save', 'error');
         }
-        setSkillsList(updated);
-        saveSkills(updated);
-        setEditingSkill(null);
-        showToast(skill.id ? 'Skill updated' : 'Skill added');
+        setLoading(false);
     };
 
-    const handleDeleteSkill = (id) => {
-        const updated = skills.filter(s => s.id !== id);
-        setSkillsList(updated);
-        saveSkills(updated);
-        showToast('Skill deleted', 'info');
-    };
-
-    const handleResetSkills = () => {
-        const defaults = resetSkills();
-        setSkillsList(defaults);
-        showToast('Skills reset to defaults', 'info');
+    const handleDeleteSkill = async (id) => {
+        const result = await deleteSkill(id);
+        if (result.success) {
+            await loadData();
+            showToast('Skill deleted', 'info');
+        }
     };
 
     // ─── Login Screen ─────────────────────────────────────────
@@ -306,12 +303,6 @@ const AdminPanel = () => {
                             </h2>
                             <div className="flex gap-3">
                                 <button
-                                    onClick={handleResetProjects}
-                                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-dark-300 text-gray-500 hover:text-black dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all"
-                                >
-                                    <RotateCcw className="w-3.5 h-3.5" /> Reset
-                                </button>
-                                <button
                                     onClick={() => setEditingProject({ ...emptyProject })}
                                     className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-black dark:bg-white text-white dark:text-black font-black text-xs uppercase tracking-widest hover:bg-gray-800 dark:hover:bg-gray-200 transition-all shadow-md"
                                 >
@@ -376,12 +367,6 @@ const AdminPanel = () => {
                             </h2>
                             <div className="flex gap-3">
                                 <button
-                                    onClick={handleResetSkills}
-                                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-dark-300 text-gray-500 hover:text-black dark:hover:text-white font-bold text-xs uppercase tracking-wider transition-all"
-                                >
-                                    <RotateCcw className="w-3.5 h-3.5" /> Reset
-                                </button>
-                                <button
                                     onClick={() => setEditingSkill({ ...emptySkill })}
                                     className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-black dark:bg-white text-white dark:text-black font-black text-xs uppercase tracking-widest hover:bg-gray-800 dark:hover:bg-gray-200 transition-all shadow-md"
                                 >
@@ -438,9 +423,21 @@ const AdminPanel = () => {
 const ProjectForm = ({ project, onSave, onCancel }) => {
     const [form, setForm] = useState({ ...project, tags: project.tags || [] });
     const [tagInput, setTagInput] = useState('');
+    const fileInputRef = React.useRef(null);
 
     const handleChange = (field, value) => {
         setForm(prev => ({ ...prev, [field]: value }));
+    };
+
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            handleChange('image', ev.target.result);
+        };
+        reader.readAsDataURL(file);
     };
 
     const addTag = () => {
@@ -468,7 +465,46 @@ const ProjectForm = ({ project, onSave, onCancel }) => {
             <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <InputField label="Project Title" value={form.title} onChange={v => handleChange('title', v)} placeholder="My Project" required />
-                    <InputField label="Image URL" value={form.image} onChange={v => handleChange('image', v)} placeholder="./assets/image.png or https://..." />
+                    <div>
+                        <label className="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Project Image</label>
+                        <div className="flex gap-2">
+                            <input
+                                value={form.image?.startsWith('data:') ? 'Image uploaded ✓' : (form.image || '')}
+                                onChange={(e) => handleChange('image', e.target.value)}
+                                placeholder="URL or upload an image"
+                                readOnly={form.image?.startsWith('data:')}
+                                className="flex-1 px-4 py-3 bg-gray-50 dark:bg-dark-300 border border-gray-200 dark:border-slate-600 rounded-xl text-black dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white placeholder:text-gray-400"
+                            />
+                            <input
+                                ref={fileInputRef}
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                                className="hidden"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => fileInputRef.current?.click()}
+                                className="flex items-center gap-2 px-4 py-3 bg-black dark:bg-white text-white dark:text-black font-black rounded-xl text-xs uppercase tracking-widest hover:bg-gray-800 dark:hover:bg-gray-200 transition-all whitespace-nowrap"
+                            >
+                                <Upload className="w-4 h-4" /> Upload
+                            </button>
+                        </div>
+                        {form.image && (
+                            <div className="mt-3 relative group/img">
+                                <div className="w-full h-32 rounded-xl overflow-hidden bg-gray-100 dark:bg-dark-300 border border-gray-200 dark:border-slate-600">
+                                    <img src={form.image} alt="Preview" className="w-full h-full object-contain" />
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => { handleChange('image', ''); if (fileInputRef.current) fileInputRef.current.value = ''; }}
+                                    className="absolute top-2 right-2 p-1.5 rounded-lg bg-red-500 text-white opacity-0 group-hover/img:opacity-100 transition-opacity"
+                                >
+                                    <X className="w-3.5 h-3.5" />
+                                </button>
+                            </div>
+                        )}
+                    </div>
                     <InputField label="GitHub URL" value={form.github} onChange={v => handleChange('github', v)} placeholder="https://github.com/..." />
                     <InputField label="Live URL" value={form.live || ''} onChange={v => handleChange('live', v)} placeholder="https://example.com" />
                 </div>

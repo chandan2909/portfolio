@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getProjects } from '../utils/dataManager';
 
 const Projects = () => {
-    const [projects] = useState(() => getProjects());
+    const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+        getProjects().then(data => setProjects(data));
+    }, []);
 
     return (
         <section id="projects" aria-labelledby="projects-heading" className="py-20 animate-on-scroll">

@@ -1,95 +1,101 @@
-// Data Manager — localStorage-based persistence for projects & skills
-// This replaces hardcoded arrays in Projects.jsx and Skills.jsx
+// Data Manager — API-based persistence for projects & skills
+// All data is stored in MySQL (Aiven) and fetched via API
 
-const PROJECTS_KEY = 'portfolio_projects';
-const SKILLS_KEY = 'portfolio_skills';
-const ADMIN_PASSWORD_KEY = 'admin_password';
+// ─── Projects API ───────────────────────────────────────────────
 
-// ─── Default Data ───────────────────────────────────────────────
-
-const defaultProjects = [
-    {
-        id: '1',
-        title: 'Portfolio Website',
-        description: 'Personal portfolio showcasing modern web development skills using HTML, CSS, JavaScript, and responsive design principles.',
-        image: './assets/portfolio-screenshot.png',
-        github: 'https://github.com/chandan2909/portfolio',
-        live: 'https://chandanpathak.dev',
-        tags: ['HTML', 'CSS', 'JavaScript'],
-    },
-    {
-        id: '2',
-        title: 'ATM Interface',
-        description: 'Interactive ATM management system built with modern programming concepts, featuring secure transactions and intuitive user interface design.',
-        image: './assets/project-three.gif',
-        github: 'https://github.com/chandan2909/Atm-manage',
-        tags: ['Java', 'OOP'],
-        desktopApp: true,
-    },
-];
-
-const defaultSkills = [
-    { id: '1', name: 'HTML', category: 'Markup Language', level: 'Intermediate' },
-    { id: '2', name: 'CSS', category: 'Styling & Design', level: 'Intermediate' },
-    { id: '3', name: 'JavaScript', category: 'Programming & Logic', level: 'Intermediate' },
-    { id: '4', name: 'Git/GitHub', category: 'Version Control', level: 'Basic' },
-    { id: '5', name: 'SQL', category: 'Database Management', level: 'Intermediate' },
-    { id: '6', name: 'Java', category: 'Object-Oriented Programming', level: 'Intermediate' },
-];
-
-// ─── Projects CRUD ──────────────────────────────────────────────
-
-export function getProjects() {
+export async function getProjects() {
     try {
-        const stored = localStorage.getItem(PROJECTS_KEY);
-        if (stored) return JSON.parse(stored);
-    } catch (e) {
-        console.warn('Failed to read projects from localStorage:', e);
-    }
-    return [...defaultProjects];
-}
-
-export function saveProjects(projects) {
-    try {
-        localStorage.setItem(PROJECTS_KEY, JSON.stringify(projects));
-    } catch (e) {
-        console.error('Failed to save projects:', e);
+        const res = await fetch('/api/projects');
+        if (!res.ok) throw new Error('Failed to fetch projects');
+        return await res.json();
+    } catch (err) {
+        console.error('Failed to load projects:', err);
+        return [];
     }
 }
 
-export function resetProjects() {
-    localStorage.removeItem(PROJECTS_KEY);
-    return [...defaultProjects];
-}
-
-// ─── Skills CRUD ────────────────────────────────────────────────
-
-export function getSkills() {
+export async function saveProject(project) {
     try {
-        const stored = localStorage.getItem(SKILLS_KEY);
-        if (stored) return JSON.parse(stored);
-    } catch (e) {
-        console.warn('Failed to read skills from localStorage:', e);
+        if (project.id) {
+            // Update existing
+            const res = await fetch(`/api/projects/${project.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(project),
+            });
+            return await res.json();
+        } else {
+            // Create new
+            const res = await fetch('/api/projects', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(project),
+            });
+            return await res.json();
+        }
+    } catch (err) {
+        console.error('Failed to save project:', err);
+        return { success: false, message: 'Network error' };
     }
-    return [...defaultSkills];
 }
 
-export function saveSkills(skills) {
+export async function deleteProject(id) {
     try {
-        localStorage.setItem(SKILLS_KEY, JSON.stringify(skills));
-    } catch (e) {
-        console.error('Failed to save skills:', e);
+        const res = await fetch(`/api/projects/${id}`, { method: 'DELETE' });
+        return await res.json();
+    } catch (err) {
+        console.error('Failed to delete project:', err);
+        return { success: false, message: 'Network error' };
     }
 }
 
-export function resetSkills() {
-    localStorage.removeItem(SKILLS_KEY);
-    return [...defaultSkills];
+// ─── Skills API ─────────────────────────────────────────────────
+
+export async function getSkills() {
+    try {
+        const res = await fetch('/api/skills');
+        if (!res.ok) throw new Error('Failed to fetch skills');
+        return await res.json();
+    } catch (err) {
+        console.error('Failed to load skills:', err);
+        return [];
+    }
+}
+
+export async function saveSkill(skill) {
+    try {
+        if (skill.id) {
+            const res = await fetch(`/api/skills/${skill.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(skill),
+            });
+            return await res.json();
+        } else {
+            const res = await fetch('/api/skills', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(skill),
+            });
+            return await res.json();
+        }
+    } catch (err) {
+        console.error('Failed to save skill:', err);
+        return { success: false, message: 'Network error' };
+    }
+}
+
+export async function deleteSkill(id) {
+    try {
+        const res = await fetch(`/api/skills/${id}`, { method: 'DELETE' });
+        return await res.json();
+    } catch (err) {
+        console.error('Failed to delete skill:', err);
+        return { success: false, message: 'Network error' };
+    }
 }
 
 // ─── Admin Auth (API-based with bcrypt hashing) ─────────────────
-// Uses relative URLs — Vercel serves API from same domain,
-// locally Vite proxy forwards /api/* to the Express server
 
 export async function checkPassword(password) {
     try {
@@ -120,10 +126,3 @@ export async function changePassword(currentPassword, newPassword) {
         return { success: false, message: 'Network error' };
     }
 }
-
-// ─── Unique ID generator ────────────────────────────────────────
-
-export function generateId() {
-    return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
-}
-

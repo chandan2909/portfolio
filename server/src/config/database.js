@@ -9,15 +9,12 @@ const pool = mysql.createPool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    ssl: {
-        rejectUnauthorized: false,
-    },
+    ssl: { rejectUnauthorized: false },
     waitForConnections: true,
     connectionLimit: 5,
     queueLimit: 0,
 });
 
-// Initialize the admin_users table
 export async function initDatabase() {
     try {
         await pool.execute(`
@@ -29,7 +26,36 @@ export async function initDatabase() {
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )
         `);
-        console.log('✅ Database initialized — admin_users table ready');
+
+        await pool.execute(`
+            CREATE TABLE IF NOT EXISTS projects (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                title VARCHAR(255) NOT NULL,
+                description TEXT,
+                image LONGTEXT,
+                github VARCHAR(500),
+                live VARCHAR(500),
+                tags JSON,
+                desktop_app BOOLEAN DEFAULT FALSE,
+                sort_order INT DEFAULT 0,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            )
+        `);
+
+        await pool.execute(`
+            CREATE TABLE IF NOT EXISTS skills (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(100) NOT NULL,
+                category VARCHAR(200),
+                level VARCHAR(50) DEFAULT 'Basic',
+                sort_order INT DEFAULT 0,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            )
+        `);
+
+        console.log('✅ Database initialized — all tables ready');
     } catch (err) {
         console.error('❌ Database initialization failed:', err.message);
         throw err;

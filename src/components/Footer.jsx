@@ -9,10 +9,20 @@ const Footer = () => {
                         CHANDAN PATHAK
                     </div>
                     <div className="flex flex-wrap justify-center gap-10">
-                        <a href="#about" className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 hover:text-black dark:hover:text-white transition-colors">About</a>
-                        <a href="#skills" className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 hover:text-black dark:hover:text-white transition-colors">Skills</a>
-                        <a href="#projects" className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 hover:text-black dark:hover:text-white transition-colors">Work</a>
-                        <a href="#contact" className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 hover:text-black dark:hover:text-white transition-colors">Contact</a>
+                        {['about', 'skills', 'projects', 'contact'].map((section) => (
+                            <a
+                                key={section}
+                                href={`#${section}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    const el = document.getElementById(section);
+                                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 hover:text-black dark:hover:text-white transition-colors"
+                            >
+                                {section === 'projects' ? 'Work' : section}
+                            </a>
+                        ))}
                     </div>
                 </div>
                 <div className="mt-20 pt-10 border-t border-gray-50 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6 text-[9px] font-black uppercase tracking-[0.4em] text-gray-500">
