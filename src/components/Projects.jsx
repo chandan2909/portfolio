@@ -57,12 +57,12 @@ const Projects = () => {
                     ) : (
                         projects.map((project, index) => (
                             <article key={index} className="bg-white dark:bg-dark-200 rounded-[2rem] border border-gray-200 dark:border-slate-700 shadow-md hover:shadow-2xl transition-all duration-700 group overflow-hidden flex flex-col">
-                                <div className="aspect-video overflow-hidden bg-gray-50 dark:bg-dark-300 relative">
+                                <div className="aspect-video overflow-hidden bg-gray-100 dark:bg-dark-300 relative p-2">
                                     <img
                                         src={project.image}
                                         alt={`${project.title} Screenshot`}
                                         loading="lazy"
-                                        className={`w-full h-full transition-all duration-700 group-hover:scale-105 group-hover:brightness-95 ${index === 0 ? 'object-contain' : 'object-cover'}`}
+                                        className="w-full h-full object-contain transition-all duration-700 group-hover:scale-105"
                                     />
                                 </div>
 
