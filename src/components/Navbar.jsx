@@ -93,7 +93,7 @@ const Navbar = () => {
                             {navLinks.map((link) => (
                                 <li key={link.name}>
                                     <a
-                                        className={`cursor-pointer block px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeSection === link.href.substring(1)
+                                        className={`cursor-pointer block px-6 py-3.5 lg:py-2 rounded-full text-sm lg:text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeSection === link.href.substring(1)
                                             ? 'bg-gray-200 text-black dark:bg-dark-200 dark:text-white'
                                             : 'text-gray-500 hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-dark-200 dark:hover:text-white'
                                             }`}
