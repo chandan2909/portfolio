@@ -66,34 +66,34 @@ const Projects = () => {
                                     />
                                 </div>
 
-                                <div className="p-10 flex-1 flex flex-col">
-                                    <div className="flex items-center justify-between mb-4">
-                                        <h3 className="text-3xl font-black text-black dark:text-white uppercase tracking-tighter group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
+                                <div className="p-6 md:p-10 flex-1 flex flex-col">
+                                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+                                        <h3 className="text-2xl md:text-3xl font-black text-black dark:text-white uppercase tracking-tighter group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
                                             {project.title}
                                         </h3>
-                                        <div className="flex gap-2">
+                                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
                                             {project.tags.map((tag) => (
                                                 <span key={tag} className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{tag}</span>
                                             ))}
                                         </div>
                                     </div>
 
-                                    <p className="text-gray-500 dark:text-gray-400 mb-8 leading-relaxed font-medium text-lg flex-1">
+                                    <p className="text-gray-500 dark:text-gray-400 mb-6 md:mb-8 leading-relaxed font-medium text-base md:text-lg flex-1">
                                         {project.description}
                                     </p>
 
-                                    <div className="flex gap-4 pt-4">
+                                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
                                         {project.live && (
                                             <button
                                                 onClick={() => window.open(project.live, '_blank')}
-                                                className="flex-1 bg-black dark:bg-white dark:text-black dark:hover:bg-gray-200 hover:bg-gray-800 text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
+                                                className="flex-1 bg-black dark:bg-white dark:text-black dark:hover:bg-gray-200 hover:bg-gray-800 text-white font-black py-3.5 md:py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
                                             >
                                                 Live Experience
                                             </button>
                                         )}
                                         <button
                                             onClick={() => window.open(project.github, '_blank')}
-                                            className="flex-1 bg-white dark:bg-dark-300 border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-dark-200 text-black dark:text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
+                                            className="flex-1 bg-white dark:bg-dark-300 border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-dark-200 text-black dark:text-white font-black py-3.5 md:py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
                                         >
                                             Source Code
                                         </button>
