@@ -6,12 +6,15 @@ import {
     checkPassword, changePassword
 } from '../utils/dataManager';
 import { Lock, LogOut, Plus, Trash2, Edit3, Save, X, RotateCcw, FolderOpen, Wrench, KeyRound, ArrowLeft, Check, Upload, ImageIcon } from 'lucide-react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const AdminPanel = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [dataLoading, setDataLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('projects');
     const [projects, setProjectsList] = useState([]);
     const [skills, setSkillsList] = useState([]);
@@ -26,6 +29,7 @@ const AdminPanel = () => {
     const navigate = useNavigate();
 
     const loadData = async () => {
+        setDataLoading(true);
         try {
             const [p, s] = await Promise.all([getProjects(), getSkills()]);
             setProjectsList(p || []);
@@ -33,6 +37,7 @@ const AdminPanel = () => {
         } catch (err) {
             console.error('Failed to load data:', err);
         }
+        setDataLoading(false);
     };
 
     useEffect(() => {
@@ -322,7 +327,22 @@ const AdminPanel = () => {
 
                         {/* Project List */}
                         <div className="space-y-4">
-                            {projects.map((project) => (
+                            {dataLoading ? (
+                                [1, 2, 3].map(i => (
+                                    <div key={i} className="bg-white dark:bg-dark-200 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-sm p-6 flex items-center gap-6">
+                                        <Skeleton width={80} height={56} borderRadius={12} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
+                                        <div className="flex-1">
+                                            <Skeleton width={180} height={18} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
+                                            <Skeleton width="80%" height={14} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" className="mt-1" />
+                                            <div className="flex gap-2 mt-2">
+                                                <Skeleton width={40} height={16} borderRadius={12} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
+                                                <Skeleton width={40} height={16} borderRadius={12} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                projects.map((project) => (
                                 <div key={project.id} className="bg-white dark:bg-dark-200 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-sm p-6 flex items-center gap-6 group hover:shadow-md transition-all">
                                     {project.image && (
                                         <div className="w-20 h-14 rounded-xl overflow-hidden bg-gray-100 dark:bg-dark-300 flex-shrink-0">
@@ -353,7 +373,8 @@ const AdminPanel = () => {
                                         </button>
                                     </div>
                                 </div>
-                            ))}
+                                ))
+                            )}
                         </div>
                     </div>
                 )}
@@ -386,7 +407,18 @@ const AdminPanel = () => {
 
                         {/* Skill List */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {skills.map((skill) => (
+                            {dataLoading ? (
+                                [1, 2, 3, 4, 5, 6].map(i => (
+                                    <div key={i} className="bg-white dark:bg-dark-200 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-sm p-6">
+                                        <div className="flex items-center justify-between mb-3">
+                                            <Skeleton width={120} height={20} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
+                                        </div>
+                                        <Skeleton width={100} height={12} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" className="mb-3" />
+                                        <Skeleton width={70} height={24} borderRadius={20} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
+                                    </div>
+                                ))
+                            ) : (
+                                skills.map((skill) => (
                                 <div key={skill.id} className="bg-white dark:bg-dark-200 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-sm p-6 group hover:shadow-md transition-all">
                                     <div className="flex items-center justify-between mb-3">
                                         <h3 className="font-black text-xl text-black dark:text-white uppercase tracking-tighter">{skill.name}</h3>
@@ -410,7 +442,8 @@ const AdminPanel = () => {
                                         {skill.level}
                                     </span>
                                 </div>
-                            ))}
+                                ))
+                            )}
                         </div>
                     </div>
                 )}

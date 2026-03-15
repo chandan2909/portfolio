@@ -1,11 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { getSkills } from '../utils/dataManager';
+
+const SkillSkeleton = () => (
+    <div className="bg-white dark:bg-dark-200 rounded-3xl p-8 border border-gray-100 dark:border-slate-700 shadow-sm">
+        <div className="flex items-center mb-6">
+            <Skeleton circle width={44} height={44} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" className="mr-4" />
+            <Skeleton width={100} height={24} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
+        </div>
+        <Skeleton width={150} height={12} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" className="mb-4" />
+        <Skeleton width={80} height={28} borderRadius={20} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
+    </div>
+);
 
 const Skills = () => {
     const [technicalSkills, setSkills] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getSkills().then(data => setSkills(data));
+        getSkills().then(data => {
+            setSkills(data);
+            setLoading(false);
+        });
     }, []);
 
     const education = [
@@ -28,32 +45,43 @@ const Skills = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
-                        {technicalSkills.map((skill) => (
-                            <div key={skill.name} className="bg-white dark:bg-dark-200 rounded-3xl p-8 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-500 group cursor-pointer" role="listitem">
-                                <div className="flex items-center mb-6">
-                                    <div className="bg-black rounded-full p-3 mr-4 group-hover:scale-110 transition-transform">
-                                        {skill.icon ? (
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16">
-                                                <path d={skill.icon} />
-                                            </svg>
-                                        ) : (
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
-                                            </svg>
-                                        )}
+                        {loading ? (
+                            <>
+                                <SkillSkeleton />
+                                <SkillSkeleton />
+                                <SkillSkeleton />
+                                <SkillSkeleton />
+                                <SkillSkeleton />
+                                <SkillSkeleton />
+                            </>
+                        ) : (
+                            technicalSkills.map((skill) => (
+                                <div key={skill.name} className="bg-white dark:bg-dark-200 rounded-3xl p-8 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-500 group cursor-pointer" role="listitem">
+                                    <div className="flex items-center mb-6">
+                                        <div className="bg-black rounded-full p-3 mr-4 group-hover:scale-110 transition-transform">
+                                            {skill.icon ? (
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16">
+                                                    <path d={skill.icon} />
+                                                </svg>
+                                            ) : (
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+                                                </svg>
+                                            )}
+                                        </div>
+                                        <h4 className="font-black text-2xl text-black dark:text-white uppercase tracking-tighter">
+                                            {skill.name}
+                                        </h4>
                                     </div>
-                                    <h4 className="font-black text-2xl text-black dark:text-white uppercase tracking-tighter">
-                                        {skill.name}
-                                    </h4>
+                                    <p className="text-sm text-gray-400 mb-4 font-bold uppercase tracking-widest">{skill.category}</p>
+                                    <div className="flex items-center">
+                                        <span className="bg-gray-100 dark:bg-dark-300 text-black dark:text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-tighter">
+                                            {skill.level}
+                                        </span>
+                                    </div>
                                 </div>
-                                <p className="text-sm text-gray-400 mb-4 font-bold uppercase tracking-widest">{skill.category}</p>
-                                <div className="flex items-center">
-                                    <span className="bg-gray-100 dark:bg-dark-300 text-black dark:text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-tighter">
-                                        {skill.level}
-                                    </span>
-                                </div>
-                            </div>
-                        ))}
+                            ))
+                        )}
                     </div>
                 </div>
             </section>

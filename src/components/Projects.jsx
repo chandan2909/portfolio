@@ -1,11 +1,39 @@
 import React, { useState, useEffect } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { getProjects } from '../utils/dataManager';
+
+const ProjectSkeleton = () => (
+    <article className="bg-white dark:bg-dark-200 rounded-[2rem] border border-gray-200 dark:border-slate-700 shadow-md overflow-hidden flex flex-col">
+        <div className="aspect-video bg-gray-50 dark:bg-dark-300">
+            <Skeleton height="100%" containerClassName="block h-full" baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
+        </div>
+        <div className="p-10 flex-1 flex flex-col">
+            <div className="flex items-center justify-between mb-4">
+                <Skeleton width={200} height={28} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
+                <div className="flex gap-2">
+                    <Skeleton width={40} height={14} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
+                    <Skeleton width={40} height={14} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
+                </div>
+            </div>
+            <Skeleton count={3} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" className="mb-1" />
+            <div className="flex gap-4 pt-6 mt-auto">
+                <Skeleton width="100%" height={48} borderRadius={16} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" containerClassName="flex-1" />
+                <Skeleton width="100%" height={48} borderRadius={16} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" containerClassName="flex-1" />
+            </div>
+        </div>
+    </article>
+);
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getProjects().then(data => setProjects(data));
+        getProjects().then(data => {
+            setProjects(data);
+            setLoading(false);
+        });
     }, []);
 
     return (
@@ -21,53 +49,59 @@ const Projects = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    {projects.map((project, index) => (
-                        <article key={index} className="bg-white dark:bg-dark-200 rounded-[2rem] border border-gray-200 dark:border-slate-700 shadow-md hover:shadow-2xl transition-all duration-700 group overflow-hidden flex flex-col">
-                            <div className="aspect-video overflow-hidden bg-gray-50 dark:bg-dark-300 relative">
-                                <img
-                                    src={project.image}
-                                    alt={`${project.title} Screenshot`}
-                                    loading="lazy"
-                                    className={`w-full h-full transition-all duration-700 group-hover:scale-105 group-hover:brightness-95 ${index === 0 ? 'object-contain' : 'object-cover'}`}
-                                />
+                    {loading ? (
+                        <>
+                            <ProjectSkeleton />
+                            <ProjectSkeleton />
+                        </>
+                    ) : (
+                        projects.map((project, index) => (
+                            <article key={index} className="bg-white dark:bg-dark-200 rounded-[2rem] border border-gray-200 dark:border-slate-700 shadow-md hover:shadow-2xl transition-all duration-700 group overflow-hidden flex flex-col">
+                                <div className="aspect-video overflow-hidden bg-gray-50 dark:bg-dark-300 relative">
+                                    <img
+                                        src={project.image}
+                                        alt={`${project.title} Screenshot`}
+                                        loading="lazy"
+                                        className={`w-full h-full transition-all duration-700 group-hover:scale-105 group-hover:brightness-95 ${index === 0 ? 'object-contain' : 'object-cover'}`}
+                                    />
+                                </div>
 
-                            </div>
+                                <div className="p-10 flex-1 flex flex-col">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <h3 className="text-3xl font-black text-black dark:text-white uppercase tracking-tighter group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
+                                            {project.title}
+                                        </h3>
+                                        <div className="flex gap-2">
+                                            {project.tags.map((tag) => (
+                                                <span key={tag} className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{tag}</span>
+                                            ))}
+                                        </div>
+                                    </div>
 
-                            <div className="p-10 flex-1 flex flex-col">
-                                <div className="flex items-center justify-between mb-4">
-                                    <h3 className="text-3xl font-black text-black dark:text-white uppercase tracking-tighter group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
-                                        {project.title}
-                                    </h3>
-                                    <div className="flex gap-2">
-                                        {project.tags.map((tag) => (
-                                            <span key={tag} className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{tag}</span>
-                                        ))}
+                                    <p className="text-gray-500 dark:text-gray-400 mb-8 leading-relaxed font-medium text-lg flex-1">
+                                        {project.description}
+                                    </p>
+
+                                    <div className="flex gap-4 pt-4">
+                                        {project.live && (
+                                            <button
+                                                onClick={() => window.open(project.live, '_blank')}
+                                                className="flex-1 bg-black dark:bg-white dark:text-black dark:hover:bg-gray-200 hover:bg-gray-800 text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
+                                            >
+                                                Live Experience
+                                            </button>
+                                        )}
+                                        <button
+                                            onClick={() => window.open(project.github, '_blank')}
+                                            className="flex-1 bg-white dark:bg-dark-300 border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-dark-200 text-black dark:text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
+                                        >
+                                            Source Code
+                                        </button>
                                     </div>
                                 </div>
-
-                                <p className="text-gray-500 dark:text-gray-400 mb-8 leading-relaxed font-medium text-lg flex-1">
-                                    {project.description}
-                                </p>
-
-                                <div className="flex gap-4 pt-4">
-                                    {project.live && (
-                                        <button
-                                            onClick={() => window.open(project.live, '_blank')}
-                                            className="flex-1 bg-black dark:bg-white dark:text-black dark:hover:bg-gray-200 hover:bg-gray-800 text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
-                                        >
-                                            Live Experience
-                                        </button>
-                                    )}
-                                    <button
-                                        onClick={() => window.open(project.github, '_blank')}
-                                        className="flex-1 bg-white dark:bg-dark-300 border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-dark-200 text-black dark:text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
-                                    >
-                                        Source Code
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-                    ))}
+                            </article>
+                        ))
+                    )}
                 </div>
             </div>
         </section>

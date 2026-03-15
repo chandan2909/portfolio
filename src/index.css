@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Skeleton loading colors — adapts to dark mode */
+:root {
+  --sk-base: #e5e7eb;
+  --sk-highlight: #f3f4f6;
+}
+.dark {
+  --sk-base: #1e293b;
+  --sk-highlight: #334155;
+}
+
 /* Performance optimizations */
 * {
   box-sizing: border-box;
