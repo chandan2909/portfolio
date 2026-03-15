@@ -89,11 +89,11 @@ const Navbar = () => {
                     className={`w-full lg:w-auto lg:flex transition-all duration-300 ease-in-out z-40 absolute lg:relative left-0 right-0 top-full lg:top-auto overflow-hidden lg:overflow-visible ${isMobileMenuOpen ? 'max-h-[500px] opacity-100 visible translate-y-0' : 'max-h-0 opacity-0 invisible -translate-y-4 lg:max-h-none lg:opacity-100 lg:visible lg:translate-y-0'}`}
                 >
                     <div className="flex flex-col lg:flex-row lg:items-center bg-white dark:bg-dark-100 lg:bg-transparent dark:lg:bg-transparent p-4 lg:p-0 border-b border-gray-100 dark:border-slate-800 lg:border-none relative z-40 w-full shadow-sm lg:shadow-none">
-                        <ul className="flex flex-col lg:flex-row lg:space-x-1 w-full lg:w-auto">
+                        <ul className="flex flex-col lg:flex-row lg:space-x-1 gap-1 lg:gap-0 w-full lg:w-auto">
                             {navLinks.map((link) => (
                                 <li key={link.name}>
                                     <a
-                                        className={`cursor-pointer block px-6 py-3.5 lg:py-2 rounded-full text-sm lg:text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeSection === link.href.substring(1)
+                                        className={`cursor-pointer block px-6 py-3.5 lg:py-2 rounded-2xl lg:rounded-full text-sm lg:text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeSection === link.href.substring(1)
                                             ? 'bg-gray-200 text-black dark:bg-dark-200 dark:text-white'
                                             : 'text-gray-500 hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-dark-200 dark:hover:text-white'
                                             }`}
