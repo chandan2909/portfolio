@@ -92,7 +92,7 @@ const Skills = () => {
                         <p className="text-gray-400 font-bold text-xs mb-4 tracking-[0.2em] uppercase">
                             My Academic
                         </p>
-                        <h2 id="education-heading" className="text-6xl lg:text-8xl font-black text-black dark:text-white uppercase tracking-tighter leading-none text-right lg:text-left">
+                        <h2 id="education-heading" className="text-6xl lg:text-8xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
                             Education
                         </h2>
                     </div>
