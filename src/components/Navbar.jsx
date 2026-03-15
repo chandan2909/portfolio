@@ -3,7 +3,6 @@ import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
 
     useEffect(() => {
@@ -26,95 +25,97 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navLinks = [
-        { name: 'Home', href: '#home' },
-        { name: 'About', href: '#about' },
-        { name: 'Skills', href: '#skills' },
-        { name: 'Education', href: '#education' },
-        { name: 'Projects', href: '#projects' },
-        { name: 'Contact', href: '#contact' },
+    const scrollTo = (id) => {
+        const element = document.getElementById(id);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    // Desktop nav links
+    const desktopLinks = [
+        { name: 'Home', id: 'home' },
+        { name: 'About', id: 'about' },
+        { name: 'Skills', id: 'skills' },
+        { name: 'Education', id: 'education' },
+        { name: 'Projects', id: 'projects' },
+        { name: 'Contact', id: 'contact' },
     ];
 
-    const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+    // Mobile bottom tab links (subset with icons)
+    const mobileLinks = [
+        {
+            name: 'Home', id: 'home',
+            icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+            )
+        },
+        {
+            name: 'Skills', id: 'skills',
+            icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+                </svg>
+            )
+        },
+        {
+            name: 'Work', id: 'projects',
+            icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                </svg>
+            )
+        },
+        {
+            name: 'Contact', id: 'contact',
+            icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+                </svg>
+            )
+        },
+    ];
 
     return (
-        <nav
-            className={`bg-white dark:bg-dark-100 border-b border-slate-200 dark:border-slate-800 py-4 px-4 shadow-lg transition-all duration-300 ease-in-out fixed top-0 left-0 right-0 z-[100000] ${isScrolled ? 'nav-scrolled' : ''
-                }`}
-            aria-label="Main navigation"
-        >
-            <div className="container mx-auto flex flex-wrap items-center justify-between">
-                <a
-                    className="cursor-pointer text-xl font-black flex items-center text-gray-800 dark:text-gray-100 transition-colors duration-300 uppercase tracking-tighter"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        const element = document.getElementById('home');
-                        if (element) {
-                            element.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }}
-                    aria-label="Chandan Pathak Portfolio Home"
-                >
-                    Chandan Pathak
-                </a>
+        <>
+            {/* ─── Desktop Top Navbar ─────────────────────────────── */}
+            <nav
+                className={`bg-white dark:bg-dark-100 border-b border-slate-200 dark:border-slate-800 py-4 px-4 shadow-lg transition-all duration-300 ease-in-out fixed top-0 left-0 right-0 z-[100000] ${isScrolled ? 'nav-scrolled' : ''}`}
+                aria-label="Main navigation"
+            >
+                <div className="container mx-auto flex items-center justify-between">
+                    <a
+                        className="cursor-pointer text-xl font-black flex items-center text-gray-800 dark:text-gray-100 transition-colors duration-300 uppercase tracking-tighter"
+                        onClick={(e) => { e.preventDefault(); scrollTo('home'); }}
+                        aria-label="Chandan Pathak Portfolio Home"
+                    >
+                        Chandan Pathak
+                    </a>
 
-                <div className="flex items-center gap-2">
+                    {/* Mobile: theme toggle only */}
                     <div className="lg:hidden">
                         <ThemeToggle />
                     </div>
-                    <button
-                        className="lg:hidden bg-transparent border-0 text-gray-400 hover:text-black dark:hover:text-white focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white p-2 rounded-full transition-all duration-300 hover:bg-gray-100 dark:hover:bg-dark-200"
-                        type="button"
-                        onClick={toggleMobileMenu}
-                        aria-expanded={isMobileMenuOpen}
-                        aria-label="Toggle navigation menu"
-                    >
-                        <svg
-                            className={`w-6 h-6 transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-90' : ''}`}
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="1.5"
-                                d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-                            ></path>
-                        </svg>
-                    </button>
-                </div>
 
-                <div
-                    className={`w-full lg:w-auto lg:flex transition-all duration-300 ease-in-out z-40 absolute lg:relative left-0 right-0 top-full lg:top-auto overflow-hidden lg:overflow-visible ${isMobileMenuOpen ? 'max-h-[500px] opacity-100 visible translate-y-0' : 'max-h-0 opacity-0 invisible -translate-y-4 lg:max-h-none lg:opacity-100 lg:visible lg:translate-y-0'}`}
-                >
-                    <div className="flex flex-col lg:flex-row lg:items-center bg-white dark:bg-dark-100 lg:bg-transparent dark:lg:bg-transparent p-4 lg:p-0 border-b border-gray-100 dark:border-slate-800 lg:border-none relative z-40 w-full shadow-sm lg:shadow-none">
-                        <ul className="flex flex-col lg:flex-row lg:space-x-1 gap-1 lg:gap-0 w-full lg:w-auto">
-                            {navLinks.map((link) => (
+                    {/* Desktop: full nav links */}
+                    <div className="hidden lg:flex items-center">
+                        <ul className="flex items-center space-x-1">
+                            {desktopLinks.map((link) => (
                                 <li key={link.name}>
                                     <a
-                                        className={`cursor-pointer block px-6 py-3.5 lg:py-2 rounded-2xl lg:rounded-full text-sm lg:text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeSection === link.href.substring(1)
+                                        className={`cursor-pointer block px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeSection === link.id
                                             ? 'bg-gray-200 text-black dark:bg-dark-200 dark:text-white'
                                             : 'text-gray-500 hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-dark-200 dark:hover:text-white'
                                             }`}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setIsMobileMenuOpen(false);
-                                            const element = document.getElementById(link.href.substring(1));
-                                            if (element) {
-                                                element.scrollIntoView({ behavior: 'smooth' });
-                                            }
-                                        }}
+                                        onClick={(e) => { e.preventDefault(); scrollTo(link.id); }}
                                     >
                                         {link.name}
                                     </a>
                                 </li>
                             ))}
                         </ul>
-                        <div className="flex items-center gap-3 mt-4 lg:mt-0 lg:ml-2 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-gray-200 dark:border-slate-700 lg:pl-3">
-                            <div className="hidden lg:block">
-                                <ThemeToggle />
-                            </div>
+                        <div className="flex items-center gap-3 ml-2 pl-3 border-l border-gray-200 dark:border-slate-700">
+                            <ThemeToggle />
                             <a
                                 href="https://www.github.com/chandan2909/"
                                 target="_blank"
@@ -140,8 +141,38 @@ const Navbar = () => {
                         </div>
                     </div>
                 </div>
+            </nav>
+
+            {/* ─── Mobile Bottom Tab Bar ──────────────────────────── */}
+            <div className="lg:hidden fixed bottom-0 left-0 right-0 z-[100000] bg-white dark:bg-dark-100 border-t border-gray-200 dark:border-slate-800 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.3)]" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+                <div className="flex items-center justify-around px-2 py-1.5">
+                    {mobileLinks.map((link) => {
+                        const isActive = activeSection === link.id;
+                        return (
+                            <button
+                                key={link.id}
+                                onClick={() => scrollTo(link.id)}
+                                className={`flex flex-col items-center justify-center gap-0.5 py-1.5 px-3 rounded-2xl transition-all duration-300 min-w-[60px] ${
+                                    isActive
+                                        ? 'text-black dark:text-white'
+                                        : 'text-gray-400 dark:text-gray-500'
+                                }`}
+                            >
+                                <div className={`transition-all duration-300 ${isActive ? 'scale-110' : ''}`}>
+                                    {link.icon}
+                                </div>
+                                <span className={`text-[9px] font-black uppercase tracking-wider transition-all duration-300 ${isActive ? 'text-black dark:text-white' : ''}`}>
+                                    {link.name}
+                                </span>
+                                {isActive && (
+                                    <div className="w-5 h-0.5 bg-black dark:bg-white rounded-full mt-0.5 transition-all" />
+                                )}
+                            </button>
+                        );
+                    })}
+                </div>
             </div>
-        </nav>
+        </>
     );
 };
 
