@@ -48,7 +48,7 @@ A modern, responsive portfolio website showcasing web development skills, projec
 
 ## 🚀 Live Demo
 
-**[View Live Portfolio](https://chandanpathak.netlify.app)**
+**[View Live Portfolio](https://chandanpathak.dev)**
 
 ## 📁 Project Structure
 
