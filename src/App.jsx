@@ -1,31 +1,29 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
-import useScrollReveal from './hooks/useScrollReveal';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import SkillsPage from './pages/SkillsPage';
+import ProjectsPage from './pages/ProjectsPage';
+import ContactPage from './pages/ContactPage';
 
-function Portfolio() {
-    useScrollReveal();
-
+function Layout() {
     return (
-        <div className="min-h-screen">
-            <div>
-                <Navbar />
-                <main>
-                    <Hero />
-                    <About />
-                    <Skills />
-                    <Projects />
-                    <Contact />
-                </main>
-                <Footer />
+        <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <div className="flex-1">
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/skills" element={<SkillsPage />} />
+                    <Route path="/projects" element={<ProjectsPage />} />
+                    <Route path="/contact" element={<ContactPage />} />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
             </div>
+            <Footer />
         </div>
     );
 }
@@ -33,8 +31,8 @@ function Portfolio() {
 function App() {
     return (
         <Routes>
-            <Route path="/" element={<Portfolio />} />
             <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/*" element={<Layout />} />
         </Routes>
     );
 }

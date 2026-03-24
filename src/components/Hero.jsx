@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
     const [typedText, setTypedText] = React.useState('');
@@ -62,19 +63,13 @@ const Hero = () => {
                             >
                                 Download Resume
                             </button>
-                            <a
-                                className="cursor-pointer bg-white dark:bg-dark-200 border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-dark-300 text-black dark:text-white px-10 py-4 rounded-full font-bold text-sm uppercase tracking-widest transition-all duration-300 shadow-sm"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    const element = document.getElementById('contact');
-                                    if (element) {
-                                        element.scrollIntoView({ behavior: 'smooth' });
-                                    }
-                                }}
-                                aria-label="Go to contact section"
+                            <Link
+                                to="/contact"
+                                className="bg-white dark:bg-dark-200 border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-dark-300 text-black dark:text-white px-10 py-4 rounded-full font-bold text-sm uppercase tracking-widest transition-all duration-300 shadow-sm"
+                                aria-label="Go to contact page"
                             >
                                 Contact Me
-                            </a>
+                            </Link>
                         </div>
 
                         <div className="flex flex-wrap gap-4 pt-2">
