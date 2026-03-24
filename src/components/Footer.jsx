@@ -1,27 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
+    const navLinks = [
+        { label: 'About', to: '/about' },
+        { label: 'Skills', to: '/skills' },
+        { label: 'Work', to: '/projects' },
+        { label: 'Contact', to: '/contact' },
+    ];
+
     return (
         <footer className="py-20 border-t border-gray-100 dark:border-slate-700 mt-24">
             <div className="container mx-auto px-8">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-12">
-                    <div className="text-3xl font-black text-black dark:text-white uppercase tracking-tighter">
+                    <Link to="/" className="text-3xl font-black text-black dark:text-white uppercase tracking-tighter">
                         CHANDAN PATHAK
-                    </div>
+                    </Link>
                     <div className="flex flex-wrap justify-center gap-10">
-                        {['about', 'skills', 'projects', 'contact'].map((section) => (
-                            <a
-                                key={section}
-                                href={`#${section}`}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    const el = document.getElementById(section);
-                                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                                }}
+                        {navLinks.map(({ label, to }) => (
+                            <Link
+                                key={to}
+                                to={to}
                                 className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 hover:text-black dark:hover:text-white transition-colors"
                             >
-                                {section === 'projects' ? 'Work' : section}
-                            </a>
+                                {label}
+                            </Link>
                         ))}
                     </div>
                 </div>
