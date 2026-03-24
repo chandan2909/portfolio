@@ -67,9 +67,7 @@ const About = () => {
                                 valuable asset to any development team.
                             </p>
                         </div>
-                        <div className="absolute top-0 right-0 p-12 opacity-10 font-black text-9xl uppercase tracking-tighter select-none pointer-events-none">
-                            Future
-                        </div>
+
                     </div>
                 </div>
             </div>
