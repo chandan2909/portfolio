@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
@@ -30,10 +31,13 @@ function Layout() {
 
 function App() {
     return (
-        <Routes>
-            <Route path="/admin" element={<AdminPanel />} />
-            <Route path="/*" element={<Layout />} />
-        </Routes>
+        <>
+            <Routes>
+                <Route path="/admin" element={<AdminPanel />} />
+                <Route path="/*" element={<Layout />} />
+            </Routes>
+            <Analytics />
+        </>
     );
 }
 
