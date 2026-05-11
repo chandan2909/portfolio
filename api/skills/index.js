@@ -16,6 +16,7 @@ export default async function handler(req, res) {
                 category: r.category || '',
                 level: r.level || 'Basic',
             }));
+            res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
             return res.json(skills);
         }
 

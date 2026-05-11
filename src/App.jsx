@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
@@ -9,8 +9,15 @@ import AboutPage from './pages/AboutPage';
 import SkillsPage from './pages/SkillsPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ContactPage from './pages/ContactPage';
+import { getProjects, getSkills } from './utils/dataManager';
 
 function Layout() {
+    // Prefetch data immediately on mount so Skills & Projects sections
+    // render instantly once the user scrolls to them.
+    useEffect(() => {
+        getProjects();
+        getSkills();
+    }, []);
     return (
         <div className="min-h-screen flex flex-col">
             <Navbar />

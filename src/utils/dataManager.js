@@ -1,13 +1,35 @@
 // Data Manager — API-based persistence for projects & skills
 // All data is stored in MySQL (Aiven) and fetched via API
 
+// ─── In-memory cache (TTL = 60 s) ───────────────────────────────
+const CACHE_TTL = 60_000;
+const cache = {};
+
+function cacheGet(key) {
+    const entry = cache[key];
+    if (entry && Date.now() - entry.ts < CACHE_TTL) return entry.data;
+    return null;
+}
+
+function cacheSet(key, data) {
+    cache[key] = { data, ts: Date.now() };
+}
+
+function cacheInvalidate(key) {
+    delete cache[key];
+}
+
 // ─── Projects API ───────────────────────────────────────────────
 
 export async function getProjects() {
+    const hit = cacheGet('projects');
+    if (hit) return hit;
     try {
         const res = await fetch('/api/projects');
         if (!res.ok) throw new Error('Failed to fetch projects');
-        return await res.json();
+        const data = await res.json();
+        cacheSet('projects', data);
+        return data;
     } catch (err) {
         console.error('Failed to load projects:', err);
         return [];
@@ -16,23 +38,22 @@ export async function getProjects() {
 
 export async function saveProject(project) {
     try {
+        let res;
         if (project.id) {
-            // Update existing
-            const res = await fetch(`/api/projects/${project.id}`, {
+            res = await fetch(`/api/projects/${project.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(project),
             });
-            return await res.json();
         } else {
-            // Create new
-            const res = await fetch('/api/projects', {
+            res = await fetch('/api/projects', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(project),
             });
-            return await res.json();
         }
+        cacheInvalidate('projects');
+        return await res.json();
     } catch (err) {
         console.error('Failed to save project:', err);
         return { success: false, message: 'Network error' };
@@ -42,6 +63,7 @@ export async function saveProject(project) {
 export async function deleteProject(id) {
     try {
         const res = await fetch(`/api/projects/${id}`, { method: 'DELETE' });
+        cacheInvalidate('projects');
         return await res.json();
     } catch (err) {
         console.error('Failed to delete project:', err);
@@ -52,10 +74,14 @@ export async function deleteProject(id) {
 // ─── Skills API ─────────────────────────────────────────────────
 
 export async function getSkills() {
+    const hit = cacheGet('skills');
+    if (hit) return hit;
     try {
         const res = await fetch('/api/skills');
         if (!res.ok) throw new Error('Failed to fetch skills');
-        return await res.json();
+        const data = await res.json();
+        cacheSet('skills', data);
+        return data;
     } catch (err) {
         console.error('Failed to load skills:', err);
         return [];
@@ -64,21 +90,22 @@ export async function getSkills() {
 
 export async function saveSkill(skill) {
     try {
+        let res;
         if (skill.id) {
-            const res = await fetch(`/api/skills/${skill.id}`, {
+            res = await fetch(`/api/skills/${skill.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(skill),
             });
-            return await res.json();
         } else {
-            const res = await fetch('/api/skills', {
+            res = await fetch('/api/skills', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(skill),
             });
-            return await res.json();
         }
+        cacheInvalidate('skills');
+        return await res.json();
     } catch (err) {
         console.error('Failed to save skill:', err);
         return { success: false, message: 'Network error' };
@@ -88,12 +115,14 @@ export async function saveSkill(skill) {
 export async function deleteSkill(id) {
     try {
         const res = await fetch(`/api/skills/${id}`, { method: 'DELETE' });
+        cacheInvalidate('skills');
         return await res.json();
     } catch (err) {
         console.error('Failed to delete skill:', err);
         return { success: false, message: 'Network error' };
     }
 }
+
 
 // ─── Admin Auth (API-based with bcrypt hashing) ─────────────────
 

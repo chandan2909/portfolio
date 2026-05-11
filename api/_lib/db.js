@@ -1,6 +1,8 @@
 import mysql from 'mysql2/promise';
 
 let pool = null;
+// Memoized init promise — DDL only runs once per serverless instance
+let initTablesPromise = null;
 
 export function getPool() {
     if (!pool) {
@@ -12,14 +14,22 @@ export function getPool() {
             database: process.env.DB_NAME,
             ssl: { rejectUnauthorized: false },
             waitForConnections: true,
-            connectionLimit: 3,
+            connectionLimit: 5,
             queueLimit: 0,
+            enableKeepAlive: true,
+            keepAliveInitialDelay: 0,
         });
     }
     return pool;
 }
 
 export async function initTables() {
+    if (initTablesPromise) return initTablesPromise;
+    initTablesPromise = _doInitTables();
+    return initTablesPromise;
+}
+
+async function _doInitTables() {
     const db = getPool();
 
     await db.execute(`

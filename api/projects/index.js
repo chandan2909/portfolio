@@ -20,6 +20,7 @@ export default async function handler(req, res) {
                 tags: typeof r.tags === 'string' ? JSON.parse(r.tags) : (r.tags || []),
                 desktopApp: !!r.desktop_app,
             }));
+            res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
             return res.json(projects);
         }
 
