@@ -95,7 +95,7 @@ const SocialCard = ({ name, description, href, accentFrom, accentTo, icon }) => 
         </div>
         {/* Text */}
         <div className="relative flex-1 min-w-0">
-            <p className="font-black text-lg text-black dark:text-white uppercase tracking-tighter leading-tight">
+            <p className="font-black text-xl text-black dark:text-white uppercase tracking-tighter leading-tight">
                 {name}
             </p>
             <p className="text-gray-500 dark:text-gray-400 text-sm font-medium mt-0.5 leading-snug">
@@ -155,7 +155,7 @@ const Contact = () => {
                     <p className="text-gray-400 font-bold text-xs mb-4 tracking-[0.2em] uppercase">
                         Get in Touch
                     </p>
-                    <h2 id="contact-heading" className="text-6xl lg:text-8xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
+                    <h2 id="contact-heading" className="text-5xl lg:text-7xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
                         Let's Connect
                     </h2>
                 </div>
@@ -287,7 +287,7 @@ const Contact = () => {
                         {/* Info blurb */}
                         <div className="bg-black dark:bg-white rounded-3xl p-8 text-white dark:text-black">
                             <p className="text-xs font-black uppercase tracking-[0.2em] opacity-50 mb-3">Open to</p>
-                            <h3 className="font-black text-3xl uppercase tracking-tighter leading-tight mb-4">
+                            <h3 className="font-black text-2xl uppercase tracking-tighter leading-tight mb-4">
                                 New Opportunities
                             </h3>
                             <p className="text-sm font-medium opacity-70 leading-relaxed">
@@ -295,7 +295,7 @@ const Contact = () => {
                             </p>
                             <div className="flex flex-wrap gap-2 mt-6">
                                 {['Web Dev', 'Frontend', 'Freelance'].map(tag => (
-                                    <span key={tag} className="bg-white/10 dark:bg-black/10 text-white dark:text-black text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest">
+                                    <span key={tag} className="bg-white/10 dark:bg-black/10 text-white dark:text-black text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-widest">
                                         {tag}
                                     </span>
                                 ))}

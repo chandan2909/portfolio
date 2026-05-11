@@ -39,7 +39,7 @@ const Skills = () => {
                         <p className="text-gray-400 font-bold text-xs mb-4 tracking-[0.2em] uppercase">
                             Explore My
                         </p>
-                        <h2 id="skills-heading" className="text-6xl lg:text-8xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
+                        <h2 id="skills-heading" className="text-5xl lg:text-7xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
                             Technical Skills
                         </h2>
                     </div>
@@ -69,7 +69,7 @@ const Skills = () => {
                                                 </svg>
                                             )}
                                         </div>
-                                        <h4 className="font-black text-2xl text-black dark:text-white uppercase tracking-tighter">
+                                        <h4 className="font-black text-xl text-black dark:text-white uppercase tracking-tighter">
                                             {skill.name}
                                         </h4>
                                     </div>
@@ -92,7 +92,7 @@ const Skills = () => {
                         <p className="text-gray-400 font-bold text-xs mb-4 tracking-[0.2em] uppercase">
                             My Academic
                         </p>
-                        <h2 id="education-heading" className="text-6xl lg:text-8xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
+                        <h2 id="education-heading" className="text-5xl lg:text-7xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
                             Education
                         </h2>
                     </div>
@@ -106,7 +106,7 @@ const Skills = () => {
                                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                                         </svg>
                                     </div>
-                                    <h4 className="font-black text-2xl text-black dark:text-white uppercase tracking-tighter">
+                                    <h4 className="font-black text-xl text-black dark:text-white uppercase tracking-tighter">
                                         {edu.type}
                                     </h4>
                                 </div>

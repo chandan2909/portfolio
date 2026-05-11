@@ -43,7 +43,7 @@ const Projects = () => {
                     <p className="text-gray-400 font-bold text-xs mb-4 tracking-[0.2em] uppercase">
                         Explore My
                     </p>
-                    <h2 id="projects-heading" className="text-6xl lg:text-8xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
+                    <h2 id="projects-heading" className="text-5xl lg:text-7xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
                         Latest Work
                     </h2>
                 </div>
@@ -68,7 +68,7 @@ const Projects = () => {
 
                                 <div className="p-6 md:p-10 flex-1 flex flex-col">
                                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
-                                        <h3 className="text-2xl md:text-3xl font-black text-black dark:text-white uppercase tracking-tighter group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
+                                        <h3 className="text-2xl font-black text-black dark:text-white uppercase tracking-tighter group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
                                             {project.title}
                                         </h3>
                                         <div className="flex flex-wrap gap-1.5 sm:gap-2">
