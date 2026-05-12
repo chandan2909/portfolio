@@ -149,3 +149,40 @@ html {
 .animate-slide-in {
   animation: slide-in 0.3s ease-out;
 }
+
+/* ─── Page Transitions ───────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
+.page-transition.fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.page-transition.fadeOut {
+  animation: fadeOut 0.2s ease-in forwards;
+}
+
+
+/* ─── Skill progress ring ────────────────────────── */
+.skill-ring-track {
+  stroke: #e5e7eb;
+}
+.dark .skill-ring-track {
+  stroke: #334155;
+}
+.skill-ring-fill {
+  stroke: #000;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease-out;
+}
+.dark .skill-ring-fill {
+  stroke: #fff;
+}
+
