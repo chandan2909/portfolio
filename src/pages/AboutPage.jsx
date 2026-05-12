@@ -1,6 +1,5 @@
 import React from 'react';
 import About from '../components/About';
-import Experience from '../components/Experience';
 import useScrollReveal from '../hooks/useScrollReveal';
 import usePageMeta from '../hooks/usePageMeta';
 
@@ -13,7 +12,6 @@ const AboutPage = () => {
     return (
         <main className="pt-16">
             <About />
-            <Experience />
         </main>
     );
 };
