@@ -1,8 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { getSkills } from '../utils/dataManager';
 
+// ─── Progress Ring ───────────────────────────────────────────────
+const levelToPercent = { Basic: 25, Intermediate: 50, Advanced: 75, Expert: 100 };
+
+const ProgressRing = ({ level, size = 48 }) => {
+    const percent = levelToPercent[level] || 50;
+    const radius = (size - 6) / 2;
+    const circumference = 2 * Math.PI * radius;
+    const [offset, setOffset] = useState(circumference);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setOffset(circumference - (percent / 100) * circumference);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.3 }
+        );
+        if (ref.current) observer.observe(ref.current);
+        return () => observer.disconnect();
+    }, [circumference, percent]);
+
+    return (
+        <svg ref={ref} width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="flex-shrink-0">
+            <circle
+                className="skill-ring-track"
+                strokeWidth="4"
+                fill="none"
+                cx={size / 2}
+                cy={size / 2}
+                r={radius}
+            />
+            <circle
+                className="skill-ring-fill"
+                strokeWidth="4"
+                fill="none"
+                cx={size / 2}
+                cy={size / 2}
+                r={radius}
+                strokeDasharray={circumference}
+                strokeDashoffset={offset}
+                transform={`rotate(-90 ${size / 2} ${size / 2})`}
+            />
+        </svg>
+    );
+};
+
+// ─── Skeleton ────────────────────────────────────────────────────
 const SkillSkeleton = () => (
     <div className="bg-white dark:bg-dark-200 rounded-3xl p-8 border border-gray-100 dark:border-slate-700 shadow-sm">
         <div className="flex items-center mb-6">
@@ -14,6 +64,14 @@ const SkillSkeleton = () => (
     </div>
 );
 
+// ─── Education data ──────────────────────────────────────────────
+const education = [
+    { type: 'MCA', detail: 'Master of Computer Applications', school: 'Veer Bahadur Singh Purvanchal University, Jaunpur', result: 'CGPA: 8.0', color: 'blue' },
+    { type: 'BSc', detail: 'Bachelor of Science', school: 'Veer Bahadur Singh Purvanchal University, Jaunpur', result: '63.0%', color: 'green' },
+    { type: 'Intermediate', detail: 'Higher Secondary Education', school: 'Parvati Public School, Jaunpur', result: '62%', color: 'purple' },
+];
+
+// ─── Main Skills Component ───────────────────────────────────────
 const Skills = () => {
     const [technicalSkills, setSkills] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -24,12 +82,6 @@ const Skills = () => {
             setLoading(false);
         });
     }, []);
-
-    const education = [
-        { type: 'MCA', detail: 'Master of Computer Applications', school: 'Veer Bahadur Singh Purvanchal University, Jaunpur', result: 'CGPA: 8.0', color: 'blue' },
-        { type: 'BSc', detail: 'Bachelor of Science', school: 'Veer Bahadur Singh Purvanchal University, Jaunpur', result: '63.0%', color: 'green' },
-        { type: 'Intermediate', detail: 'Higher Secondary Education', school: 'Parvati Public School, Jaunpur', result: '62%', color: 'purple' },
-    ];
 
     return (
         <>
@@ -56,28 +108,32 @@ const Skills = () => {
                             </>
                         ) : (
                             technicalSkills.map((skill) => (
-                                <div key={skill.name} className="bg-white dark:bg-dark-200 rounded-3xl p-8 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-500 group cursor-pointer" role="listitem">
-                                    <div className="flex items-center mb-6">
-                                        <div className="bg-black rounded-full p-3 mr-4 group-hover:scale-110 transition-transform">
-                                            {skill.icon ? (
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16">
-                                                    <path d={skill.icon} />
-                                                </svg>
-                                            ) : (
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                    <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
-                                                </svg>
-                                            )}
+                                <div key={skill.id || skill.name} className="bg-white dark:bg-dark-200 rounded-3xl p-8 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-500 group cursor-pointer" role="listitem">
+                                    <div className="flex items-center justify-between mb-6">
+                                        <div className="flex items-center gap-4">
+                                            <div className="bg-black rounded-full p-3 group-hover:scale-110 transition-transform flex-shrink-0">
+                                                {skill.icon ? (
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16">
+                                                        <path d={skill.icon} />
+                                                    </svg>
+                                                ) : (
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                        <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+                                                    </svg>
+                                                )}
+                                            </div>
+                                            <h4 className="font-black text-xl text-black dark:text-white uppercase tracking-tighter">
+                                                {skill.name}
+                                            </h4>
                                         </div>
-                                        <h4 className="font-black text-xl text-black dark:text-white uppercase tracking-tighter">
-                                            {skill.name}
-                                        </h4>
+                                        <ProgressRing level={skill.level} size={52} />
                                     </div>
                                     <p className="text-sm text-gray-400 mb-4 font-bold uppercase tracking-widest">{skill.category}</p>
-                                    <div className="flex items-center">
+                                    <div className="flex items-center justify-between">
                                         <span className="bg-gray-100 dark:bg-dark-300 text-black dark:text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-tighter">
                                             {skill.level}
                                         </span>
+                                        <span className="text-xs text-gray-400 font-bold">{levelToPercent[skill.level] || 50}%</span>
                                     </div>
                                 </div>
                             ))
