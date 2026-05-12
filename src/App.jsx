@@ -7,6 +7,7 @@ import AdminPanel from './components/AdminPanel';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 import CursorGlow from './components/CursorGlow';
+import CustomCursor from './components/CustomCursor';
 import PageTransition from './components/PageTransition';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -30,6 +31,7 @@ function Layout() {
         <div className="min-h-screen flex flex-col">
             <ScrollProgress />
             <CursorGlow />
+            <CustomCursor />
             <Navbar />
             <div className="flex-1">
                 <PageTransition key={location.pathname}>
