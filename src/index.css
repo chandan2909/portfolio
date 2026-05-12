@@ -186,3 +186,33 @@ html {
   stroke: #fff;
 }
 
+/* ─── Custom Scrollbar ───────────────────────────── */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #6b7280; /* Tailwind gray-500 for darker light mode scrollbar */
+  border-radius: 5px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #94a3b8; /* Tailwind slate-400 for lighter dark mode scrollbar */
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4b5563; /* Tailwind gray-600 */
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1; /* Tailwind slate-300 */
+}
+
+/* ─── Custom Cursor Global Styles ────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  body, a, button, input, textarea, select, .cursor-pointer {
+    cursor: none !important;
+  }
+}
