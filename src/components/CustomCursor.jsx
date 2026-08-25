@@ -1,18 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const CustomCursor = () => {
-    const dotRef = useRef(null);
-    const ringRef = useRef(null);
+    const cursorRef = useRef(null);
     const wrapperRef = useRef(null);
-    
-    // Store positions in refs so they survive re-renders and don't reset
+
     const pos = useRef({
         mouseX: window.innerWidth / 2,
         mouseY: window.innerHeight / 2,
-        dotX: window.innerWidth / 2,
-        dotY: window.innerHeight / 2,
-        ringX: window.innerWidth / 2,
-        ringY: window.innerHeight / 2,
+        cursorX: window.innerWidth / 2,
+        cursorY: window.innerHeight / 2,
         isHovering: false,
         isVisible: false
     });
@@ -20,10 +16,9 @@ const CustomCursor = () => {
     useEffect(() => {
         if (window.matchMedia('(hover: none)').matches) return;
 
-        const dot = dotRef.current;
-        const ring = ringRef.current;
+        const cursor = cursorRef.current;
         const wrapper = wrapperRef.current;
-        if (!dot || !ring || !wrapper) return;
+        if (!cursor || !wrapper) return;
 
         pos.current.isVisible = true;
         let raf;
@@ -53,16 +48,12 @@ const CustomCursor = () => {
 
         const animate = () => {
             const p = pos.current;
-            
-            p.dotX += (p.mouseX - p.dotX) * 0.4;
-            p.dotY += (p.mouseY - p.dotY) * 0.4;
-            
-            p.ringX += (p.mouseX - p.ringX) * 0.15;
-            p.ringY += (p.mouseY - p.ringY) * 0.15;
 
-            dot.style.transform = `translate3d(${p.dotX}px, ${p.dotY}px, 0) translate(-50%, -50%)`;
-            ring.style.transform = `translate3d(${p.ringX}px, ${p.ringY}px, 0) translate(-50%, -50%) ${p.isHovering ? 'scale(1.5)' : 'scale(1)'}`;
-            
+            p.cursorX += (p.mouseX - p.cursorX) * 0.2;
+            p.cursorY += (p.mouseY - p.cursorY) * 0.2;
+
+            cursor.style.transform = `translate3d(${p.cursorX}px, ${p.cursorY}px, 0) translate(-2px, -2px) ${p.isHovering ? 'scale(1.2)' : 'scale(1)'}`;
+
             raf = requestAnimationFrame(animate);
         };
 
@@ -70,7 +61,7 @@ const CustomCursor = () => {
         window.addEventListener('mouseover', handleMouseOver, { passive: true });
         document.body.addEventListener('mouseenter', onMouseEnter);
         document.body.addEventListener('mouseleave', onMouseLeave);
-        
+
         raf = requestAnimationFrame(animate);
 
         return () => {
@@ -84,16 +75,23 @@ const CustomCursor = () => {
 
     return (
         <div ref={wrapperRef} className="pointer-events-none fixed inset-0 z-[999999] opacity-0 transition-opacity duration-300 mix-blend-difference">
-            <div
-                ref={ringRef}
-                className="absolute top-0 left-0 w-8 h-8 rounded-full border-2 border-white transition-transform duration-150 ease-out will-change-transform opacity-100"
-                style={{ transform: 'translate(-50%, -50%) scale(1)' }}
-            />
-            <div
-                ref={dotRef}
-                className="absolute top-0 left-0 w-2 h-2 rounded-full bg-white will-change-transform"
-                style={{ transform: 'translate(-50%, -50%)' }}
-            />
+            <svg
+                ref={cursorRef}
+                className="absolute top-0 left-0 will-change-transform"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                style={{ transform: 'translate(-2px, -2px)' }}
+            >
+                <path
+                    d="M4 2L4 20L9.5 14.5L15 22L18 20L12.5 12.5L20 12.5L4 2Z"
+                    fill="white"
+                    stroke="white"
+                    strokeWidth="1"
+                    strokeLinejoin="round"
+                />
+            </svg>
         </div>
     );
 };

@@ -9,7 +9,9 @@ package-lock.json
 # Uncomment the line below if you want to ignore the output CSS
 # style/output.css
 
+# Internal docs
+.internal/
+
 # Local planning docs
-IMPLEMENTATION_PLAN.md
 firebase-debug.log
 .env

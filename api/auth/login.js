@@ -1,8 +1,8 @@
 import bcrypt from 'bcryptjs';
 import { getPool, initTable } from '../_lib/db.js';
+import { generateToken } from '../_lib/auth.js';
 
 export default async function handler(req, res) {
-    // Only allow POST
     if (req.method !== 'POST') {
         return res.status(405).json({ success: false, message: 'Method not allowed' });
     }
@@ -23,15 +23,16 @@ export default async function handler(req, res) {
         );
 
         if (rows.length === 0) {
-            return res.status(401).json({ success: false, message: 'Admin account not configured. Run: npm run seed' });
+            return res.status(401).json({ success: false, message: 'Invalid credentials' });
         }
 
         const isMatch = await bcrypt.compare(password, rows[0].password_hash);
 
         if (isMatch) {
-            return res.json({ success: true, message: 'Login successful' });
+            const token = generateToken();
+            return res.json({ success: true, token, message: 'Login successful' });
         } else {
-            return res.status(401).json({ success: false, message: 'Incorrect password' });
+            return res.status(401).json({ success: false, message: 'Invalid credentials' });
         }
     } catch (err) {
         console.error('Login error:', err);

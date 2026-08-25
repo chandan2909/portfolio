@@ -12,7 +12,7 @@ const defaultProjects = [
         description: 'Personal portfolio showcasing modern web development skills using HTML, CSS, JavaScript, and responsive design principles.',
         image: './assets/portfolio-screenshot.png',
         github: 'https://github.com/chandan2909/portfolio',
-        live: 'https://chandanpathak.dev',
+        live: 'https://portfoliochandan.vercel.app',
         tags: ['HTML', 'CSS', 'JavaScript'],
         desktopApp: false,
     },

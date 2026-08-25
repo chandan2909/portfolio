@@ -2,17 +2,80 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/portfolio/assets/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chandan Pathak - Web Developer Portfolio | MCA Graduate</title>
-    <meta
-      name="description"
-      content="Chandan Pathak is a passionate web developer and MCA graduate with expertise in HTML, CSS, JavaScript, and modern web technologies."
-    />
-    <script type="module" crossorigin src="/portfolio/assets/index-51iEkM-7.js"></script>
-    <link rel="stylesheet" crossorigin href="/portfolio/assets/index-CSP2KFnU.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Primary Meta -->
+    <title>Chandan Pathak — Web Developer Portfolio | MCA Graduate</title>
+    <meta name="description" content="Chandan Pathak is a passionate web developer and MCA graduate with expertise in HTML, CSS, JavaScript, React, and Java. Open to freelance and full-time roles." />
+    <meta name="author" content="Chandan Pathak" />
+    <meta name="keywords" content="Chandan Pathak, Web Developer, Portfolio, React Developer, MCA Graduate, Jaunpur, Frontend Developer, Full Stack" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://portfoliochandan.vercel.app" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://portfoliochandan.vercel.app/" />
+    <meta property="og:title" content="Chandan Pathak — Web Developer Portfolio" />
+    <meta property="og:description" content="Passionate web developer and MCA graduate crafting modern, responsive web experiences with clean code and creative solutions." />
+    <meta property="og:image" content="https://portfoliochandan.vercel.app/assets/portfolio-screenshot.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Chandan Pathak Portfolio" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://portfoliochandan.vercel.app/" />
+    <meta name="twitter:title" content="Chandan Pathak — Web Developer Portfolio" />
+    <meta name="twitter:description" content="Passionate web developer and MCA graduate crafting modern, responsive web experiences." />
+    <meta name="twitter:image" content="https://portfoliochandan.vercel.app/assets/portfolio-screenshot.png" />
+
+    <!-- PWA / Theme -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Chandan Pathak" />
+
+    <!-- JSON-LD Structured Data — Person -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Chandan Pathak",
+      "url": "https://portfoliochandan.vercel.app",
+      "image": "https://portfoliochandan.vercel.app/assets/favicon.png",
+      "jobTitle": "Web Developer",
+      "description": "MCA Graduate and passionate web developer specialising in React, JavaScript, and modern full-stack web technologies.",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Veer Bahadur Singh Purvanchal University"
+      },
+      "knowsAbout": ["HTML", "CSS", "JavaScript", "React", "Java", "MySQL", "Node.js", "Tailwind CSS"],
+      "sameAs": [
+        "https://github.com/chandan2909",
+        "https://www.linkedin.com/in/chandanpathak291"
+      ]
+    }
+    </script>
+    <script type="module" crossorigin src="/assets/index-DdJ8i_yw.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-53kza2Ex.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"></div>
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
   </body>
 </html>

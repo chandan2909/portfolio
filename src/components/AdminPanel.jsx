@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
     getProjects, saveProject, deleteProject,
     getSkills, saveSkill, deleteSkill,
-    checkPassword, changePassword
+    checkPassword, changePassword, clearAuthToken
 } from '../utils/dataManager';
 import { Lock, LogOut, Plus, Trash2, Edit3, Save, X, RotateCcw, FolderOpen, Wrench, KeyRound, ArrowLeft, Check, Upload, ImageIcon } from 'lucide-react';
 import Skeleton from 'react-loading-skeleton';
@@ -26,7 +25,6 @@ const AdminPanel = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordMsg, setPasswordMsg] = useState('');
     const [toast, setToast] = useState(null);
-    const navigate = useNavigate();
 
     const loadData = async () => {
         setDataLoading(true);
@@ -187,7 +185,7 @@ const AdminPanel = () => {
                             </button>
                         </form>
                         <button
-                            onClick={() => navigate('/')}
+                            onClick={() => window.location.href = '/'}
                             className="w-full mt-4 flex items-center justify-center gap-2 text-gray-400 hover:text-black dark:hover:text-white text-sm font-bold transition-colors"
                         >
                             <ArrowLeft className="w-4 h-4" /> Back to Portfolio
@@ -219,7 +217,7 @@ const AdminPanel = () => {
                     </div>
                     <div className="flex items-center gap-3">
                         <button
-                            onClick={() => navigate('/')}
+                            onClick={() => window.location.href = '/'}
                             className="flex items-center gap-2 text-gray-400 hover:text-black dark:hover:text-white text-xs font-black uppercase tracking-widest transition-colors"
                         >
                             <ArrowLeft className="w-4 h-4" /> Portfolio
@@ -232,7 +230,7 @@ const AdminPanel = () => {
                             <KeyRound className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                         </button>
                         <button
-                            onClick={() => setIsAuthenticated(false)}
+                            onClick={() => { clearAuthToken(); setIsAuthenticated(false); }}
                             className="p-2.5 rounded-xl bg-gray-100 dark:bg-dark-300 hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors"
                             title="Logout"
                         >

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ScrollReveal from './ScrollReveal';
 
 /* ─── Floating Label Input ─────────────────────────────── */
 const FloatingInput = ({ id, name, type = 'text', label, value, onChange, required, autoComplete }) => {
@@ -81,7 +82,7 @@ const SocialCard = ({ name, description, href, accentFrom, accentTo, icon }) => 
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative flex items-center gap-5 bg-white dark:bg-dark-200 border border-gray-100 dark:border-slate-700 rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 overflow-hidden"
+        className="group relative flex items-center gap-5 bg-surface dark:bg-dark-200 border border-gray-100 dark:border-slate-700 rounded-3xl p-6 shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1 overflow-hidden"
     >
         {/* gradient blob on hover */}
         <div
@@ -147,23 +148,26 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" aria-labelledby="contact-heading" className="py-20 animate-on-scroll">
+        <section id="contact" aria-labelledby="contact-heading" className="py-20">
             <div className="container mx-auto max-w-6xl px-8">
 
                 {/* ── Heading ── */}
-                <div className="mb-16">
-                    <p className="text-gray-400 font-bold text-xs mb-4 tracking-[0.2em] uppercase">
-                        Get in Touch
-                    </p>
-                    <h2 id="contact-heading" className="text-5xl lg:text-7xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
-                        Let's Connect
-                    </h2>
-                </div>
+                <ScrollReveal direction="up">
+                    <div className="mb-16">
+                        <p className="text-gray-400 font-bold text-xs mb-4 tracking-[0.2em] uppercase">
+                            Get in Touch
+                        </p>
+                        <h2 id="contact-heading" className="text-5xl lg:text-7xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
+                            Let's Connect
+                        </h2>
+                    </div>
+                </ScrollReveal>
 
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
 
                     {/* ── Email Form ── */}
-                    <div className="lg:col-span-3 bg-white dark:bg-dark-200 rounded-[2rem] p-8 lg:p-10 border border-gray-100 dark:border-slate-700 shadow-sm">
+                    <ScrollReveal direction="left" delay={100} className="lg:col-span-3 h-full">
+                    <div className="h-full bg-surface dark:bg-dark-200 rounded-[2rem] p-8 lg:p-10 border border-gray-100 dark:border-slate-700 shadow-md">
 
                         {/* Form header */}
                         <div className="flex items-center gap-4 mb-8">
@@ -280,11 +284,10 @@ const Contact = () => {
                             </form>
                         )}
                     </div>
+                    </ScrollReveal>
 
-                    {/* ── Right column ── */}
-                    <div className="lg:col-span-2 flex flex-col gap-5">
-
-                        {/* Info blurb */}
+                    <ScrollReveal direction="right" delay={200} className="lg:col-span-2 flex flex-col gap-5 h-full">
+                        {/* Open to opportunities */}
                         <div className="bg-black dark:bg-white rounded-3xl p-8 text-white dark:text-black">
                             <p className="text-xs font-black uppercase tracking-[0.2em] opacity-50 mb-3">Open to</p>
                             <h3 className="font-black text-2xl uppercase tracking-tighter leading-tight mb-4">
@@ -329,7 +332,7 @@ const Contact = () => {
                                 </svg>
                             }
                         />
-                    </div>
+                    </ScrollReveal>
                 </div>
             </div>
         </section>

@@ -1,35 +1,40 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const Footer = () => {
     const navLinks = [
-        { label: 'About', to: '/about' },
-        { label: 'Skills', to: '/skills' },
-        { label: 'Work', to: '/projects' },
-        { label: 'Contact', to: '/contact' },
+        { label: 'About', id: 'about' },
+        { label: 'Skills', id: 'skills' },
+        { label: 'Projects', id: 'projects' },
+        { label: 'Contact', id: 'contact' },
     ];
+
+    const scrollTo = (id) => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+    };
 
     return (
         <footer className="py-20 border-t border-gray-100 dark:border-slate-700 mt-24">
             <div className="container mx-auto px-8">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-12">
-                    <Link to="/" className="text-3xl font-black text-black dark:text-white uppercase tracking-tighter">
+                    <a href="#home" onClick={(e) => { e.preventDefault(); scrollTo('home'); }} className="text-3xl font-black text-black dark:text-white uppercase tracking-tighter">
                         CHANDAN PATHAK
-                    </Link>
+                    </a>
                     <div className="flex flex-wrap justify-center gap-10">
-                        {navLinks.map(({ label, to }) => (
-                            <Link
-                                key={to}
-                                to={to}
-                                className="text-xs font-black uppercase tracking-[0.3em] text-gray-500 hover:text-black dark:hover:text-white transition-colors"
+                        {navLinks.map(({ label, id }) => (
+                            <a
+                                key={id}
+                                href={`#${id}`}
+                                onClick={(e) => { e.preventDefault(); scrollTo(id); }}
+                                className="text-xs font-bold tracking-[0.2em] text-gray-500 hover:text-black dark:hover:text-white transition-colors"
                             >
                                 {label}
-                            </Link>
+                            </a>
                         ))}
                     </div>
                 </div>
-                <div className="mt-20 pt-10 border-t border-gray-50 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-black uppercase tracking-[0.4em] text-gray-500">
-                    <p>&copy; {new Date().getFullYear()} CHANDAN PATHAK. ALL RIGHTS RESERVED.</p>
+                <div className="mt-20 pt-10 border-t border-gray-50 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-black tracking-[0.4em] text-gray-500">
+                    <p className="normal-case">&copy; {new Date().getFullYear()} Chandan Pathak. All rights reserved.</p>
                     <div className="flex gap-8">
                         <a href="https://github.com/chandan2909" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-black dark:hover:text-white transition-colors">GITHUB</a>
                         <a href="https://linkedin.com/in/chandanpathak291" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition-colors">LINKEDIN</a>

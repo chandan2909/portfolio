@@ -17,11 +17,11 @@ const BackToTop = () => {
         <button
             onClick={scrollToTop}
             aria-label="Scroll back to top"
-            className={`fixed bottom-24 right-6 lg:bottom-8 z-[100000] w-12 h-12 rounded-full bg-black dark:bg-white text-white dark:text-black shadow-xl flex items-center justify-center transition-all duration-500 hover:scale-110 hover:shadow-2xl
+            className={`fixed bottom-24 lg:bottom-6 right-6 z-[100000] w-12 h-12 rounded-full bg-black dark:bg-white text-white dark:text-black shadow-xl flex items-center justify-center transition-all duration-500 hover:scale-110 hover:shadow-2xl
                 ${visible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'}`}
         >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5l7.5-7.5 7.5 7.5M12 3v13.5" />
             </svg>
         </button>
     );

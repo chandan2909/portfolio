@@ -1,12 +1,16 @@
 import bcrypt from 'bcryptjs';
 import { getPool, initTable } from '../_lib/db.js';
+import { requireAuth } from '../_lib/auth.js';
 
 const SALT_ROUNDS = 12;
+const MIN_PASSWORD_LENGTH = 8;
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ success: false, message: 'Method not allowed' });
     }
+
+    if (!requireAuth(req, res)) return;
 
     try {
         const { currentPassword, newPassword } = req.body;
@@ -15,8 +19,12 @@ export default async function handler(req, res) {
             return res.status(400).json({ success: false, message: 'Both current and new password are required' });
         }
 
-        if (newPassword.length < 4) {
-            return res.status(400).json({ success: false, message: 'New password must be at least 4 characters' });
+        if (newPassword.length < MIN_PASSWORD_LENGTH) {
+            return res.status(400).json({ success: false, message: `New password must be at least ${MIN_PASSWORD_LENGTH} characters` });
+        }
+
+        if (newPassword === currentPassword) {
+            return res.status(400).json({ success: false, message: 'New password must differ from current password' });
         }
 
         await initTable();
@@ -28,7 +36,7 @@ export default async function handler(req, res) {
         );
 
         if (rows.length === 0) {
-            return res.status(401).json({ success: false, message: 'Admin account not found' });
+            return res.status(401).json({ success: false, message: 'Invalid credentials' });
         }
 
         const isMatch = await bcrypt.compare(currentPassword, rows[0].password_hash);

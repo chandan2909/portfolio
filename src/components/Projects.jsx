@@ -4,7 +4,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { getProjects } from '../utils/dataManager';
 
 const ProjectSkeleton = () => (
-    <article className="bg-white dark:bg-dark-200 rounded-[2rem] border border-gray-200 dark:border-slate-700 shadow-md overflow-hidden flex flex-col">
+    <article className="bg-surface dark:bg-dark-200 rounded-[2rem] border border-gray-200 dark:border-slate-700 shadow-md overflow-hidden flex flex-col">
         <div className="aspect-video bg-gray-50 dark:bg-dark-300">
             <Skeleton height="100%" containerClassName="block h-full" baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
         </div>
@@ -37,7 +37,7 @@ const Projects = () => {
     }, []);
 
     return (
-        <section id="projects" aria-labelledby="projects-heading" className="py-20 animate-on-scroll">
+        <section id="projects" aria-labelledby="projects-heading" className="py-20">
             <div className="container mx-auto max-w-6xl px-8">
                 <div className="mb-16">
                     <p className="text-gray-400 font-bold text-xs mb-4 tracking-[0.2em] uppercase">
@@ -56,7 +56,7 @@ const Projects = () => {
                         </>
                     ) : (
                         projects.map((project, index) => (
-                            <article key={project.id || index} className="bg-white dark:bg-dark-200 rounded-[2rem] border border-gray-200 dark:border-slate-700 shadow-md hover:shadow-2xl transition-all duration-700 group overflow-hidden flex flex-col">
+                            <article key={project.id || index} className="bg-surface dark:bg-dark-200 rounded-[2rem] border border-gray-200 dark:border-slate-700 shadow-md hover:shadow-2xl transition-all duration-700 group overflow-hidden flex flex-col">
                                 {/* Image with hover overlay */}
                                 <div className="aspect-video overflow-hidden bg-gray-100 dark:bg-dark-300 relative p-2">
                                     <img
@@ -70,7 +70,7 @@ const Projects = () => {
                                         {project.live && (
                                             <button
                                                 onClick={() => window.open(project.live, '_blank')}
-                                                className="flex items-center gap-2 bg-white text-black font-black text-xs uppercase tracking-widest px-5 py-3 rounded-xl hover:bg-gray-100 transition-all translate-y-2 group-hover:translate-y-0 duration-300"
+                                                className="flex items-center gap-2 bg-surface text-black font-black text-xs uppercase tracking-widest px-5 py-3 rounded-xl hover:bg-gray-100 transition-all translate-y-2 group-hover:translate-y-0 duration-300"
                                             >
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
@@ -127,7 +127,7 @@ const Projects = () => {
                                         )}
                                         <button
                                             onClick={() => window.open(project.github, '_blank')}
-                                            className="flex-1 bg-white dark:bg-dark-300 border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-dark-200 text-black dark:text-white font-black py-3.5 md:py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
+                                            className="flex-1 bg-surface dark:bg-dark-300 border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-dark-200 text-black dark:text-white font-black py-3.5 md:py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm"
                                         >
                                             Source Code
                                         </button>

@@ -4,12 +4,19 @@
 
 /* Skeleton loading colors — adapts to dark mode */
 :root {
-  --sk-base: #e5e7eb;
-  --sk-highlight: #f3f4f6;
+  --sk-base: #E8E4DF;
+  --sk-highlight: #F0EDE8;
 }
 .dark {
-  --sk-base: #1e293b;
-  --sk-highlight: #334155;
+  --sk-base: #292524;
+  --sk-highlight: #44403C;
+}
+
+/* Smooth scrolling and fixed navbar offset (desktop top navbar) */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  overflow: overlay;
 }
 
 /* Performance optimizations */
@@ -34,12 +41,13 @@ img {
 }
 
 body {
-  @apply bg-[#f8f8f8] text-[#000000] dark:bg-dark-100 dark:text-gray-100;
-  background-image: linear-gradient(to right, #e5e7eb 1px, transparent 1px);
+  @apply text-[#2D2A26] dark:bg-dark-100 dark:text-gray-100;
+  background-color: #FAF8F5;
+  background-image: linear-gradient(to right, #E8E4DF 1px, transparent 1px);
   background-size: 30px 100%;
   overflow-x: hidden;
   font-family:
-    "Inter",
+    "Plus Jakarta Sans",
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
@@ -48,12 +56,12 @@ body {
 }
 
 .dark body {
-  background-image: linear-gradient(to right, #334155 1px, transparent 1px);
+  background-image: linear-gradient(to right, #44403C 1px, transparent 1px);
 }
 
 ::selection {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #2D2A26;
+  color: #FAF8F5;
 }
 
 /* Custom Scroll Styling */
@@ -66,7 +74,7 @@ html {
 .nav-scrolled {
   padding-top: 0.5rem !important;
   padding-bottom: 0.5rem !important;
-  @apply bg-white/90 dark:bg-dark-100/90;
+  @apply bg-surface/90 dark:bg-dark-100/90;
   backdrop-filter: blur(8px);
 }
 
@@ -101,17 +109,52 @@ html {
   text-decoration: none;
 }
 
-/* Animation on scroll helpers */
+/* ─── Scroll Reveal Animations ──────────────────────── */
+
+/* Base reveal — invisible until triggered */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Directions */
+.reveal-up        { transform: translateY(48px); }
+.reveal-down      { transform: translateY(-48px); }
+.reveal-left      { transform: translateX(-60px); }
+.reveal-right     { transform: translateX(60px); }
+.reveal-scale     { transform: scale(0.88); }
+.reveal-fade      { transform: none; }
+
+/* Visible state — all directions land here */
+.reveal.is-visible {
+  opacity: 1;
+  transform: none !important;
+}
+
+/* Stagger delays */
+.reveal-delay-100 { transition-delay: 0.10s; }
+.reveal-delay-150 { transition-delay: 0.15s; }
+.reveal-delay-200 { transition-delay: 0.20s; }
+.reveal-delay-250 { transition-delay: 0.25s; }
+.reveal-delay-300 { transition-delay: 0.30s; }
+.reveal-delay-400 { transition-delay: 0.40s; }
+.reveal-delay-500 { transition-delay: 0.50s; }
+.reveal-delay-600 { transition-delay: 0.60s; }
+.reveal-delay-700 { transition-delay: 0.70s; }
+.reveal-delay-800 { transition-delay: 0.80s; }
+
+/* Legacy animate-on-scroll compat */
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.6s ease-out;
 }
-
 .animate-on-scroll.animate-in {
   opacity: 1;
   transform: translateY(0);
 }
+
 
 /* Turnstile Gate Specifics */
 #turnstile-gate {
@@ -172,18 +215,18 @@ html {
 
 /* ─── Skill progress ring ────────────────────────── */
 .skill-ring-track {
-  stroke: #e5e7eb;
+  stroke: #E8E4DF;
 }
 .dark .skill-ring-track {
-  stroke: #334155;
+  stroke: #44403C;
 }
 .skill-ring-fill {
-  stroke: #000;
+  stroke: #2D2A26;
   stroke-linecap: round;
   transition: stroke-dashoffset 1s ease-out;
 }
 .dark .skill-ring-fill {
-  stroke: #fff;
+  stroke: #F0EDE8;
 }
 
 /* ─── Custom Scrollbar ───────────────────────────── */
@@ -191,23 +234,23 @@ html {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #F0EDE8;
 }
 .dark ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #1C1917;
 }
 ::-webkit-scrollbar-thumb {
-  background: #6b7280; /* Tailwind gray-500 for darker light mode scrollbar */
+  background: #A8A29E;
   border-radius: 5px;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: #94a3b8; /* Tailwind slate-400 for lighter dark mode scrollbar */
+  background: #78716C;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #4b5563; /* Tailwind gray-600 */
+  background: #78716C;
 }
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #cbd5e1; /* Tailwind slate-300 */
+  background: #A8A29E;
 }
 
 /* ─── Custom Cursor Global Styles ────────────────── */
