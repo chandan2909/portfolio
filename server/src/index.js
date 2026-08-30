@@ -5,6 +5,7 @@ import { initDatabase } from './config/database.js';
 import authRoutes from './routes/auth.js';
 import projectRoutes from './routes/projects.js';
 import skillRoutes from './routes/skills.js';
+import sendEmailRoutes from './routes/sendEmail.js';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/skills', skillRoutes);
+app.use('/api/send-email', sendEmailRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
