@@ -58,7 +58,7 @@ const Hero = () => {
                         <ScrollReveal direction="up" delay={200}>
                             <div className="flex flex-wrap gap-4 pt-4">
                                 <button
-                                    onClick={() => window.open('https://www.chandanpathak.me/resume')}
+                                    onClick={() => window.open('https://chandanpathak.me/resume', '_blank')}
                                     className="bg-black dark:bg-white dark:text-black dark:hover:bg-gray-200 hover:bg-gray-800 text-white px-10 py-4 rounded-full font-bold text-sm uppercase tracking-widest transition-all duration-300 shadow-sm"
                                     aria-label="Download Chandan Pathak Resume PDF"
                                 >
