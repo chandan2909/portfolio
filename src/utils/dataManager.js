@@ -27,7 +27,7 @@ const FALLBACK_PROJECTS = [
         description: 'A modern, responsive developer portfolio built with React, Tailwind CSS, and a MySQL backend on Aiven. Features an admin panel, dark mode, and contact form.',
         image: '/assets/portfolio-screenshot.png',
         github: 'https://github.com/chandan2909/chandan2909.github.io',
-        live: 'https://portfoliochandan.vercel.app',
+        live: 'https://chandanpathak.me',
         tags: ['React', 'Tailwind', 'MySQL', 'Vercel'],
         featured: true,
     },

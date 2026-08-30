@@ -137,7 +137,8 @@ const Contact = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
-            const result = await response.json();
+            const text = await response.text();
+            const result = text ? JSON.parse(text) : {};
             if (!response.ok) throw new Error(result.error || 'Failed to send message.');
             setStatus('success');
             setFormData({ name: '', email: '', message: '' });
