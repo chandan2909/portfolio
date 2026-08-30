@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { sanitize, sanitizeEmail } from '../_lib/auth.js';
+import { sanitize, sanitizeEmail } from './_lib/auth.js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
