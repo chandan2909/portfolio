@@ -210,7 +210,7 @@ Licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
 
 **Chandan Pathak**
 
-- 🌐 [portfoliochandan.vercel.app](https://portfoliochandan.vercel.app)
+- 🌐 [portfoliochandan.vercel.app](https://chandanpathak.me)
 - 📧 chandanpathakssa@gmail.com
 - 💼 [LinkedIn](https://linkedin.com/in/chandanpathak)
 - 🐱 [GitHub @chandan2909](https://github.com/chandan2909)
