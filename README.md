@@ -4,7 +4,7 @@ A modern, responsive developer portfolio built with **React 18**, **Vite**, **Ta
 
 ## 🌐 Live Demo
 
-**[portfoliochandan.vercel.app](https://chandanpathak.me)**
+**[www.chandanpathak.dev](https://chandanpathak.me)**
 
 ---
 
