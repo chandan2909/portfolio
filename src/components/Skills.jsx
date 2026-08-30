@@ -2,45 +2,23 @@ import React, { useState, useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { getSkills } from '../utils/dataManager';
+import ScrollReveal from './ScrollReveal';
 
-// ─── Skill Icon Renderer ─────────────────────────────────────────
-const SkillIcon = ({ icon, name }) => {
-    // If an SVG path is provided, determine appropriate viewBox based on coordinate scale
-    if (icon) {
-        let viewBox = "0 0 24 24";
-        if (icon.includes('395') || icon.includes('480') || icon.includes('384')) {
-            viewBox = "0 0 384 512";
-        } else if (icon.includes('304') || icon.includes('452') || icon.includes('468')) {
-            viewBox = "0 0 512 512";
-        } else if (icon.includes('22.19') || icon.includes('16.405')) {
-            viewBox = "0 0 24 24";
-        } else if (icon.includes('11.998') || icon.includes('16.832')) {
-            viewBox = "0 0 24 24";
-        } else if (icon.includes('M12 6C9.33')) {
-            viewBox = "0 0 24 24";
-        } else if (icon.length < 100) {
-            viewBox = "0 0 16 16";
-        } else {
-            viewBox = "0 0 512 512";
-        }
+const CATEGORY_META = {
+    'Languages': { icon: '⚡' },
+    'Frameworks & Libraries': { icon: '⚛' },
+    'Databases & Cloud': { icon: '🗄' },
+};
 
-        return (
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox={viewBox}>
-                <path d={icon} />
-            </svg>
-        );
-    }
-
-    // Default icon
+const SkillIcon = ({ icon, viewBox = '0 0 24 24', size = 14 }) => {
+    if (!icon) return null;
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="16 18 22 12 16 6" />
-            <polyline points="8 6 2 12 8 18" />
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="white" viewBox={viewBox}>
+            <path d={icon} />
         </svg>
     );
 };
 
-// ─── Skeleton ────────────────────────────────────────────────────
 const SkillSkeleton = () => (
     <div className="bg-surface dark:bg-dark-200 rounded-3xl p-8 border border-gray-100 dark:border-slate-700 shadow-md">
         <div className="flex items-center mb-6">
@@ -52,15 +30,11 @@ const SkillSkeleton = () => (
     </div>
 );
 
-// ─── Education data ──────────────────────────────────────────────
 const education = [
     { type: 'MCA', detail: 'Master of Computer Applications', school: 'Veer Bahadur Singh Purvanchal University, Jaunpur', result: 'CGPA: 8.0', color: 'blue' },
     { type: 'BSc', detail: 'Bachelor of Science', school: 'Veer Bahadur Singh Purvanchal University, Jaunpur', result: '63.0%', color: 'green' },
     { type: 'Intermediate', detail: 'Higher Secondary Education', school: 'Parvati Public School, Jaunpur', result: '62%', color: 'purple' },
 ];
-
-// ─── Main Skills Component ───────────────────────────────────────
-import ScrollReveal from './ScrollReveal';
 
 const Skills = () => {
     const [technicalSkills, setSkills] = useState([]);
@@ -72,6 +46,13 @@ const Skills = () => {
             setLoading(false);
         });
     }, []);
+
+    const grouped = technicalSkills.reduce((acc, skill) => {
+        const cat = skill.category || 'Other';
+        if (!acc[cat]) acc[cat] = [];
+        acc[cat].push(skill);
+        return acc;
+    }, {});
 
     return (
         <>
@@ -94,30 +75,32 @@ const Skills = () => {
                                 <SkillSkeleton />
                                 <SkillSkeleton />
                                 <SkillSkeleton />
-                                <SkillSkeleton />
-                                <SkillSkeleton />
-                                <SkillSkeleton />
                             </>
                         ) : (
-                            technicalSkills.map((skill, i) => (
-                                <ScrollReveal
-                                    key={skill.id || skill.name}
-                                    direction={i % 3 === 0 ? 'left' : i % 3 === 1 ? 'up' : 'right'}
-                                    delay={Math.min((i % 3) * 150, 400)}
-                                >
-                                    <div className="bg-surface dark:bg-dark-200 rounded-3xl p-8 border border-gray-100 dark:border-slate-700 shadow-md hover:shadow-lg transition-all duration-500 group cursor-pointer" role="listitem">
-                                        <div className="flex items-center gap-4 mb-4">
-                                            <div className="bg-black rounded-full p-3 group-hover:scale-110 transition-transform flex-shrink-0">
-                                                <SkillIcon icon={skill.icon} name={skill.name} />
+                            Object.entries(grouped).map(([category, skills], catIdx) => {
+                                const meta = CATEGORY_META[category] || { icon: '🔧' };
+                                return (
+                                    <ScrollReveal key={category} direction={catIdx % 3 === 0 ? 'left' : catIdx % 3 === 1 ? 'up' : 'right'} delay={Math.min((catIdx % 3) * 150, 400)}>
+                                        <div className="bg-surface dark:bg-dark-200 rounded-3xl p-8 border border-gray-100 dark:border-slate-700 shadow-md hover:shadow-lg transition-all duration-500 h-full" role="listitem">
+                                            <h3 className="text-lg font-bold text-black dark:text-white mb-5 flex items-center gap-2">
+                                                <span>{meta.icon}</span> {category}
+                                            </h3>
+                                            <div className="flex flex-wrap gap-2">
+                                                {skills.map((skill) => (
+                                                    <div
+                                                        key={skill.id || skill.name}
+                                                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-bold text-white"
+                                                        style={{ backgroundColor: skill.color || '#6B7280' }}
+                                                    >
+                                                        <SkillIcon icon={skill.icon} viewBox={skill.viewBox} />
+                                                        <span className="uppercase tracking-wide">{skill.name}</span>
+                                                    </div>
+                                                ))}
                                             </div>
-                                            <h4 className="font-black text-xl text-black dark:text-white uppercase tracking-tighter">
-                                                {skill.name}
-                                            </h4>
                                         </div>
-                                        <p className="text-sm text-gray-400 font-bold uppercase tracking-widest">{skill.category}</p>
-                                    </div>
-                                </ScrollReveal>
-                            ))
+                                    </ScrollReveal>
+                                );
+                            })
                         )}
                     </div>
                 </div>

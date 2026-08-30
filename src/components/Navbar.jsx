@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import ThemeToggle from './ThemeToggle';
 
 const NAV_ITEMS = [
@@ -37,36 +37,72 @@ const NAV_ICONS = {
     ),
 };
 
+const ACTIVE_DESKTOP = 'bg-gray-200 text-black dark:bg-dark-200 dark:text-white';
+const INACTIVE_DESKTOP = 'text-gray-500 hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-dark-200 dark:hover:text-white';
+const ACTIVE_MOBILE = 'bg-gray-200 text-black dark:bg-dark-200 dark:text-white';
+const INACTIVE_MOBILE = 'text-gray-400 dark:text-gray-500';
+
 const Navbar = () => {
-    const [activeSection, setActiveSection] = useState('home');
+    const navRef = useRef(null);
+    const activeRef = useRef('home');
+
+    const updateHighlight = useCallback((id) => {
+        if (activeRef.current === id) return;
+        activeRef.current = id;
+
+        const nav = navRef.current;
+        if (!nav) return;
+
+        const desktopLinks = nav.querySelectorAll('[data-nav-link]');
+        const mobileLinks = nav.querySelectorAll('[data-nav-mobile]');
+
+        desktopLinks.forEach((link) => {
+            const isActive = link.dataset.navLink === id;
+            link.className = `cursor-pointer px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-colors duration-150 ${
+                isActive ? ACTIVE_DESKTOP : INACTIVE_DESKTOP
+            }`;
+        });
+
+        mobileLinks.forEach((link) => {
+            const isActive = link.dataset.navMobile === id;
+            link.className = `flex flex-col items-center justify-center gap-0.5 py-2 px-3 rounded-full transition-colors duration-150 min-w-[52px] ${
+                isActive ? ACTIVE_MOBILE : INACTIVE_MOBILE
+            }`;
+            const icon = link.querySelector('[data-nav-icon]');
+            const label = link.querySelector('[data-nav-label]');
+            if (icon) icon.className = `transition-transform duration-150 ${isActive ? 'scale-110' : ''}`;
+            if (label) label.className = `text-[8px] font-black uppercase tracking-wider transition-colors duration-150 ${isActive ? 'text-black dark:text-white' : ''}`;
+        });
+    }, []);
 
     useEffect(() => {
-        const sections = NAV_ITEMS.map(item => document.getElementById(item.id)).filter(Boolean);
+        const handleScroll = () => {
+            const navbarHeight = 80;
+            let current = 'home';
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveSection(entry.target.id);
-                    }
-                });
-            },
-            { threshold: 0.3, rootMargin: '-80px 0px -40% 0px' }
-        );
+            for (const item of NAV_ITEMS) {
+                const el = document.getElementById(item.id);
+                if (el && el.getBoundingClientRect().top <= navbarHeight + window.innerHeight / 3) {
+                    current = item.id;
+                }
+            }
 
-        sections.forEach((section) => observer.observe(section));
-        return () => observer.disconnect();
-    }, []);
+            updateHighlight(current);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [updateHighlight]);
 
     const scrollTo = (id) => {
         const el = document.getElementById(id);
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
-        }
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
     };
 
     return (
         <nav
+            ref={navRef}
             className="fixed bottom-6 lg:bottom-auto lg:top-6 left-1/2 -translate-x-1/2 z-[100000] bg-surface/80 dark:bg-dark-100/80 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-full shadow-lg px-2 py-2 flex items-center gap-1"
             aria-label="Main navigation"
         >
@@ -76,11 +112,10 @@ const Navbar = () => {
                     <a
                         key={item.id}
                         href={`#${item.id}`}
+                        data-nav-link={item.id}
                         onClick={(e) => { e.preventDefault(); scrollTo(item.id); }}
-                        className={`cursor-pointer px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${
-                            activeSection === item.id
-                                ? 'bg-gray-200 text-black dark:bg-dark-200 dark:text-white'
-                                : 'text-gray-500 hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-dark-200 dark:hover:text-white'
+                        className={`cursor-pointer px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-colors duration-150 ${
+                            item.id === 'home' ? ACTIVE_DESKTOP : INACTIVE_DESKTOP
                         }`}
                     >
                         {item.name}
@@ -92,7 +127,7 @@ const Navbar = () => {
                         href="https://www.github.com/chandan2909/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-dark-200 dark:hover:text-white transition-all duration-300"
+                        className="p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-dark-200 dark:hover:text-white transition-colors duration-150"
                         aria-label="Visit GitHub profile"
                     >
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -103,7 +138,7 @@ const Navbar = () => {
                         href="https://www.linkedin.com/in/chandanpathak291"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-dark-200 dark:hover:text-white transition-all duration-300"
+                        className="p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-dark-200 dark:hover:text-white transition-colors duration-150"
                         aria-label="Visit LinkedIn profile"
                     >
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -115,21 +150,20 @@ const Navbar = () => {
 
             {/* Mobile: icon links */}
             <div className="flex lg:hidden items-center gap-0.5">
-                {NAV_ITEMS.map((item) => (
+                {NAV_ITEMS.map((item, i) => (
                     <a
                         key={item.id}
                         href={`#${item.id}`}
+                        data-nav-mobile={item.id}
                         onClick={(e) => { e.preventDefault(); scrollTo(item.id); }}
-                        className={`flex flex-col items-center justify-center gap-0.5 py-2 px-3 rounded-full transition-all duration-300 min-w-[52px] ${
-                            activeSection === item.id
-                                ? 'bg-gray-200 text-black dark:bg-dark-200 dark:text-white'
-                                : 'text-gray-400 dark:text-gray-500'
+                        className={`flex flex-col items-center justify-center gap-0.5 py-2 px-3 rounded-full transition-colors duration-150 min-w-[52px] ${
+                            i === 0 ? ACTIVE_MOBILE : INACTIVE_MOBILE
                         }`}
                     >
-                        <div className={`transition-all duration-300 ${activeSection === item.id ? 'scale-110' : ''}`}>
+                        <div data-nav-icon className={`transition-transform duration-150 ${i === 0 ? 'scale-110' : ''}`}>
                             {NAV_ICONS[item.name]}
                         </div>
-                        <span className={`text-[8px] font-black uppercase tracking-wider transition-all duration-300 ${activeSection === item.id ? 'text-black dark:text-white' : ''}`}>
+                        <span data-nav-label className={`text-[8px] font-black uppercase tracking-wider transition-colors duration-150 ${i === 0 ? 'text-black dark:text-white' : ''}`}>
                             {item.name === 'Projects' ? 'Work' : item.name}
                         </span>
                     </a>
