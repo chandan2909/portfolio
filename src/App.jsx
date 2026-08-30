@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
@@ -40,13 +39,10 @@ function Portfolio() {
 
 function App() {
     return (
-        <>
-            <Routes>
-                <Route path="/admin" element={<AdminPanel />} />
-                <Route path="*" element={<Portfolio />} />
-            </Routes>
-            <Analytics />
-        </>
+        <Routes>
+            <Route path="/admin" element={<AdminPanel />} />
+            <Route path="*" element={<Portfolio />} />
+        </Routes>
     );
 }
 
