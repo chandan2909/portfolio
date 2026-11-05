@@ -33,12 +33,12 @@ const FALLBACK_PROJECTS = [
     },
     {
         id: 'f2',
-        title: 'Project Three',
-        description: 'A dynamic web application showcasing full-stack development skills with modern tooling and responsive design principles.',
+        title: 'ATM Management System',
+        description: 'A desktop ATM system built in Java and Spring Boot with withdrawal, deposit and balance inquiry modules, secure user authentication, input validation and exception handling.',
         image: '/assets/project-three.gif',
         github: 'https://github.com/chandan2909',
         live: '',
-        tags: ['JavaScript', 'CSS', 'HTML'],
+        tags: ['Java', 'Spring Boot', 'OOP'],
         featured: false,
     },
 ];
@@ -51,8 +51,42 @@ const FALLBACK_SKILLS = [
     { id: 's4', name: 'React', category: 'Frameworks & Libraries', icon: 'M12 12m-3.2 0a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0-6.4 0M17.06 8.94A10.16 10.16 0 0 1 22 12c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2c1.85 0 3.58.5 5.06 1.37M6.94 17.06A10.16 10.16 0 0 1 2 12c0-1.85.5-3.58 1.37-5.06', color: '#61DAFB', viewBox: '0 0 24 24' },
     { id: 's8', name: 'Tailwind CSS', category: 'Frameworks & Libraries', icon: 'M12 6C9.33 6 7.67 7.33 7 10c1 -1.33 2.17 -1.83 3.5 -1.5c.76 .19 1.31 .74 1.91 1.35C13.41 10.86 14.73 12 17 12c2.67 0 4.33 -1.33 5 -4c-1 1.33 -2.17 1.83 -3.5 1.5c-.76-.19-1.31-.74-1.91-1.35C15.59 7.14 14.27 6 12 6zm-5 6C4.33 12 2.67 13.33 2 16c1-1.33 2.17-1.83 3.5-1.5c.76.19 1.31.74 1.91 1.35C8.41 16.86 9.73 18 12 18c2.67 0 4.33-1.33 5-4c-1 1.33-2.17 1.83-3.5 1.5c-.76-.19-1.31-.74-1.91-1.35C10.59 13.14 9.27 12 7 12z', color: '#06B6D4', viewBox: '0 0 24 24' },
     { id: 's7', name: 'Node.js', category: 'Frameworks & Libraries', icon: 'M11.998 0C5.373 0 0 5.373 0 12s5.373 12 11.998 12C18.627 24 24 18.627 24 12S18.626 0 11.998 0zm5.15 17.58l-5.87-3.39V8.41l5.87 3.39v5.78zm1.68-8.16l-5.87-3.39V2.63l5.87 3.39v3.4z', color: '#339933', viewBox: '0 0 24 24' },
-    { id: 's6', name: 'MySQL', category: 'Databases & Cloud', icon: 'M12 2C6.48 2 2 4.02 2 6.5v11C2 19.98 6.48 22 12 22s10-2.02 10-4.5v-11C22 4.02 17.52 2 12 2zm0 2c4.42 0 8 1.57 8 2.5S16.42 9 12 9 4 7.43 4 6.5 7.58 4 12 4zm8 11.5c0 .93-3.58 2.5-8 2.5s-8-1.57-8-2.5v-2c1.6.91 4.62 1.5 8 1.5s6.4-.59 8-1.5v2zm0-4.5c0 .93-3.58 2.5-8 2.5s-8-1.57-8-2.5v-2c1.6.91 4.62 1.5 8 1.5s6.4-.59 8-1.5v2z', color: '#4479A1', viewBox: '0 0 24 24' },
+    { id: 's6', name: 'MySQL', category: 'Databases', icon: 'M12 2C6.48 2 2 4.02 2 6.5v11C2 19.98 6.48 22 12 22s10-2.02 10-4.5v-11C22 4.02 17.52 2 12 2zm0 2c4.42 0 8 1.57 8 2.5S16.42 9 12 9 4 7.43 4 6.5 7.58 4 12 4zm8 11.5c0 .93-3.58 2.5-8 2.5s-8-1.57-8-2.5v-2c1.6.91 4.62 1.5 8 1.5s6.4-.59 8-1.5v2zm0-4.5c0 .93-3.58 2.5-8 2.5s-8-1.57-8-2.5v-2c1.6.91 4.62 1.5 8 1.5s6.4-.59 8-1.5v2z', color: '#4479A1', viewBox: '0 0 24 24' },
+    { id: 's9', name: 'Spring Boot', category: 'Frameworks & Libraries', color: '#6DB33F' },
+    { id: 's10', name: 'Vercel', category: 'Cloud & Deployment', color: '#000000' },
+    { id: 's11', name: 'Render', category: 'Cloud & Deployment', color: '#46E3B7' },
+    { id: 's12', name: 'Aiven', category: 'Cloud & Deployment', color: '#FF3554' },
+    { id: 's13', name: 'Netlify', category: 'Cloud & Deployment', color: '#00C7B7' },
+    { id: 's14', name: 'VS Code', category: 'Tools', color: '#007ACC' },
+    { id: 's15', name: 'IntelliJ IDEA', category: 'Tools', color: '#FE315D' },
+    { id: 's16', name: 'Eclipse', category: 'Tools', color: '#2C2255' },
+    { id: 's17', name: 'Git', category: 'Tools', color: '#F05032' },
+    { id: 's18', name: 'GitHub', category: 'Tools', color: '#24292F' },
+    { id: 's19', name: 'Postman', category: 'Tools', color: '#FF6C37' },
+    { id: 's20', name: 'Docker', category: 'Tools', color: '#2496ED' },
+    { id: 's21', name: 'MySQL Workbench', category: 'Tools', color: '#00758F' },
+    { id: 's22', name: 'OOP', category: 'Concepts' },
+    { id: 's23', name: 'DSA', category: 'Concepts' },
+    { id: 's24', name: 'REST APIs', category: 'Concepts' },
+    { id: 's25', name: 'MVC', category: 'Concepts' },
+    { id: 's26', name: 'Microservices', category: 'Concepts' },
+    { id: 's27', name: 'JWT Auth', category: 'Concepts' },
 ];
+
+// Skills from the API only have a name, category and level, so their colour and icon are looked up by name.
+const normalizeSkillName = (name = '') => name.toLowerCase().replace(/[^a-z]/g, '');
+const SKILL_NAME_ALIASES = { intellij: 'intellijidea', gitgithub: 'github', sql: 'mysql', vscodeeditor: 'vscode' };
+const SKILL_STYLES = new Map(FALLBACK_SKILLS.map((skill) => [normalizeSkillName(skill.name), skill]));
+
+export function getSkillStyle(skill) {
+    const key = normalizeSkillName(skill.name);
+    const known = SKILL_STYLES.get(SKILL_NAME_ALIASES[key] || key);
+    return {
+        color: skill.color || known?.color || '#6B7280',
+        icon: skill.icon || known?.icon,
+        viewBox: skill.viewBox || known?.viewBox,
+    };
+}
 
 // ─── Auth Token Management ──────────────────────────────────────
 

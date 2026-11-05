@@ -4,6 +4,7 @@ import {
     saveProject,
     deleteProject,
     getSkills,
+    getSkillStyle,
     saveSkill,
     deleteSkill,
     checkPassword,
@@ -105,6 +106,21 @@ describe('dataManager utility', () => {
             const res = await getSkills();
             expect(res.length).toBeGreaterThan(0);
             expect(res[0]).toHaveProperty('name');
+        });
+    });
+
+    describe('getSkillStyle', () => {
+        it('finds brand colours by name for skills added in the admin panel', () => {
+            expect(getSkillStyle({ name: 'Postman' }).color).toBe('#FF6C37');
+            expect(getSkillStyle({ name: 'vs code' }).color).toBe('#007ACC');
+            expect(getSkillStyle({ name: 'HTML' }).color).toBe('#E34F26');
+            expect(getSkillStyle({ name: 'IntelliJ' }).color).toBe('#FE315D');
+            expect(getSkillStyle({ name: 'Git/GitHub' }).color).toBe('#24292F');
+        });
+
+        it('falls back to grey for unknown skills and keeps explicit colours', () => {
+            expect(getSkillStyle({ name: 'Unknown Tool' }).color).toBe('#6B7280');
+            expect(getSkillStyle({ name: 'Postman', color: '#123456' }).color).toBe('#123456');
         });
     });
 

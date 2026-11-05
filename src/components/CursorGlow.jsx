@@ -4,11 +4,14 @@ const CursorGlow = () => {
     const glowRef = useRef(null);
 
     useEffect(() => {
-        // Only enable on non-touch devices
-        if (window.matchMedia('(hover: none)').matches) return;
-
         const glow = glowRef.current;
         if (!glow) return;
+
+        // Only enable on non-touch devices, and not for people who asked for less motion
+        if (window.matchMedia('(hover: none), (prefers-reduced-motion: reduce)').matches) {
+            glow.style.display = 'none';
+            return;
+        }
 
         let raf;
         let mouseX = -500;

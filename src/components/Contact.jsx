@@ -19,7 +19,7 @@ const FloatingInput = ({ id, name, type = 'text', label, value, onChange, requir
                 required={required}
                 autoComplete={autoComplete}
                 placeholder=" "
-                className={`peer w-full bg-gray-50 dark:bg-dark-300 border-2 rounded-2xl px-5 pt-6 pb-2.5 text-black dark:text-white text-sm font-medium outline-none transition-all duration-200 placeholder-transparent
+                className={`peer w-full bg-surface/60 dark:bg-white/5 border-2 rounded-2xl px-5 pt-6 pb-2.5 text-black dark:text-white text-base font-medium outline-none transition-all duration-200 placeholder-transparent
                     ${focused
                         ? 'border-black dark:border-white shadow-[0_0_0_3px_rgba(0,0,0,0.06)] dark:shadow-[0_0_0_3px_rgba(255,255,255,0.06)]'
                         : 'border-gray-200 dark:border-slate-700 hover:border-gray-400 dark:hover:border-slate-500'
@@ -27,10 +27,10 @@ const FloatingInput = ({ id, name, type = 'text', label, value, onChange, requir
             />
             <label
                 htmlFor={id}
-                className={`absolute left-5 font-bold uppercase tracking-widest pointer-events-none transition-all duration-200 
+                className={`absolute left-5 font-semibold uppercase tracking-wider pointer-events-none transition-all duration-200 
                     ${lifted
-                        ? 'top-2 text-[9px] text-black dark:text-white opacity-60'
-                        : 'top-1/2 -translate-y-1/2 text-xs text-gray-400 dark:text-gray-500'
+                        ? 'top-2 text-[11px] text-black dark:text-white opacity-60'
+                        : 'top-1/2 -translate-y-1/2 text-[13px] text-gray-600 dark:text-gray-300'
                     }`}
             >
                 {label}
@@ -56,7 +56,7 @@ const FloatingTextarea = ({ id, name, label, value, onChange, required, rows = 5
                 required={required}
                 rows={rows}
                 placeholder=" "
-                className={`peer w-full bg-gray-50 dark:bg-dark-300 border-2 rounded-2xl px-5 pt-7 pb-3 text-black dark:text-white text-sm font-medium outline-none transition-all duration-200 placeholder-transparent resize-none
+                className={`peer w-full bg-surface/60 dark:bg-white/5 border-2 rounded-2xl px-5 pt-7 pb-3 text-black dark:text-white text-base font-medium outline-none transition-all duration-200 placeholder-transparent resize-none
                     ${focused
                         ? 'border-black dark:border-white shadow-[0_0_0_3px_rgba(0,0,0,0.06)] dark:shadow-[0_0_0_3px_rgba(255,255,255,0.06)]'
                         : 'border-gray-200 dark:border-slate-700 hover:border-gray-400 dark:hover:border-slate-500'
@@ -64,10 +64,10 @@ const FloatingTextarea = ({ id, name, label, value, onChange, required, rows = 5
             />
             <label
                 htmlFor={id}
-                className={`absolute left-5 font-bold uppercase tracking-widest pointer-events-none transition-all duration-200 
+                className={`absolute left-5 font-semibold uppercase tracking-wider pointer-events-none transition-all duration-200 
                     ${lifted
-                        ? 'top-2.5 text-[9px] text-black dark:text-white opacity-60'
-                        : 'top-5 text-xs text-gray-400 dark:text-gray-500'
+                        ? 'top-2.5 text-[11px] text-black dark:text-white opacity-60'
+                        : 'top-5 text-[13px] text-gray-600 dark:text-gray-300'
                     }`}
             >
                 {label}
@@ -82,7 +82,7 @@ const SocialCard = ({ name, description, href, accentFrom, accentTo, icon }) => 
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative flex items-center gap-5 bg-surface dark:bg-dark-200 border border-gray-100 dark:border-slate-700 rounded-3xl p-6 shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1 overflow-hidden"
+        className="group relative flex items-center gap-3 min-[360px]:gap-5 glass glass-interactive rounded-3xl p-4 min-[360px]:p-6 transition-all duration-500 hover:-translate-y-1 overflow-hidden"
     >
         {/* gradient blob on hover */}
         <div
@@ -96,17 +96,17 @@ const SocialCard = ({ name, description, href, accentFrom, accentTo, icon }) => 
         </div>
         {/* Text */}
         <div className="relative flex-1 min-w-0">
-            <p className="font-black text-xl text-black dark:text-white uppercase tracking-tighter leading-tight">
+            <p className="font-black text-xl text-black dark:text-white uppercase tracking-tight leading-tight">
                 {name}
             </p>
-            <p className="text-gray-500 dark:text-gray-400 text-sm font-medium mt-0.5 leading-snug">
+            <p className="text-gray-600 dark:text-gray-300 text-sm font-medium mt-0.5 leading-snug">
                 {description}
             </p>
         </div>
         {/* Arrow */}
         <div className="relative flex-shrink-0 w-9 h-9 rounded-full bg-gray-100 dark:bg-dark-300 flex items-center justify-center group-hover:bg-black dark:group-hover:bg-white transition-colors duration-300">
             <svg
-                className="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white dark:group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
+                className="w-4 h-4 text-gray-600 dark:text-gray-300 group-hover:text-white dark:group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
                 fill="none" stroke="currentColor" strokeWidth="2.5"
                 viewBox="0 0 24 24"
             >
@@ -149,46 +149,46 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" aria-labelledby="contact-heading" className="py-20">
+        <section id="contact" aria-labelledby="contact-heading" className="py-10 lg:py-14">
             <div className="container mx-auto max-w-6xl px-8">
 
                 {/* ── Heading ── */}
                 <ScrollReveal direction="up">
-                    <div className="mb-16">
-                        <p className="text-gray-400 font-bold text-xs mb-4 tracking-[0.2em] uppercase">
+                    <div className="mb-8 lg:mb-10">
+                        <p className="text-gray-700 dark:text-gray-300 font-semibold text-[13px] mb-4 tracking-[0.15em] uppercase">
                             Get in Touch
                         </p>
-                        <h2 id="contact-heading" className="text-5xl lg:text-7xl font-black text-black dark:text-white uppercase tracking-tighter leading-none">
+                        <h2 id="contact-heading" className="text-5xl lg:text-7xl font-black text-black dark:text-white uppercase tracking-tight leading-none">
                             Let's Connect
                         </h2>
                     </div>
                 </ScrollReveal>
 
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
 
                     {/* ── Email Form ── */}
                     <ScrollReveal direction="left" delay={100} className="lg:col-span-3 h-full">
-                    <div className="h-full bg-surface dark:bg-dark-200 rounded-[2rem] p-8 lg:p-10 border border-gray-100 dark:border-slate-700 shadow-md">
+                    <div className="h-full glass rounded-[2rem] p-8">
 
                         {/* Form header */}
-                        <div className="flex items-center gap-4 mb-8">
+                        <div className="flex items-center gap-4 mb-6">
                             <div className="w-12 h-12 bg-black dark:bg-white rounded-2xl flex items-center justify-center flex-shrink-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="white" className="dark:stroke-black" strokeWidth="2">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                 </svg>
                             </div>
                             <div>
-                                <h3 className="font-black text-xl text-black dark:text-white uppercase tracking-tighter">
+                                <h3 className="font-black text-xl text-black dark:text-white uppercase tracking-tight">
                                     Send a Message
                                 </h3>
-                                <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">
+                                <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">
                                     I'll get back to you as soon as possible
                                 </p>
                             </div>
                         </div>
 
                         {/* Divider */}
-                        <div className="h-px bg-gray-100 dark:bg-slate-700 mb-8" />
+                        <div className="h-px bg-gray-100 dark:bg-slate-700 mb-6" />
 
                         {status === 'success' ? (
                             /* Success state */
@@ -202,15 +202,15 @@ const Contact = () => {
                                     {/* Pulse ring */}
                                     <div className="absolute inset-0 rounded-full bg-black dark:bg-white opacity-10 animate-ping" />
                                 </div>
-                                <h4 className="font-black text-2xl text-black dark:text-white uppercase tracking-tighter mb-2">
+                                <h4 className="font-black text-2xl text-black dark:text-white uppercase tracking-tight mb-2">
                                     Message Sent!
                                 </h4>
-                                <p className="text-gray-500 dark:text-gray-400 font-medium mb-8 max-w-xs">
+                                <p className="text-gray-600 dark:text-gray-300 font-medium mb-8 max-w-xs">
                                     Thanks for reaching out. I'll be in touch soon.
                                 </p>
                                 <button
                                     onClick={() => setStatus('idle')}
-                                    className="bg-black dark:bg-white text-white dark:text-black font-black py-3 px-8 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest hover:bg-gray-800 dark:hover:bg-gray-200"
+                                    className="bg-black dark:bg-white text-white dark:text-black font-semibold py-3 px-8 rounded-2xl transition-all duration-300 uppercase text-[13px] tracking-wider hover:bg-gray-800 dark:hover:bg-gray-200"
                                 >
                                     Send Another
                                 </button>
@@ -254,7 +254,7 @@ const Contact = () => {
                                         <svg className="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" />
                                         </svg>
-                                        <p className="text-red-600 dark:text-red-400 text-xs font-bold">
+                                        <p className="text-red-600 dark:text-red-400 text-[13px] font-semibold">
                                             {errorMessage}
                                         </p>
                                     </div>
@@ -263,7 +263,7 @@ const Contact = () => {
                                 <button
                                     type="submit"
                                     disabled={status === 'sending'}
-                                    className="group w-full bg-black dark:bg-white text-white dark:text-black font-black py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-xs tracking-widest shadow-sm hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2.5"
+                                    className="group w-full bg-black dark:bg-white text-white dark:text-black font-semibold py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-[13px] tracking-wider shadow-sm hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2.5"
                                 >
                                     {status === 'sending' ? (
                                         <>
@@ -287,19 +287,19 @@ const Contact = () => {
                     </div>
                     </ScrollReveal>
 
-                    <ScrollReveal direction="right" delay={200} className="lg:col-span-2 flex flex-col gap-5 h-full">
+                    <ScrollReveal direction="right" delay={200} className="lg:col-span-2 flex flex-col gap-6 h-full">
                         {/* Open to opportunities */}
-                        <div className="bg-black dark:bg-white rounded-3xl p-8 text-white dark:text-black">
-                            <p className="text-xs font-black uppercase tracking-[0.2em] opacity-50 mb-3">Open to</p>
-                            <h3 className="font-black text-2xl uppercase tracking-tighter leading-tight mb-4">
+                        <div className="flex-1 bg-black dark:bg-white rounded-3xl p-8 text-white dark:text-black">
+                            <p className="text-[13px] font-semibold uppercase tracking-[0.15em] opacity-70 mb-3">Open to</p>
+                            <h3 className="font-black text-2xl uppercase tracking-tight leading-tight mb-4">
                                 New Opportunities
                             </h3>
                             <p className="text-sm font-medium opacity-70 leading-relaxed">
-                                I'm actively looking for freelance work and full-time roles in web development. Let's build something great together.
+                                I'm looking for entry-level software development roles, especially Java and Spring Boot backend work.
                             </p>
                             <div className="flex flex-wrap gap-2 mt-6">
-                                {['Web Dev', 'Frontend', 'Freelance'].map(tag => (
-                                    <span key={tag} className="bg-white/10 dark:bg-black/10 text-white dark:text-black text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-widest">
+                                {['Java', 'Spring Boot', 'Full-Stack'].map(tag => (
+                                    <span key={tag} className="bg-white/10 dark:bg-black/10 text-white dark:text-black text-[13px] font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">
                                         {tag}
                                     </span>
                                 ))}

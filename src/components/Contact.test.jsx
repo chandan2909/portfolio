@@ -21,7 +21,7 @@ describe('Contact component', () => {
     it('submits form successfully and shows confirmation', async () => {
         global.fetch.mockResolvedValueOnce({
             ok: true,
-            json: async () => ({ success: true }),
+            text: async () => JSON.stringify({ success: true }),
         });
 
         render(<Contact />);

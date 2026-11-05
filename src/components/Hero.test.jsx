@@ -7,14 +7,15 @@ describe('Hero component', () => {
     it('renders hero title and call to action buttons', () => {
         render(<Hero />);
 
-        expect(screen.getByText(/Chandan/i)).toBeInTheDocument();
-        expect(screen.getByRole('button', { name: /resume/i })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { level: 1, name: /Chandan/i })).toBeInTheDocument();
+        expect(screen.getByRole('link', { name: /resume/i })).toHaveAttribute('href', 'https://chandanpathak.me/resume');
         expect(screen.getByRole('link', { name: /contact/i })).toBeInTheDocument();
     });
 
-    it('renders the avatar image in the hero section', () => {
+    it('renders the code window with a label for screen readers', () => {
         render(<Hero />);
 
-        expect(screen.getByAltText(/Chandan Pathak Profile/i)).toBeInTheDocument();
+        expect(screen.getByRole('figure', { name: /spring boot controller/i })).toBeInTheDocument();
+        expect(screen.getByText('ProfileController.java')).toBeInTheDocument();
     });
 });

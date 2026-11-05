@@ -2,14 +2,182 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: theme('fontFamily.display');
+  }
+
+  /* Keyboard focus ring. In the base layer so form fields can opt out with outline-none. */
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+}
+
+/* ─── Glass panels ───────────────────────────────── */
+@layer components {
+  .glass {
+    background-color: var(--glass-bg);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  }
+
+  .glass-interactive:hover {
+    background-color: var(--glass-bg-hover);
+    box-shadow: var(--glass-shadow-hover), inset 0 1px 0 var(--glass-highlight);
+  }
+
+  .glass-menu {
+    background-color: var(--glass-menu-bg);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow-hover), inset 0 1px 0 var(--glass-highlight);
+  }
+
+  /* Solid panels for browsers without blur and people who ask for less transparency */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass, .glass-interactive:hover, .glass-menu {
+      background-color: var(--glass-solid);
+    }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .glass, .glass-interactive:hover, .glass-menu {
+      background-color: var(--glass-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+}
+
 /* Skeleton loading colors — adapts to dark mode */
 :root {
-  --sk-base: #E8E4DF;
-  --sk-highlight: #F0EDE8;
+  --sk-base: #E6E5E1;
+  --sk-highlight: #EFEEEA;
+
+  --glass-bg: rgba(250, 249, 246, 0.6);
+  --glass-bg-hover: rgba(251, 250, 248, 0.75);
+  --glass-bar-bg: rgba(250, 249, 246, 0.78);
+  --glass-menu-bg: rgba(250, 249, 246, 0.88);
+  --glass-solid: #F8F7F4;
+  --glass-border: rgba(255, 255, 255, 0.55);
+  --glass-highlight: rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 8px 28px rgba(45, 42, 38, 0.08);
+  --glass-shadow-hover: 0 14px 40px rgba(45, 42, 38, 0.14);
+  --wash-1: rgba(249, 248, 245, 0.9);
+  --wash-2: rgba(249, 248, 245, 0.8);
+  --wash-3: rgba(249, 248, 245, 0.85);
 }
 .dark {
   --sk-base: #292524;
   --sk-highlight: #44403C;
+
+  --glass-bg: rgba(41, 37, 36, 0.6);
+  --glass-bg-hover: rgba(51, 47, 45, 0.7);
+  --glass-bar-bg: rgba(28, 25, 23, 0.72);
+  --glass-menu-bg: rgba(28, 25, 23, 0.85);
+  --glass-solid: #292524;
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+  --glass-shadow-hover: 0 14px 40px rgba(0, 0, 0, 0.45);
+  --wash-1: rgba(96, 130, 180, 0.20);
+  --wash-2: rgba(180, 130, 80, 0.14);
+  --wash-3: rgba(110, 140, 120, 0.12);
+}
+
+/* Glisse navbar: keeps the library's motion and refraction, with this site's glass, type and colours.
+   The stronger blur and fill matter: page text passes behind the bar, and Glisse's 3px blur leaves it readable through the labels. */
+.site-nav {
+  --lg-glass: var(--glass-bar-bg);
+  --lg-blur: 24px;
+  --lg-foreground: #000;
+  --lg-muted: #374151;
+  --nav-tab-width: 56px;
+}
+.dark .site-nav {
+  --lg-foreground: #fff;
+  --lg-muted: #d1d5db;
+}
+@media (min-width: 360px) {
+  .site-nav { --nav-tab-width: 62px; }
+}
+@media (min-width: 420px) {
+  .site-nav { --nav-tab-width: 72px; }
+}
+@media (min-width: 1024px) {
+  .site-nav { --nav-tab-width: 104px; }
+}
+.site-nav .lg-glass,
+.site-nav .lg-glass[data-rim] {
+  box-shadow: var(--glass-shadow-hover);
+}
+/* Plain blur at rest: Glisse's displacement filter halved the frame rate (144 to 70fps), for a bend
+   that a 24px blur hides anyway. The lens still refracts while a tab is pressed or dragged. */
+.site-nav > .lg-glass,
+.site-nav .lg-tab-bar-glass {
+  -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(1.5);
+  backdrop-filter: blur(var(--lg-blur)) saturate(1.5);
+}
+.site-nav .lg-tab-bar,
+.site-nav .lg-tab-bar[data-icons] {
+  --lg-tab-width: var(--nav-tab-width);
+  --lg-tab-selected: var(--lg-foreground);
+}
+.site-nav .lg-tab-bar {
+  --lg-tab-height: 40px;
+}
+.site-nav .lg-tab-bar[data-icons] {
+  --lg-tab-height: 52px;
+}
+.site-nav .lg-tab-bar :is(.lg-tab, .lg-tab-copy) {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.site-nav .lg-tab-bar[data-icons] :is(.lg-tab, .lg-tab-copy) {
+  font-size: 10px;
+  letter-spacing: 0;
+}
+@media (min-width: 360px) {
+  .site-nav .lg-tab-bar[data-icons] :is(.lg-tab, .lg-tab-copy) { font-size: 11px; }
+}
+.site-nav .lg-tab-bar[data-icons] .lg-tab {
+  color: var(--lg-muted);
+}
+.site-nav .lg-tab-icon > svg {
+  width: 20px;
+  height: 20px;
+}
+/* Lines the About menu up with the About tab, second in the bar after its 4px inset */
+.site-nav-menu {
+  left: calc(4px + var(--nav-tab-width));
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-nav { --lg-glass: var(--glass-solid); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .site-nav { --lg-glass: var(--glass-solid); }
+  .site-nav .lg-glass {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* Soft colour washes behind the page: blurred glass needs something to pick up */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(50vmax 50vmax at 10% 15%, var(--wash-1), transparent 70%),
+    radial-gradient(45vmax 45vmax at 90% 35%, var(--wash-2), transparent 70%),
+    radial-gradient(50vmax 50vmax at 40% 100%, var(--wash-3), transparent 70%);
 }
 
 /* Smooth scrolling and fixed navbar offset (desktop top navbar) */
@@ -37,17 +205,27 @@ img {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
 body {
   @apply text-[#2D2A26] dark:bg-dark-100 dark:text-gray-100;
-  background-color: #FAF8F5;
-  background-image: linear-gradient(to right, #E8E4DF 1px, transparent 1px);
+  background-color: #F2F1EE;
+  background-image: linear-gradient(to right, #E5E4E0 1px, transparent 1px);
   background-size: 30px 100%;
   overflow-x: hidden;
   font-family:
-    "Plus Jakarta Sans",
+    "Instrument Sans",
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
@@ -234,7 +412,7 @@ html {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #F0EDE8;
+  background: #EFEEEA;
 }
 .dark ::-webkit-scrollbar-track {
   background: #1C1917;
@@ -251,11 +429,4 @@ html {
 }
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #A8A29E;
-}
-
-/* ─── Custom Cursor Global Styles ────────────────── */
-@media (hover: hover) and (pointer: fine) {
-  body, a, button, input, textarea, select, .cursor-pointer {
-    cursor: none !important;
-  }
 }

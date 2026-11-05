@@ -3,9 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
+import AnimatedBackground from './components/AnimatedBackground';
 import BackToTop from './components/BackToTop';
 import CursorGlow from './components/CursorGlow';
-import CustomCursor from './components/CustomCursor';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
@@ -21,8 +21,8 @@ function Portfolio() {
 
     return (
         <div className="min-h-screen flex flex-col">
+            <AnimatedBackground />
             <CursorGlow />
-            <CustomCursor />
             <Navbar />
             <main className="flex-1">
                 <Hero />

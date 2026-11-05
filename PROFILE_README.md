@@ -9,7 +9,7 @@
 <br/>
 
 <!-- Social badges -->
-<a href="https://portfoliochandan.vercel.app" target="_blank">
+<a href="https://chandanpathak.me" target="_blank">
   <img src="https://img.shields.io/badge/%F0%9F%8C%90_Portfolio-0f172a?style=for-the-badge&logoColor=white" />
 </a>
 <a href="https://linkedin.com/in/chandanpathak291" target="_blank">
@@ -38,7 +38,7 @@ name:        Chandan Pathak
 location:    Noida, Uttar Pradesh, India 🇮🇳
 education:   MCA — Post Graduate in Computer Science & Engineering
 focus:       Full-Stack Web & Mobile Development
-portfolio:   https://portfoliochandan.vercel.app
+portfolio:   https://chandanpathak.me
 email:       chandanpathakssa@gmail.com
 currently:   Building full-stack web & mobile applications
 interests:   [Clean Code, Scalable Systems, Open Source]

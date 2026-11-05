@@ -4,4 +4,4 @@ Allow: /
 # Disallow admin panel from search indexing
 Disallow: /admin
 
-Sitemap: https://chandanpathak.dev/sitemap.xml
+Sitemap: https://chandanpathak.me/sitemap.xml

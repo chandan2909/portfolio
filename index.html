@@ -2,26 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.png" />
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Apply the saved or system theme before first paint so dark-mode visitors don't see a light flash -->
+    <script>
+      try {
+        var savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {}
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet" />
 
     <!-- Primary Meta -->
-    <title>Chandan Pathak — Web Developer Portfolio | MCA Graduate</title>
-    <meta name="description" content="Chandan Pathak is a passionate web developer and MCA graduate with expertise in HTML, CSS, JavaScript, React, and Java. Open to freelance and full-time roles." />
+    <title>Chandan Pathak — Java & Spring Boot Developer | MCA Graduate</title>
+    <meta name="description" content="MCA graduate and software development intern building REST APIs and backends with Java, Spring Boot and MySQL. See my projects, resume and contact details." />
     <meta name="author" content="Chandan Pathak" />
-    <meta name="keywords" content="Chandan Pathak, Web Developer, Portfolio, React Developer, MCA Graduate, Jaunpur, Frontend Developer, Full Stack" />
+    <meta name="keywords" content="Chandan Pathak, Java Developer, Spring Boot, Backend Developer, REST API, MySQL, React, MCA Graduate, Noida, Portfolio" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://portfoliochandan.vercel.app" />
+    <link rel="canonical" href="https://chandanpathak.me/" />
 
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://portfoliochandan.vercel.app/" />
-    <meta property="og:title" content="Chandan Pathak — Web Developer Portfolio" />
-    <meta property="og:description" content="Passionate web developer and MCA graduate crafting modern, responsive web experiences with clean code and creative solutions." />
-    <meta property="og:image" content="https://portfoliochandan.vercel.app/assets/portfolio-screenshot.png" />
+    <meta property="og:url" content="https://chandanpathak.me/" />
+    <meta property="og:title" content="Chandan Pathak — Java & Spring Boot Developer" />
+    <meta property="og:description" content="MCA graduate and software development intern building REST APIs and backends with Java, Spring Boot and MySQL." />
+    <meta property="og:image" content="https://chandanpathak.me/assets/portfolio-screenshot.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Chandan Pathak Portfolio" />
@@ -29,10 +38,10 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://portfoliochandan.vercel.app/" />
-    <meta name="twitter:title" content="Chandan Pathak — Web Developer Portfolio" />
-    <meta name="twitter:description" content="Passionate web developer and MCA graduate crafting modern, responsive web experiences." />
-    <meta name="twitter:image" content="https://portfoliochandan.vercel.app/assets/portfolio-screenshot.png" />
+    <meta name="twitter:url" content="https://chandanpathak.me/" />
+    <meta name="twitter:title" content="Chandan Pathak — Java & Spring Boot Developer" />
+    <meta name="twitter:description" content="MCA graduate and software development intern building REST APIs and backends with Java, Spring Boot and MySQL." />
+    <meta name="twitter:image" content="https://chandanpathak.me/assets/portfolio-screenshot.png" />
 
     <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
@@ -43,15 +52,15 @@
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Chandan Pathak",
-      "url": "https://portfoliochandan.vercel.app",
-      "image": "https://portfoliochandan.vercel.app/assets/favicon.png",
-      "jobTitle": "Web Developer",
-      "description": "MCA Graduate and passionate web developer specialising in React, JavaScript, and modern full-stack web technologies.",
+      "url": "https://chandanpathak.me",
+      "image": "https://chandanpathak.me/assets/favicon.png",
+      "jobTitle": "Software Development Intern",
+      "description": "MCA graduate and software development intern building REST APIs and backends with Java, Spring Boot and MySQL.",
       "alumniOf": {
         "@type": "CollegeOrUniversity",
         "name": "Veer Bahadur Singh Purvanchal University"
       },
-      "knowsAbout": ["HTML", "CSS", "JavaScript", "React", "Java", "MySQL", "Node.js", "Tailwind CSS"],
+      "knowsAbout": ["Java", "Spring Boot", "REST APIs", "MySQL", "React", "JavaScript", "HTML", "CSS", "Docker"],
       "sameAs": [
         "https://github.com/chandan2909",
         "https://www.linkedin.com/in/chandanpathak291"
