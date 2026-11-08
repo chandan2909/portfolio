@@ -224,22 +224,23 @@ export async function deleteSkill(id) {
 
 // ─── Admin Auth (API-based with bcrypt hashing) ─────────────────
 
+// Resolves false for a wrong password. Throws when the login API can't be reached,
+// so the admin panel can say so instead of reporting a wrong password.
 export async function checkPassword(password) {
-    try {
-        const res = await fetch('/api/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ password }),
-        });
-        const data = await res.json();
-        if (data.success && data.token) {
-            setAuthToken(data.token);
-        }
-        return data.success;
-    } catch (err) {
-        console.error('Auth check failed:', err);
-        return false;
+    const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+    });
+    // The API always answers in JSON. Anything else is a host, DNS or proxy page in front of it.
+    if (!res.headers?.get('content-type')?.includes('application/json')) {
+        throw new Error(`Login API unreachable (HTTP ${res.status})`);
     }
+    const data = await res.json();
+    if (data.success && data.token) {
+        setAuthToken(data.token);
+    }
+    return Boolean(data.success);
 }
 
 export async function changePassword(currentPassword, newPassword) {

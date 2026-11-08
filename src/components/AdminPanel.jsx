@@ -64,7 +64,8 @@ const AdminPanel = () => {
                 setError('Incorrect password');
             }
         } catch (err) {
-            setError('Server error — is the backend running?');
+            console.error('Login check failed:', err);
+            setError("Can't reach the login server, so your password wasn't checked. Try again later.");
         }
         setLoading(false);
         setPassword('');

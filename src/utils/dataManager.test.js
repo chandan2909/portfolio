@@ -125,9 +125,12 @@ describe('dataManager utility', () => {
     });
 
     describe('checkPassword & changePassword', () => {
+        const jsonHeaders = new Headers({ 'Content-Type': 'application/json; charset=utf-8' });
+
         it('returns true on successful login check', async () => {
             global.fetch.mockResolvedValueOnce({
                 ok: true,
+                headers: jsonHeaders,
                 json: async () => ({ success: true, token: 'fake.token.here' }),
             });
 
@@ -137,6 +140,34 @@ describe('dataManager utility', () => {
                 method: 'POST',
                 body: JSON.stringify({ password: 'secret' }),
             }));
+        });
+
+        it('returns false for a wrong password', async () => {
+            global.fetch.mockResolvedValueOnce({
+                ok: false,
+                status: 401,
+                headers: jsonHeaders,
+                json: async () => ({ success: false, message: 'Invalid credentials' }),
+            });
+
+            await expect(checkPassword('wrong')).resolves.toBe(false);
+        });
+
+        it('throws when something other than the API answers, such as a host error page', async () => {
+            global.fetch.mockResolvedValueOnce({
+                ok: false,
+                status: 403,
+                headers: new Headers({ 'Content-Type': 'text/plain' }),
+                json: async () => { throw new SyntaxError('Unexpected end of JSON input'); },
+            });
+
+            await expect(checkPassword('secret')).rejects.toThrow('unreachable (HTTP 403)');
+        });
+
+        it('throws when the network request fails', async () => {
+            global.fetch.mockRejectedValueOnce(new TypeError('Failed to fetch'));
+
+            await expect(checkPassword('secret')).rejects.toThrow('Failed to fetch');
         });
 
         it('calls change password endpoint with correct payload', async () => {
