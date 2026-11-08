@@ -1,37 +1,7 @@
 import React from 'react';
 import { GraduationCap, School } from 'lucide-react';
-import { SKILLS } from '../data/skills';
+import { SKILL_GROUPS } from '../data/skills';
 import ScrollReveal from './ScrollReveal';
-import { readableTextColor } from '../utils/color';
-
-const CATEGORY_META = {
-    'Languages': { icon: '⚡' },
-    'Frameworks & Libraries': { icon: '⚛' },
-    'Databases': { icon: '🗄' },
-    'Databases & Cloud': { icon: '🗄' },
-    'Cloud & Deployment': { icon: '☁' },
-    'Tools': { icon: '🛠' },
-    'Concepts': { icon: '💡' },
-};
-
-const SkillIcon = ({ icon, viewBox = '0 0 24 24', size = 14 }) => {
-    if (!icon) return null;
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="currentColor" viewBox={viewBox}>
-            <path d={icon} />
-        </svg>
-    );
-};
-
-// Grey for skills without a brand colour, such as concepts
-const DEFAULT_CHIP_COLOR = '#6B7280';
-
-const GROUPED_SKILLS = SKILLS.reduce((acc, skill) => {
-    const cat = skill.category || 'Other';
-    if (!acc[cat]) acc[cat] = [];
-    acc[cat].push(skill);
-    return acc;
-}, {});
 
 const education = [
     { type: 'MCA', detail: 'Master of Computer Applications', school: 'Veer Bahadur Singh Purvanchal University, Jaunpur', result: 'CGPA: 8.0', years: '2023 – 2025', color: 'blue', Icon: GraduationCap },
@@ -55,34 +25,24 @@ const Skills = () => {
                         </div>
                     </ScrollReveal>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
-                        {Object.entries(GROUPED_SKILLS).map(([category, skills], catIdx) => {
-                                const meta = CATEGORY_META[category] || { icon: '🔧' };
-                                return (
-                                    <ScrollReveal key={category} direction={catIdx % 3 === 0 ? 'left' : catIdx % 3 === 1 ? 'up' : 'right'} delay={Math.min((catIdx % 3) * 150, 400)}>
-                                        <div className="glass glass-interactive rounded-3xl p-8 transition-all duration-500 h-full" role="listitem">
-                                            <h3 className="text-lg font-bold text-black dark:text-white mb-5 flex items-center gap-2">
-                                                <span aria-hidden="true">{meta.icon}</span> {category}
-                                            </h3>
-                                            <div className="flex flex-wrap gap-2">
-                                                {skills.map((skill) => {
-                                                    const color = skill.color || DEFAULT_CHIP_COLOR;
-                                                    return (
-                                                        <div
-                                                            key={skill.id || skill.name}
-                                                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-[13px] font-semibold ring-1 ring-black/5 dark:ring-white/20"
-                                                            style={{ backgroundColor: color, color: readableTextColor(color) }}
-                                                        >
-                                                            <SkillIcon icon={skill.icon} viewBox={skill.viewBox} />
-                                                            <span className="uppercase tracking-wide">{skill.name}</span>
-                                                        </div>
-                                                    );
-                                                })}
-                                            </div>
-                                        </div>
-                                    </ScrollReveal>
-                                );
-                            })}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {SKILL_GROUPS.map(({ category, skills }, i) => (
+                            <ScrollReveal key={category} direction="up" delay={(i % 3) * 150}>
+                                <div className="h-full glass glass-interactive rounded-3xl p-8 transition-all duration-500">
+                                    <h3 className="font-black text-xl text-black dark:text-white uppercase tracking-tight mb-5">
+                                        {category}
+                                    </h3>
+                                    <ul aria-label={category} className="flex flex-wrap gap-x-5 gap-y-2.5">
+                                        {skills.map((skill) => (
+                                            <li key={skill} className="flex items-center gap-2 text-[15px] font-medium text-gray-700 dark:text-gray-300">
+                                                <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white" />
+                                                {skill}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </ScrollReveal>
+                        ))}
                     </div>
                 </div>
             </section>
