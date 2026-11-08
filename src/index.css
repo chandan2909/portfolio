@@ -52,11 +52,8 @@
   }
 }
 
-/* Skeleton loading colors — adapts to dark mode */
+/* Glass colours — adapt to dark mode */
 :root {
-  --sk-base: #E6E5E1;
-  --sk-highlight: #EFEEEA;
-
   --glass-bg: rgba(250, 249, 246, 0.6);
   --glass-bg-hover: rgba(251, 250, 248, 0.75);
   --glass-bar-bg: rgba(250, 249, 246, 0.78);
@@ -71,9 +68,6 @@
   --wash-3: rgba(249, 248, 245, 0.85);
 }
 .dark {
-  --sk-base: #292524;
-  --sk-highlight: #44403C;
-
   --glass-bg: rgba(41, 37, 36, 0.6);
   --glass-bg-hover: rgba(51, 47, 45, 0.7);
   --glass-bar-bg: rgba(28, 25, 23, 0.72);

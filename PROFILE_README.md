@@ -87,7 +87,7 @@ interests:   [Clean Code, Scalable Systems, Open Source]
 
 | 🌟 Project | 📝 Description | 🔧 Tech |
 |:---:|:---|:---:|
-| [**🖥️ Portfolio Website**](https://github.com/chandan2909/chandan2909.github.io) | Personal developer portfolio with admin panel, dark mode, contact form via Resend & MySQL backend on Aiven | `React` `Vite` `Tailwind` `Node.js` `MySQL` |
+| [**🖥️ Portfolio Website**](https://github.com/chandan2909/chandan2909.github.io) | Personal developer portfolio with a glass UI, dark mode, animated background and contact form via Resend | `React` `Vite` `Tailwind` `Three.js` |
 | [**📚 LMS Frontend**](https://github.com/chandan2909/lms-frontend) | Modern single-page application for a Learning Management System | `React` `JavaScript` |
 
 <br/>

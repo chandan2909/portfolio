@@ -1,5 +1,4 @@
 import { Resend } from 'resend';
-import { sanitize, sanitizeEmail } from './_lib/auth.js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -29,9 +28,11 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Invalid input types.' });
     }
 
-    const safeName = sanitize(name, MAX_NAME);
+    // Plain text, length-limited. escapeHtml runs once where it goes into the email body;
+    // escaping here as well showed "I'm" as "I&#39;m".
+    const safeName = name.trim().slice(0, MAX_NAME);
     const rawEmail = email.trim().toLowerCase().slice(0, MAX_EMAIL);
-    const safeMessage = sanitize(message, MAX_MESSAGE);
+    const safeMessage = message.trim().slice(0, MAX_MESSAGE);
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(rawEmail)) {

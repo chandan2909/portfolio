@@ -1,6 +1,6 @@
 # 🚀 Chandan Pathak — Portfolio Website
 
-A modern, responsive developer portfolio built with **React 18**, **Vite**, **Tailwind CSS**, and a **Node.js / MySQL** backend. Features a dynamic admin panel for managing projects & skills, dark/light mode, smooth animations, and a contact form powered by Resend.
+A modern, responsive developer portfolio built with **React 18**, **Vite** and **Tailwind CSS**. The site is fully static: projects and skills live in data files in the repo, so pages load without any database or API calls. The only server code is one small function that sends contact-form emails through Resend.
 
 ## 🌐 Live Demo
 
@@ -12,12 +12,10 @@ A modern, responsive developer portfolio built with **React 18**, **Vite**, **Ta
 
 - **Dark / Light Mode** — system-aware theme toggle
 - **Responsive Design** — mobile-first, works on all screen sizes
-- **Animated UI** — scroll-triggered animations, hover effects, custom cursor & cursor glow
-- **Admin Panel** — password-protected CRUD for projects & skills (backed by MySQL on Aiven)
+- **Glass UI** — Liquid Glass navbar ([Glisse](https://www.npmjs.com/package/glisse)) and an animated Three.js particle background
+- **Static Content** — projects and skills come from `src/data/`, with no database or loading states
 - **Contact Form** — emails sent via the Resend API
 - **SEO Optimised** — semantic HTML, Open Graph tags, JSON-LD structured data
-- **Skeleton Loading** — graceful loading states with `react-loading-skeleton`
-- **Fallback Data** — shows seed data when the API is unreachable
 
 ---
 
@@ -25,13 +23,10 @@ A modern, responsive developer portfolio built with **React 18**, **Vite**, **Ta
 
 | Layer | Technology |
 |---|---|
-| Frontend | React 18, React Router v7, Vite 5 |
+| Frontend | React 18, React Router v7, Vite |
 | Styling | Tailwind CSS 3, PostCSS, Autoprefixer |
-| Icons | Lucide React |
-| Backend / API | Node.js (Vercel serverless functions) |
-| Database | MySQL — hosted on **Aiven** |
-| Auth | bcryptjs (password hashing) |
-| Email | Resend |
+| UI | Glisse (navbar), Three.js (background), Lucide React (icons) |
+| Email | Resend, via one Vercel serverless function |
 | Analytics | Vercel Analytics |
 | Deployment | Vercel |
 
@@ -41,55 +36,27 @@ A modern, responsive developer portfolio built with **React 18**, **Vite**, **Ta
 
 ```
 chandan2909.github.io/
-├── api/                          # Vercel serverless functions (Node.js)
-│   ├── auth/
-│   │   ├── login.js              # Password check endpoint
-│   │   └── change-password.js    # Password update endpoint
-│   ├── projects/
-│   │   ├── index.js              # GET all / POST new project
-│   │   └── [id].js               # PUT / DELETE project by id
-│   ├── skills/
-│   │   ├── index.js              # GET all / POST new skill
-│   │   └── [id].js               # PUT / DELETE skill by id
-│   └── contact.js                # Contact form → Resend email
+├── api/
+│   └── send-email.js             # Contact form → Resend email (the only server code)
 ├── public/
-│   └── assets/                   # Static images & GIFs
+│   └── assets/                   # Images, GIFs and project screenshots
+│       └── projects/
 ├── src/
-│   ├── components/               # Reusable UI components
-│   │   ├── AdminPanel.jsx        # Password-protected CRUD dashboard
-│   │   ├── Hero.jsx
-│   │   ├── About.jsx
-│   │   ├── Skills.jsx
-│   │   ├── Projects.jsx
-│   │   ├── Contact.jsx
-│   │   ├── Navbar.jsx
-│   │   ├── Footer.jsx
-│   │   ├── CustomCursor.jsx
-│   │   ├── CursorGlow.jsx
-│   │   ├── ScrollProgress.jsx
-│   │   ├── BackToTop.jsx
-│   │   ├── PageTransition.jsx
-│   │   └── ThemeToggle.jsx
-│   ├── pages/                    # Route-level page components
-│   │   ├── HomePage.jsx
-│   │   ├── AboutPage.jsx
-│   │   ├── SkillsPage.jsx
-│   │   ├── ProjectsPage.jsx
-│   │   ├── ContactPage.jsx
-│   │   └── NotFoundPage.jsx
+│   ├── data/
+│   │   ├── projects.js           # Projects shown on the site — edit to add or change one
+│   │   └── skills.js             # Skills, grouped by category
+│   ├── components/               # Page sections and UI (Hero, About, Skills, Projects, Contact, Navbar…)
 │   ├── hooks/                    # Custom React hooks
-│   ├── services/                 # API service helpers
-│   ├── utils/
-│   │   └── dataManager.js        # Cached API calls + fallback seed data
+│   ├── utils/                    # Small helpers (colour contrast)
 │   ├── App.jsx
 │   ├── main.jsx
 │   └── index.css
-├── .env.example                  # Environment variable template
+├── .env.example                  # Environment variables for the contact form
 ├── index.html
 ├── package.json
 ├── tailwind.config.js
 ├── vite.config.js
-├── vercel.json                   # Vercel routing & API config
+├── vercel.json                   # SPA routing (everything except /api → index.html)
 └── README.md
 ```
 
@@ -101,41 +68,14 @@ chandan2909.github.io/
 
 - **Node.js** v18+
 - **npm** v9+
-- A MySQL database (free tier on [Aiven](https://aiven.io) works great)
-- A [Resend](https://resend.com) account for the contact form
+- A [Resend](https://resend.com) account, only if you want the contact form to send email
 
 ### Installation
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/chandan2909/chandan2909.github.io.git
 cd chandan2909.github.io
-
-# 2. Install dependencies
 npm install
-
-# 3. Copy and fill in environment variables
-cp .env.example .env
-```
-
-### Environment Variables
-
-Fill in your `.env` (see `.env.example` for all keys):
-
-```env
-# MySQL / Aiven
-DB_HOST=your-aiven-host
-DB_PORT=3306
-DB_USER=your-db-user
-DB_PASSWORD=your-db-password
-DB_NAME=your-db-name
-
-# Resend (contact form)
-RESEND_API_KEY=re_xxxxxxxxxxxx
-CONTACT_TO_EMAIL=your@email.com
-
-# Admin panel
-ADMIN_PASSWORD_HASH=bcrypt-hash-of-your-password
 ```
 
 ### Run Locally
@@ -144,32 +84,32 @@ ADMIN_PASSWORD_HASH=bcrypt-hash-of-your-password
 npm run dev        # Vite dev server → http://localhost:5173
 ```
 
-> **Tip:** When the API is unreachable, the frontend automatically falls back to built-in seed data, so you can browse the site without a local database.
+Everything works locally except sending the contact form, which needs the serverless function. To test that too, run `npx vercel dev` with `RESEND_API_KEY` and `CONTACT_TO_EMAIL` set (see `.env.example`).
 
-### Production Build
+### Tests and Production Build
 
 ```bash
+npm test           # Vitest
 npm run build      # Outputs to /dist
 npm run preview    # Preview the production build locally
 ```
 
 ---
 
-## 🔑 Admin Panel
+## ✏️ Updating Projects and Skills
 
-Visit `/admin` to manage projects and skills.
+- **Projects:** edit `src/data/projects.js`. Put screenshots in `public/assets/projects/` and reference them as `/assets/projects/name.png`. A 1200×630 PNG fills the card best.
+- **Skills:** edit `src/data/skills.js`. Skills are grouped by `category`, and `color` sets the chip colour (the text colour adjusts automatically to stay readable).
 
-- Login is protected by a **bcrypt-hashed** password stored in your environment.
-- CRUD operations call the Vercel serverless API, which reads/writes MySQL on Aiven.
-- Project images can be uploaded directly (stored as Base64) or referenced by URL.
+Commit and push, and Vercel redeploys the site.
 
 ---
 
 ## 🚀 Deployment (Vercel)
 
 1. Push to `main` — Vercel auto-deploys.
-2. Add all environment variables in the **Vercel project dashboard → Settings → Environment Variables**.
-3. `vercel.json` handles SPA client-side routing fallback and API routes automatically.
+2. Add `RESEND_API_KEY` and `CONTACT_TO_EMAIL` in **Vercel → Project → Settings → Environment Variables**.
+3. `vercel.json` sends every route except `/api` to the single-page app.
 
 ---
 

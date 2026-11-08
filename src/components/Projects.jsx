@@ -1,41 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import { getProjects } from '../utils/dataManager';
-
-const ProjectSkeleton = () => (
-    <article className="glass rounded-[2rem] overflow-hidden flex flex-col">
-        <div className="aspect-[1.9/1] bg-black/5 dark:bg-white/5">
-            <Skeleton height="100%" containerClassName="block h-full" baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
-        </div>
-        <div className="p-6 md:p-8 flex-1 flex flex-col">
-            <div className="flex items-center justify-between mb-4">
-                <Skeleton width={200} height={28} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
-                <div className="flex gap-2">
-                    <Skeleton width={40} height={14} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
-                    <Skeleton width={40} height={14} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
-                </div>
-            </div>
-            <Skeleton count={3} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" className="mb-1" />
-            <div className="flex gap-4 pt-6 mt-auto">
-                <Skeleton width="100%" height={48} borderRadius={16} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" containerClassName="flex-1" />
-                <Skeleton width="100%" height={48} borderRadius={16} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" containerClassName="flex-1" />
-            </div>
-        </div>
-    </article>
-);
+import React from 'react';
+import { PROJECTS } from '../data/projects';
 
 const Projects = () => {
-    const [projects, setProjects] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        getProjects().then(data => {
-            setProjects(data);
-            setLoading(false);
-        });
-    }, []);
-
     return (
         <section id="projects" aria-labelledby="projects-heading" className="py-10 lg:py-14">
             <div className="container mx-auto max-w-6xl px-8">
@@ -49,13 +15,7 @@ const Projects = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {loading ? (
-                        <>
-                            <ProjectSkeleton />
-                            <ProjectSkeleton />
-                        </>
-                    ) : (
-                        projects.map((project, index) => (
+                    {PROJECTS.map((project, index) => (
                             <article key={project.id || index} className="glass glass-interactive rounded-[2rem] transition-all duration-700 group overflow-hidden flex flex-col">
                                 {/* Image with hover overlay */}
                                 <div className="aspect-[1.9/1] overflow-hidden bg-black/5 dark:bg-white/5 relative">
@@ -153,8 +113,7 @@ const Projects = () => {
                                     </div>
                                 </div>
                             </article>
-                        ))
-                    )}
+                        ))}
                 </div>
             </div>
         </section>

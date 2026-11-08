@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import React from 'react';
 import { GraduationCap, School } from 'lucide-react';
-import { getSkills, getSkillStyle } from '../utils/dataManager';
+import { SKILLS } from '../data/skills';
 import ScrollReveal from './ScrollReveal';
 import { readableTextColor } from '../utils/color';
 
@@ -25,16 +23,15 @@ const SkillIcon = ({ icon, viewBox = '0 0 24 24', size = 14 }) => {
     );
 };
 
-const SkillSkeleton = () => (
-    <div className="glass rounded-3xl p-8">
-        <div className="flex items-center mb-6">
-            <Skeleton circle width={44} height={44} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" className="mr-4" />
-            <Skeleton width={100} height={24} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
-        </div>
-        <Skeleton width={150} height={12} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" className="mb-4" />
-        <Skeleton width={80} height={28} borderRadius={20} baseColor="var(--sk-base)" highlightColor="var(--sk-highlight)" />
-    </div>
-);
+// Grey for skills without a brand colour, such as concepts
+const DEFAULT_CHIP_COLOR = '#6B7280';
+
+const GROUPED_SKILLS = SKILLS.reduce((acc, skill) => {
+    const cat = skill.category || 'Other';
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(skill);
+    return acc;
+}, {});
 
 const education = [
     { type: 'MCA', detail: 'Master of Computer Applications', school: 'Veer Bahadur Singh Purvanchal University, Jaunpur', result: 'CGPA: 8.0', years: '2023 – 2025', color: 'blue', Icon: GraduationCap },
@@ -43,23 +40,6 @@ const education = [
 ];
 
 const Skills = () => {
-    const [technicalSkills, setSkills] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        getSkills().then(data => {
-            setSkills(data);
-            setLoading(false);
-        });
-    }, []);
-
-    const grouped = technicalSkills.reduce((acc, skill) => {
-        const cat = skill.category || 'Other';
-        if (!acc[cat]) acc[cat] = [];
-        acc[cat].push(skill);
-        return acc;
-    }, {});
-
     return (
         <>
             <section id="skills" aria-labelledby="skills-heading" className="py-10 lg:py-14">
@@ -76,14 +56,7 @@ const Skills = () => {
                     </ScrollReveal>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
-                        {loading ? (
-                            <>
-                                <SkillSkeleton />
-                                <SkillSkeleton />
-                                <SkillSkeleton />
-                            </>
-                        ) : (
-                            Object.entries(grouped).map(([category, skills], catIdx) => {
+                        {Object.entries(GROUPED_SKILLS).map(([category, skills], catIdx) => {
                                 const meta = CATEGORY_META[category] || { icon: '🔧' };
                                 return (
                                     <ScrollReveal key={category} direction={catIdx % 3 === 0 ? 'left' : catIdx % 3 === 1 ? 'up' : 'right'} delay={Math.min((catIdx % 3) * 150, 400)}>
@@ -93,14 +66,14 @@ const Skills = () => {
                                             </h3>
                                             <div className="flex flex-wrap gap-2">
                                                 {skills.map((skill) => {
-                                                    const style = getSkillStyle(skill);
+                                                    const color = skill.color || DEFAULT_CHIP_COLOR;
                                                     return (
                                                         <div
                                                             key={skill.id || skill.name}
                                                             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-[13px] font-semibold ring-1 ring-black/5 dark:ring-white/20"
-                                                            style={{ backgroundColor: style.color, color: readableTextColor(style.color) }}
+                                                            style={{ backgroundColor: color, color: readableTextColor(color) }}
                                                         >
-                                                            <SkillIcon icon={style.icon} viewBox={style.viewBox} />
+                                                            <SkillIcon icon={skill.icon} viewBox={skill.viewBox} />
                                                             <span className="uppercase tracking-wide">{skill.name}</span>
                                                         </div>
                                                     );
@@ -109,8 +82,7 @@ const Skills = () => {
                                         </div>
                                     </ScrollReveal>
                                 );
-                            })
-                        )}
+                            })}
                     </div>
                 </div>
             </section>

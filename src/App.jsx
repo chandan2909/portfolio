@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import AdminPanel from './components/AdminPanel';
 import AnimatedBackground from './components/AnimatedBackground';
 import BackToTop from './components/BackToTop';
 import CursorGlow from './components/CursorGlow';
@@ -11,14 +10,8 @@ import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
-import { getProjects, getSkills } from './utils/dataManager';
 
 function Portfolio() {
-    useEffect(() => {
-        getProjects();
-        getSkills();
-    }, []);
-
     return (
         <div className="min-h-screen flex flex-col">
             <AnimatedBackground />
@@ -40,7 +33,6 @@ function Portfolio() {
 function App() {
     return (
         <Routes>
-            <Route path="/admin" element={<AdminPanel />} />
             <Route path="*" element={<Portfolio />} />
         </Routes>
     );

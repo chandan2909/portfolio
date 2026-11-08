@@ -1,27 +1,26 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { render, screen, within } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
 import Skills from './Skills';
-import * as dataManager from '../utils/dataManager';
+import { SKILLS } from '../data/skills';
 
 describe('Skills component', () => {
-    it('renders technical skills grid with scroll reveal', async () => {
-        vi.spyOn(dataManager, 'getSkills').mockResolvedValue([
-            { id: 's1', name: 'React', level: 'Expert', category: 'Frontend Framework' },
-            { id: 's2', name: 'Node.js', level: 'Advanced', category: 'Backend' },
-        ]);
-
+    it('renders every skill from the data file, grouped by category, without loading', () => {
         render(<Skills />);
 
         expect(screen.getByText(/Technical Skills/i)).toBeInTheDocument();
-
-        // Wait for skills to load and render in grid
-        await waitFor(() => {
-            expect(screen.getByText('React')).toBeInTheDocument();
-            expect(screen.getByText('Node.js')).toBeInTheDocument();
+        SKILLS.forEach((skill) => {
+            expect(screen.getAllByText(skill.name).length).toBeGreaterThan(0);
         });
 
-        // Education section should also render
+        const tools = screen.getByRole('heading', { name: /Tools/ }).closest('[role="listitem"]');
+        expect(within(tools).getByText('Postman')).toBeInTheDocument();
+
         expect(screen.getByRole('heading', { name: /^Education$/i })).toBeInTheDocument();
+    });
+
+    it('uses grey chips for skills without a colour', () => {
+        render(<Skills />);
+        expect(screen.getByText('OOP').parentElement).toHaveStyle({ backgroundColor: '#6B7280' });
     });
 });
