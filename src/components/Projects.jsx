@@ -101,15 +101,22 @@ const Projects = () => {
                                                 Live Experience
                                             </a>
                                         )}
-                                        <a
-                                            href={project.github}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            aria-label={`Source Code: ${project.title}`}
-                                            className="flex-1 text-center glass glass-interactive text-black dark:text-white font-semibold py-3.5 md:py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-[13px] tracking-wider"
-                                        >
-                                            Source Code
-                                        </a>
+                                        {/* Projects split across two repos get one link for each */}
+                                        {[
+                                            { href: project.github, label: project.githubBackend ? 'Frontend Code' : 'Source Code' },
+                                            { href: project.githubBackend, label: 'Backend Code' },
+                                        ].filter((link) => link.href).map((link) => (
+                                            <a
+                                                key={link.label}
+                                                href={link.href}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                aria-label={`${link.label}: ${project.title}`}
+                                                className="flex-1 text-center glass glass-interactive text-black dark:text-white font-semibold py-3.5 md:py-4 px-6 rounded-2xl transition-all duration-300 uppercase text-[13px] tracking-wider"
+                                            >
+                                                {link.label}
+                                            </a>
+                                        ))}
                                     </div>
                                 </div>
                             </article>

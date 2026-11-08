@@ -22,6 +22,15 @@ describe('Projects component', () => {
         expect(screen.getByRole('link', { name: 'Live Experience: Kodemy' })).toHaveAttribute('href', 'https://kodemy.chandanpathak.me/');
     });
 
+    it('shows frontend and backend code links for projects split across two repos', () => {
+        render(<Projects />);
+
+        expect(screen.getByRole('link', { name: 'Frontend Code: KodCart' })).toHaveAttribute('href', 'https://github.com/chandan2909/kodcart-frontend');
+        expect(screen.getByRole('link', { name: 'Backend Code: KodCart' })).toHaveAttribute('href', 'https://github.com/chandan2909/kodcart-backend');
+        expect(screen.getByRole('link', { name: 'Source Code: KodBank' })).toBeInTheDocument();
+        expect(screen.queryByRole('link', { name: 'Backend Code: KodBank' })).toBeNull();
+    });
+
     it('points no project at the retired chandanpathak.dev domain', () => {
         PROJECTS.forEach((project) => {
             expect(project.live).not.toMatch(/chandanpathak\.dev/);
