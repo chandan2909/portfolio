@@ -54,18 +54,18 @@
 
 /* Glass colours — adapt to dark mode */
 :root {
-  --glass-bg: rgba(250, 249, 246, 0.6);
-  --glass-bg-hover: rgba(251, 250, 248, 0.75);
-  --glass-bar-bg: rgba(250, 249, 246, 0.78);
-  --glass-menu-bg: rgba(250, 249, 246, 0.88);
-  --glass-solid: #F8F7F4;
+  --glass-bg: rgba(251, 247, 235, 0.6);
+  --glass-bg-hover: rgba(252, 249, 240, 0.75);
+  --glass-bar-bg: rgba(251, 247, 235, 0.78);
+  --glass-menu-bg: rgba(251, 247, 235, 0.88);
+  --glass-solid: #FBF7EB;
   --glass-border: rgba(255, 255, 255, 0.55);
   --glass-highlight: rgba(255, 255, 255, 0.6);
   --glass-shadow: 0 8px 28px rgba(45, 42, 38, 0.08);
   --glass-shadow-hover: 0 14px 40px rgba(45, 42, 38, 0.14);
-  --wash-1: rgba(249, 248, 245, 0.9);
-  --wash-2: rgba(249, 248, 245, 0.8);
-  --wash-3: rgba(249, 248, 245, 0.85);
+  --wash-1: rgba(246, 238, 218, 0.9);
+  --wash-2: rgba(250, 243, 227, 0.8);
+  --wash-3: rgba(244, 236, 214, 0.85);
 }
 .dark {
   --glass-bg: rgba(41, 37, 36, 0.6);
@@ -214,8 +214,8 @@ img {
 
 body {
   @apply text-[#2D2A26] dark:bg-dark-100 dark:text-gray-100;
-  background-color: #F2F1EE;
-  background-image: linear-gradient(to right, #E5E4E0 1px, transparent 1px);
+  background-color: #F5EFE1;
+  background-image: linear-gradient(to right, #E4DCC4 1px, transparent 1px);
   background-size: 30px 100%;
   overflow-x: hidden;
   font-family:
@@ -406,7 +406,7 @@ html {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #EFEEEA;
+  background: #EEE7D3;
 }
 .dark ::-webkit-scrollbar-track {
   background: #1C1917;

@@ -11,8 +11,8 @@ export default {
                 'dark-100': '#1C1917',
                 'dark-200': '#292524',
                 'dark-300': '#44403C',
-                'surface': '#F8F7F4',
-                'surface-alt': '#EFEEEA',
+                'surface': '#FBF7EB',
+                'surface-alt': '#EEE7D3',
             },
             fontFamily: {
                 sans: ['"Instrument Sans"', 'sans-serif'],
