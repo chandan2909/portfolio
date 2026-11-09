@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/resume", "destination": "https://pub-33f56620f21044919288f1f22eda5017.r2.dev/resume.pdf" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
